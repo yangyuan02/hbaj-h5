@@ -2,12 +2,12 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 21:58:21
+ * @LastEditTime: 2020-04-15 23:39:18
  * @Description: 
  -->
 <template>
     <header>
-        <span>海宝安检</span>
+        <span>{{ title }}</span>
     </header>
 </template>
 
@@ -17,6 +17,12 @@
 export default {
     data() {
         return {};
+    },
+    props: {
+        title: {
+            type: String,
+            default: ""
+        }
     }
 };
 </script>

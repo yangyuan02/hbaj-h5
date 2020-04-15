@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 23:11:38
+ * @LastEditTime: 2020-04-15 23:43:33
  * @Description: 
  -->
 <template>
     <div class="page-view">
         <div class="scroll-view-wrapper">
-            <Header></Header>
+            <Header title="海宝安检"></Header>
             <div class="home-banner">
                 <Banner :bannerList="bannerList"></Banner>
             </div>
@@ -22,12 +22,7 @@
             </div>
             <div class="course-content">
                 <Title title="公众课件"></Title>
-                <div class="course-list">
-                    <CourseItem
-                        v-for="(item, index) in [1, 2, 3, 4, 5, 6]"
-                        :key="index"
-                    ></CourseItem>
-                </div>
+                <List></List>
             </div>
         </div>
         <Footer></Footer>
@@ -35,9 +30,9 @@
 </template>
 <script>
 import Banner from "./banner.vue";
+import List from "./list.vue";
 import Nav from "@/components/nav";
 import Title from "@/components/title";
-import CourseItem from "@/components/course";
 import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 export default {
@@ -57,11 +52,11 @@ export default {
     },
     components: {
         Banner,
+        List,
         Nav,
         Footer,
         Header,
-        Title,
-        CourseItem
+        Title
     }
 };
 </script>
@@ -89,9 +84,6 @@ export default {
     .course-content {
         width: 100%;
         background: #fff;
-        .course-list {
-            padding: 0 0.2rem;
-        }
     }
 }
 </style>
