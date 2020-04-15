@@ -2,15 +2,22 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 00:06:37
+ * @LastEditTime: 2020-04-15 20:49:26
  * @Description: 
  -->
 <template>
     <footer>
         <ul>
-            <li v-for="(item, index) in list" :key="index">
+            <li
+                v-for="(item, index) in list"
+                :key="index"
+                :class="{ active: item.active }"
+            >
                 <div class="menu-bg">
-                    <i></i>
+                    <i
+                        class="iconfont"
+                        :class="[item.icon ? item.icon : '']"
+                    ></i>
                 </div>
                 <div class="menu-title">
                     <span>{{ item.title }}</span>
@@ -25,22 +32,23 @@ export default {
         return {
             list: [
                 {
-                    icon: "",
+                    icon: "icontubiao-02",
                     bgColor: "rgba(254, 213, 26, 1)",
-                    title: "首页"
+                    title: "首页",
+                    active: true
                 },
                 {
-                    icon: "",
+                    icon: "icontubiao-01",
                     bgColor: "rgba(255, 158, 58, 1)",
                     title: "公共课件"
                 },
                 {
-                    icon: "",
+                    icon: "icontubiao-04",
                     bgColor: "rgba(148, 203, 243, 1)",
                     title: "新闻咨询"
                 },
                 {
-                    icon: "",
+                    icon: "icontubiao-03",
                     bgColor: "rgba(148, 203, 243, 1)",
                     title: "我的"
                 }
@@ -67,21 +75,25 @@ footer {
         padding-bottom: 0.12rem;
         li {
             width: 25%;
-            display: flex;
-            justify-content: center;
             .menu-bg {
-                // width: 0.81rem;
-                // height: 0.81rem;
-                // background: rgba(254, 213, 26, 1);
-                // border-radius: 0.1rem;
-                // margin: 0 auto;
+                text-align: center;
+                i {
+                    font-size: 0.34rem;
+                    color: rgba(219, 219, 219, 1);
+                }
             }
             .menu-title {
                 margin-top: 0.11rem;
+                text-align: center;
                 span {
                     color: rgba(102, 102, 102, 1);
                     font-size: 0.2rem;
                     line-height: 0.26rem;
+                }
+            }
+            &.active {
+                i {
+                    color: rgba(15, 79, 168, 1);
                 }
             }
         }

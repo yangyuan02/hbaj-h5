@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-14 23:53:43
+ * @LastEditTime: 2020-04-15 20:15:15
  * @Description: 
  -->
 <template>
@@ -58,6 +58,7 @@ export default {
 <style lang="less">
 @import "./style/reset.less";
 @import "./style/main.less";
+@import "./style/icon-font/iconfont.css";
 @import "./style/utils.css";
 @import "./style/ui-method.less";
 </style>

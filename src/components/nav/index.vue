@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:44:26
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-14 22:24:10
+ * @LastEditTime: 2020-04-15 20:38:13
  * @Description: 
  -->
 <template>
@@ -10,7 +10,10 @@
         <ul>
             <li v-for="(item, index) in list" :key="index">
                 <div class="nav-bg" :style="{ background: item.bgColor }">
-                    <i>{{ item.icon }}</i>
+                    <i
+                        class="iconfont"
+                        :class="[item.icon ? item.icon : '']"
+                    ></i>
                 </div>
                 <div class="nav-title">
                     <span>{{ item.title }}</span>
@@ -26,17 +29,17 @@ export default {
         return {
             list: [
                 {
-                    icon: "",
+                    icon: "icontubiao-05",
                     bgColor: "rgba(254, 213, 26, 1)",
                     title: "技术解读"
                 },
                 {
-                    icon: "",
+                    icon: "icontubiao-06",
                     bgColor: "rgba(255, 158, 58, 1)",
                     title: "专业英语"
                 },
                 {
-                    icon: "",
+                    icon: "icontubiao-07",
                     bgColor: "rgba(148, 203, 243, 1)",
                     title: "模拟训练"
                 }
@@ -64,6 +67,13 @@ nav {
                 background: rgba(254, 213, 26, 1);
                 border-radius: 0.1rem;
                 margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                i {
+                    font-size: 0.46rem;
+                    color: #fff;
+                }
             }
             .nav-title {
                 margin-top: 0.24rem;

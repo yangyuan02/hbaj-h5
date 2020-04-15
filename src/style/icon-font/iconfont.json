@@ -1,0 +1,107 @@
+{
+  "id": "1728139",
+  "name": "海宝安检VR手机平台",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14105391",
+      "name": "图标-13",
+      "font_class": "tubiao-13",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "14105384",
+      "name": "图标-12",
+      "font_class": "tubiao-12",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "14105372",
+      "name": "图标-11",
+      "font_class": "tubiao-11",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "14105366",
+      "name": "图标-10",
+      "font_class": "tubiao-10",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "14105364",
+      "name": "图标-09",
+      "font_class": "tubiao-09",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "14105359",
+      "name": "图标-08",
+      "font_class": "tubiao-08",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "14105354",
+      "name": "图标-07",
+      "font_class": "tubiao-07",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "14105340",
+      "name": "图标-06",
+      "font_class": "tubiao-06",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "14105326",
+      "name": "图标-05",
+      "font_class": "tubiao-05",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "14105323",
+      "name": "图标-04",
+      "font_class": "tubiao-04",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "14105305",
+      "name": "图标-03",
+      "font_class": "tubiao-03",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "14105301",
+      "name": "图标-01",
+      "font_class": "tubiao-01",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "14105267",
+      "name": "图标-02",
+      "font_class": "tubiao-02",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "14083953",
+      "name": "dianzan",
+      "font_class": "dianzan",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    }
+  ]
+}

@@ -1,96 +1,89 @@
 body,
 html {
-  height: 100%;
-  overflow: hidden;
-  text-size-adjust: 100%;
-  font-smoothing: antialiased;
+    height: 100%;
+    // overflow: hidden;
+    text-size-adjust: 100%;
+    font-smoothing: antialiased;
 }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: #a2a2a2;
+    color: #a2a2a2;
 }
 
 input {
-
-  color: #252525;
-
+    color: #252525;
 }
 
 html {
-  touch-action: manipulation;
+    touch-action: manipulation;
 }
 
 body {
-  color: #333;
-  font-size: .24rem;
-  font-family: "Helvetica Neue", Tahoma, Arial, PingFangSC-Regular, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background: rgba(243, 242, 247, 1);
+    color: #333;
+    font-size: 0.24rem;
+    font-family: "Helvetica Neue", Tahoma, Arial, PingFangSC-Regular,
+        "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: rgba(243, 242, 247, 1);
 }
 
 .ellipsis {
+    text-overflow: ellipsis;
 
-  text-overflow: ellipsis;
+    white-space: nowrap;
 
-  white-space: nowrap;
-
-  overflow: hidden;
-
+    overflow: hidden;
 }
 
 #app {
-
-  width: 100%;
-
-  height: 100%;
-
-  .pageView {
     width: 100%;
+
     height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform .4s cubic-bezier(.55, 0, .1, 1);
 
-    .scroll-view-wrapper {
-      position: relative;
-      overflow: scroll;
-      flex: 1;
-      -webkit-overflow-scrolling: touch;
-      overflow-scrolling: touch;
+    .pageView {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.4s cubic-bezier(0.55, 0, 0.1, 1);
 
+        .scroll-view-wrapper {
+            position: relative;
+            overflow: scroll;
+            flex: 1;
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+        }
     }
-  }
-
 }
 
 i {
-  display: inline-block;
+    display: inline-block;
 }
 
 .app_fixed {
-  position: fixed;
-  left: 0;
-  top: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 .visibility {
-
-  visibility: visible;
-  animation: fadeIn .5s ease-out backwards;
+    visibility: visible;
+    animation: fadeIn 0.5s ease-out backwards;
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(0.2rem);
-    -webkit-transform: translateY(0.2rem);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(0.2rem);
+        -webkit-transform: translateY(0.2rem);
+    }
 
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
-  }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+    }
 }
