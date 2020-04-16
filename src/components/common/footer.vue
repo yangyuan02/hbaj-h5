@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 23:11:08
+ * @LastEditTime: 2020-04-16 23:21:17
  * @Description: 
  -->
 <template>
   <footer>
     <ul>
-      <li v-for="(item, index) in list" :key="index" :class="{ active:activePath.startsWith(item.path) }" @click="goTo(item.path)">
+      <li v-for="(item, index) in list" :key="index" :class="{ active:$route.path.startsWith(item.path) }" @click="goTo(item.path)">
         <div class="menu-bg">
           <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
         </div>
@@ -28,7 +28,6 @@ export default {
                     icon: "icontubiao-02",
                     bgColor: "rgba(254, 213, 26, 1)",
                     title: "首页",
-                    active: true,
                     path: "/home"
                 },
                 {
@@ -49,17 +48,13 @@ export default {
                     title: "我的",
                     path: "/my"
                 }
-            ],
-            activePath: this.$route.path
+            ]
         };
     },
     methods: {
         goTo(path) {
             this.$router.push({ path });
         }
-    },
-    mounted() {
-        console.log(this.activePath);
     }
 };
 </script>
