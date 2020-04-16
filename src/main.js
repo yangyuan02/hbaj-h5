@@ -43,11 +43,11 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-router.afterEach((to) => {
+router.afterEach(to => {
     document.title = to.meta.title;
 });
 new Vue({
     el: "#app",
     router,
-    render: (h) => h(Application),
+    render: h => h(Application)
 });

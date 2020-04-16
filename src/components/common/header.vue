@@ -6,9 +6,9 @@
  * @Description: 
  -->
 <template>
-    <header>
-        <span>{{ title }}</span>
-    </header>
+  <header>
+    <span>{{ title }}</span>
+  </header>
 </template>
 
 <script type="text/javascript">
