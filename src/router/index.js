@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 23:54:43
+ * @LastEditTime: 2020-04-16 20:39:28
  * @Description:
  */
 import Vue from "vue";
@@ -35,6 +35,14 @@ export default new Router({
             component: () => import("@/views/course"),
             meta: {
                 title: "公共课件资源"
+            }
+        },
+        {
+            path: "/search",
+            name: "search",
+            component: () => import("@/views/search"),
+            meta: {
+                title: "公共课件搜索"
             }
         }
     ]

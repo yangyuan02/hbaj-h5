@@ -2,29 +2,22 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 20:49:26
+ * @LastEditTime: 2020-04-16 20:30:07
  * @Description: 
  -->
 <template>
-    <footer>
-        <ul>
-            <li
-                v-for="(item, index) in list"
-                :key="index"
-                :class="{ active: item.active }"
-            >
-                <div class="menu-bg">
-                    <i
-                        class="iconfont"
-                        :class="[item.icon ? item.icon : '']"
-                    ></i>
-                </div>
-                <div class="menu-title">
-                    <span>{{ item.title }}</span>
-                </div>
-            </li>
-        </ul>
-    </footer>
+  <footer>
+    <ul>
+      <li v-for="(item, index) in list" :key="index" :class="{ active: item.active }">
+        <div class="menu-bg">
+          <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+        </div>
+        <div class="menu-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </li>
+    </ul>
+  </footer>
 </template>
 <script>
 export default {
@@ -64,9 +57,6 @@ footer {
     height: 0.98rem;
     background: rgba(255, 255, 255, 1);
     border: 0.01px solid rgba(221, 221, 221, 1);
-    position: fixed;
-    bottom: 0.98rem;
-    left: 0rem;
     ul {
         display: flex;
         justify-content: space-around;
