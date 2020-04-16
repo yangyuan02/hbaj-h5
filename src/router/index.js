@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-14 21:56:03
+ * @LastEditTime: 2020-04-15 23:54:43
  * @Description:
  */
 import Vue from "vue";
@@ -27,6 +27,14 @@ export default new Router({
             component: () => import("@/views/home"),
             meta: {
                 title: "海宝安检首页"
+            }
+        },
+        {
+            path: "/course",
+            name: "course",
+            component: () => import("@/views/course"),
+            meta: {
+                title: "公共课件资源"
             }
         }
     ]
