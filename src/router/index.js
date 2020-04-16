@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 20:39:28
+ * @LastEditTime: 2020-04-16 21:01:59
  * @Description:
  */
 import Vue from "vue";
@@ -43,6 +43,14 @@ export default new Router({
             component: () => import("@/views/search"),
             meta: {
                 title: "公共课件搜索"
+            }
+        },
+        {
+            path: "/news",
+            name: "news",
+            component: () => import("@/views/news"),
+            meta: {
+                title: "海宝安检资讯"
             }
         }
     ]

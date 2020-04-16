@@ -1,28 +1,24 @@
 <!--
  * @Author: yangyuan
- * @Date: 2020-04-15 22:21:06
+ * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 21:26:58
+ * @LastEditTime: 2020-04-16 21:33:52
  * @Description: 
  -->
 <template>
-  <div class="course-content-item">
-    <div class="course-item-thumb"></div>
-    <div class="course-item-detail">
-      <div class="course-item-title">
+  <div class="news-content-item">
+    <div class="news-item-detail">
+      <div class="news-item-title">
         <div class="text">
-          <p>2019年PSC集中大会战检查要 点-专题说</p>
-        </div>
-        <div class="status">
-          <span>公开</span>
+          <p>上海宝山海事协助保障中国籍入 境船员顺利换</p>
         </div>
       </div>
-      <div class="course-item-digest">
+      <div class="news-item-digest">
         <p>
-          宝山海事局执法人员通过具有增强现实（AR）技术支持的在线通讯协作办…
+          国际航行船舶船员换班问题关系船
         </p>
       </div>
-      <div class="course-item-source">
+      <div class="news-item-source">
         <div class="organization">
           <span>发布机构:</span>
           <span>海宝安检</span>
@@ -33,8 +29,10 @@
         </div>
       </div>
     </div>
+    <div class="news-item-thumb"></div>
   </div>
 </template>
+
 <script>
 export default {
     data() {
@@ -42,22 +40,17 @@ export default {
     }
 };
 </script>
+
 <style lang="less">
-.course-content-item {
+.news-content-item {
     display: flex;
-    padding-top: 0.28rem;
-    padding-bottom: 0.2rem;
+
+    padding-top: 0.38rem;
+    padding-bottom: 0.4rem;
     border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
-    .course-item-thumb {
-        width: 2.1rem;
-        height: 2.1rem;
-        margin-right: 0.22rem;
-        background: #f0f0f0;
-    }
-    .course-item-detail {
+    .news-item-detail {
         flex: 1;
-        .course-item-title {
-            display: flex;
+        .news-item-title {
             .text {
                 p {
                     font-size: 0.28rem;
@@ -68,33 +61,19 @@ export default {
                     -webkit-background-clip: text;
                 }
             }
-            .status {
-                width: 0.72rem;
-                height: 0.34rem;
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                line-height: 0.34rem;
-                font-size: 0.2rem;
-                color: #fff;
-                text-align: center;
-                background: rgba(59, 206, 180, 1);
-                border-radius: 0.02rem;
-            }
         }
-        .course-item-digest {
+        .news-item-digest {
             margin-top: 0.14rem;
-            margin-bottom: 0.16rem;
+            margin-bottom: 0.15rem;
             p {
                 font-size: 0.24rem;
                 font-family: MicrosoftYaHei;
                 color: rgba(102, 102, 102, 1);
-                line-height: 0.38rem;
-                letter-spacing: 0.01rem;
+                line-height: 0.31rem;
                 -webkit-background-clip: text;
             }
         }
-        .course-item-source {
+        .news-item-source {
             display: flex;
             align-content: center;
             justify-content: space-between;
@@ -106,6 +85,12 @@ export default {
                 -webkit-background-clip: text;
             }
         }
+    }
+    .news-item-thumb {
+        width: 2.44rem;
+        height: 1.64rem;
+        margin-left: 0.22rem;
+        background: #f0f0f0;
     }
 }
 </style>
