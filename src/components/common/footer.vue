@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 20:30:07
+ * @LastEditTime: 2020-04-16 23:11:08
  * @Description: 
  -->
 <template>
   <footer>
     <ul>
-      <li v-for="(item, index) in list" :key="index" :class="{ active: item.active }">
+      <li v-for="(item, index) in list" :key="index" :class="{ active:activePath.startsWith(item.path) }" @click="goTo(item.path)">
         <div class="menu-bg">
           <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
         </div>
@@ -28,25 +28,38 @@ export default {
                     icon: "icontubiao-02",
                     bgColor: "rgba(254, 213, 26, 1)",
                     title: "首页",
-                    active: true
+                    active: true,
+                    path: "/home"
                 },
                 {
                     icon: "icontubiao-01",
                     bgColor: "rgba(255, 158, 58, 1)",
-                    title: "公共课件"
+                    title: "公共课件",
+                    path: "/course"
                 },
                 {
                     icon: "icontubiao-04",
                     bgColor: "rgba(148, 203, 243, 1)",
-                    title: "新闻咨询"
+                    title: "新闻咨询",
+                    path: "/news"
                 },
                 {
                     icon: "icontubiao-03",
                     bgColor: "rgba(148, 203, 243, 1)",
-                    title: "我的"
+                    title: "我的",
+                    path: "/my"
                 }
-            ]
+            ],
+            activePath: this.$route.path
         };
+    },
+    methods: {
+        goTo(path) {
+            this.$router.push({ path });
+        }
+    },
+    mounted() {
+        console.log(this.activePath);
     }
 };
 </script>
