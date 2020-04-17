@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 21:33:52
+ * @LastEditTime: 2020-04-17 21:30:42
  * @Description: 
  -->
 <template>
-  <div class="news-content-item">
+  <div class="news-content-item" @click="toNewsDetail">
     <div class="news-item-detail">
       <div class="news-item-title">
         <div class="text">
@@ -37,6 +37,11 @@
 export default {
     data() {
         return {};
+    },
+    methods: {
+        toNewsDetail() {
+            this.$router.push({ path: "/news/detail" });
+        }
     }
 };
 </script>

@@ -2,22 +2,27 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:57:13
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 00:13:19
+ * @LastEditTime: 2020-04-17 21:29:08
  * @Description: 
  -->
 <template>
-    <div class="search-content">
-        <div class="search-input">
-            <i class="iconfont icontubiao-12"></i>
-            <span>搜索</span>
-        </div>
+  <div class="search-content">
+    <div class="search-input" @click="toSeatch">
+      <i class="iconfont icontubiao-12"></i>
+      <span>搜索</span>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
     data() {
         return {};
+    },
+    methods: {
+        toSeatch() {
+            this.$router.push({ path: "/search" });
+        }
     }
 };
 </script>

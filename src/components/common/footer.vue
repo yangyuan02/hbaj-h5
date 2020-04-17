@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 23:21:17
+ * @LastEditTime: 2020-04-18 00:00:31
  * @Description: 
  -->
 <template>
@@ -64,7 +64,7 @@ footer {
     width: 100%;
     height: 0.98rem;
     background: rgba(255, 255, 255, 1);
-    border: 0.01px solid rgba(221, 221, 221, 1);
+    border: 0.01rem solid rgba(221, 221, 221, 1);
     ul {
         display: flex;
         justify-content: space-around;
