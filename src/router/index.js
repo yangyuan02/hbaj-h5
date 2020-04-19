@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-17 21:38:10
+ * @LastEditTime: 2020-04-19 18:59:55
  * @Description:
  */
 import Vue from "vue";
@@ -65,6 +65,14 @@ export default new Router({
             path: "/my",
             name: "my",
             component: () => import("@/views/my"),
+            meta: {
+                title: "个人中心"
+            }
+        },
+        {
+            path: "/my/message",
+            name: "myMessage",
+            component: () => import("@/views/my/message"),
             meta: {
                 title: "个人中心"
             }

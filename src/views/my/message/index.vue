@@ -1,0 +1,45 @@
+<!--
+ * @Author: yangyuan
+ * @Date: 2020-04-19 18:58:48
+ * @Email: 1367511704@qq.com
+ * @LastEditTime: 2020-04-19 19:16:49
+ * @Description: 
+ -->
+<template>
+  <div class="page-view">
+    <div class="scroll-view-wrapper">
+      <Header title="我的通知"></Header>
+      <div class="message-content">
+        <List></List>
+      </div>
+    </div>
+    <Footer></Footer>
+  </div>
+
+</template>
+
+<script>
+import List from "./list";
+import Header from "@/components/common/header";
+import Footer from "@/components/common/footer";
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        List,
+        Header,
+        Footer
+    }
+};
+</script>
+<style lang="less">
+.message-content {
+    background: linear-gradient(
+        180deg,
+        rgba(15, 79, 168, 1) 0%,
+        rgba(15, 79, 168, 0.98) 100%
+    );
+    padding: 0.18rem 0;
+}
+</style>
