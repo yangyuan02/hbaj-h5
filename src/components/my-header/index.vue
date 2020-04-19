@@ -2,14 +2,12 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:43:01
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-18 00:23:55
+ * @LastEditTime: 2020-04-19 18:51:43
  * @Description: 
  -->
  <template>
   <div class="my-header-content">
-    <header>
-      <span>我的</span>
-    </header>
+    <header><span>我的</span></header>
     <div class="my-person-info">
       <div class="person-thumb"></div>
       <div class="person-digest">
@@ -51,19 +49,19 @@ export default {
     }
     .my-person-info {
         display: flex;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
         padding: 0 0.24rem;
         .person-thumb {
             width: 1.57rem;
             height: 1.57rem;
             border-radius: 50%;
             background: red;
-            margin-right: 0.38rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }
         .person-digest {
             flex: 1;
+            margin-left: 1.87rem;
             .nickname {
                 margin-bottom: 0.43rem;
                 span {
