@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:39:40
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-17 21:32:43
+ * @LastEditTime: 2020-04-20 20:37:05
  * @Description: 
  -->
 <template>
@@ -78,7 +78,8 @@ export default {
         width: 6.9rem;
         height: 2.94rem;
         margin: 0 auto;
-        background: #f0f0f0;
+        background: url("../images/news-detail-bg.png");
+        background-size: 100%;
     }
     .news-detail-content {
         .title {

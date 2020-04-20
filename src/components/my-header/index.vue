@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:43:01
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-19 18:51:43
+ * @LastEditTime: 2020-04-20 20:44:21
  * @Description: 
  -->
  <template>
@@ -35,7 +35,8 @@ export default {
 .my-header-content {
     width: 100%;
     height: 4.4rem;
-    background: #f0f0f0;
+    background: url("./images/header-bg.png");
+    background-size: 100%;
     position: relative;
     header {
         height: 0.88rem;
@@ -54,7 +55,8 @@ export default {
             width: 1.57rem;
             height: 1.57rem;
             border-radius: 50%;
-            background: red;
+            background: url("./images/person.png");
+            background-size: 100%;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);

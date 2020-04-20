@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:38:27
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-18 00:07:48
+ * @LastEditTime: 2020-04-19 20:19:44
  * @Description: 
  -->
 <template>
@@ -12,7 +12,7 @@
         <my-header></my-header>
         <div class="my-list-content">
           <ul>
-            <li v-for="(item, index) in list" :key="index">
+            <li v-for="(item, index) in list" :key="index" @click="goTo(item.path)">
               <div class="info">
                 <i class="iconfont" :class="[item.icon ? item.icon : '']" :style="{color:item.color}"></i>
                 <span>{{item.text}}</span>
@@ -41,22 +41,26 @@ export default {
                 {
                     icon: "icontubiao-14",
                     text: "我的信息",
-                    color: "rgba(224, 32, 32, 1)"
+                    color: "rgba(224, 32, 32, 1)",
+                    path: "/my/person"
                 },
                 {
                     icon: "icontubiao-15",
                     text: "我的课件",
-                    color: "rgba(60, 206, 181, 1)"
+                    color: "rgba(60, 206, 181, 1)",
+                    path: "/my/person"
                 },
                 {
                     icon: "icontubiao-17",
                     text: "我的任务",
-                    color: "rgba(255, 157, 59, 1)"
+                    color: "rgba(255, 157, 59, 1)",
+                    path: "/my/task"
                 },
                 {
                     icon: "icontubiao-16",
                     text: "我的通知",
-                    color: "rgba(238, 27, 27, 1)"
+                    color: "rgba(238, 27, 27, 1)",
+                    path: "/my/message"
                 }
             ]
         };
@@ -64,6 +68,11 @@ export default {
     components: {
         MyHeader,
         Footer
+    },
+    methods: {
+        goTo(path) {
+            this.$router.push({ path });
+        }
     }
 };
 </script>
