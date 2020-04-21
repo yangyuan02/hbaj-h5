@@ -100,6 +100,14 @@ export default new Router({
             meta: {
                 title: "编辑信息"
             }
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("@/views/login"),
+            meta: {
+                title: "登录"
+            }
         }
     ]
 });
