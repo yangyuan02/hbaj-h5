@@ -2,20 +2,21 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 20:14:55
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-22 00:15:36
+ * @LastEditTime: 2020-04-23 20:12:31
  * @Description: 
  -->
 <template>
-    <div class="page-view">
-        <div class="scroll-view-wrapper">
-            <Header title="我的任务"></Header>
-            <Calendar></Calendar>
-            <div class="task-content">
-                <List></List>
-            </div>
-        </div>
-        <Footer></Footer>
+  <div class="page-view">
+    <div class="scroll-view-wrapper">
+      <Header title="我的任务"></Header>
+
+      <div class="task-content">
+        <Calendar></Calendar>
+        <List></List>
+      </div>
     </div>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
