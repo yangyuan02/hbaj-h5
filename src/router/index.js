@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-19 20:16:06
+ * @LastEditTime: 2020-04-24 23:20:27
  * @Description:
  */
 import Vue from "vue";
@@ -21,6 +21,14 @@ export default new Router({
         }
     },
     routes: [
+        {
+            path: "/",
+            name: "Index",
+            component: () => import("@/views/home"),
+            meta: {
+                title: "海宝安检首页"
+            }
+        },
         {
             path: "/home",
             name: "home",
