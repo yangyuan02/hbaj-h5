@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 17:46:34
+ * @LastEditTime: 2020-04-25 22:18:53
  * @Description:
  */
 const path = require("path");
@@ -92,10 +92,11 @@ module.exports = {
         hotOnly: false,
         open: false, // 配置自动启动浏览器
         proxy: {
-            "/": {
-                target: "https://api-pano.vr2shipping.com",
+            // https://api-pano.vr2shipping.com/home/pageInfo //socket会gg
+            "/api": {
+                target: "http://api-msa.vr2shipping.com",
                 changeOrigin: true,
-                ws: false
+                pathRewrite: (path, req) => path.replace("/api", "")
             }
         }
     }

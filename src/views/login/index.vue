@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-21 20:23:25
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-21 21:02:58
+ * @LastEditTime: 2020-04-25 22:03:55
  * @Description: 
  -->
 <template>
@@ -16,14 +16,14 @@
         </div>
         <div class="login-box">
           <div class="tel">
-            <input type="text" maxlength="11" placeholder="请输入手机号">
+            <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
           </div>
           <div class="code">
-            <input type="text" maxlength="4" placeholder="请输入短信验证码">
-            <span>输入验证码</span>
+            <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
+            <span @click="send">{{buttonText}}</span>
           </div>
           <div class="login-button">
-            <button>登录</button>
+            <button @click="submit">登录</button>
           </div>
         </div>
         <div class="tips">
@@ -32,13 +32,68 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
+import { user } from "@/model/api";
+import validate from "@/widget/validate";
 export default {
     data() {
-        return {};
+        return {
+            mobile: "",
+            verifyCode: "",
+            isClickCode: true,
+            buttonText: "发送验证码",
+            time: 60
+        };
+    },
+    methods: {
+        send() {
+            const sendCode = () => {
+                this.isClickCode = false;
+                let times = this.time;
+                this.buttonTextClone = this.buttonText;
+                this.buttonText = times + "s";
+                const countTimeTimer = setInterval(() => {
+                    times--;
+                    this.buttonText = times + "s";
+
+                    if (times == 0) {
+                        this.isClickCode = true;
+                        this.buttonText = this.buttonTextClone;
+                        clearInterval(countTimeTimer);
+                    }
+                }, 1000);
+                this.countTimeTimer = countTimeTimer;
+            };
+
+            const { mobile } = this;
+            if (!validate.isMobile(mobile)) {
+                return this.$toast("请输入正确的手机号");
+            }
+            this.$showLoading();
+            user({ type: "GET", data: { mobile } }, "verifyCode").then(res => {
+                this.$hideLoading();
+                sendCode();
+            });
+        },
+        submit() {
+            const { mobile, verifyCode } = this;
+            if (!validate.isMobile(mobile)) {
+                return this.$toast("请输入正确的手机号");
+            }
+            if (!verifyCode) {
+                return this.$toast("请输入验证码");
+            }
+            this.$showLoading();
+            user({ type: "POST", data: { mobile, verifyCode } }, "login").then(res => {
+                this.$hideLoading();
+                console.log(res);
+            });
+        }
+    },
+    beforeDestroy() {
+        this.countTimeTimer && clearInterval(this.countTimeTimer);
     }
 };
 </script>

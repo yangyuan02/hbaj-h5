@@ -2,11 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 17:49:08
+ * @LastEditTime: 2020-04-25 21:30:01
  * @Description:
  */
 import request from "../widget/request";
 
-const baseUrl = "/";
+const baseUrl = "/api";
 
-export const home = (data, url) => request(`${baseUrl}home/${url}`, data);
+export const home = (data, url) => request(`${baseUrl}/home/${url}`, data);
+
+export const user = (data, url) => request(`${baseUrl}/user/${url}`, data);

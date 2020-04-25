@@ -60,7 +60,7 @@ export default function request(
     if (headers && headers["Content-Type"] == "application/json") {
         // json类型
         options.headers["Content-Type"] = headers["Content-Type"];
-        options.data = JSON.stringify(options.data);
+        // options.data = JSON.stringify(options.data);
     } else {
         // x-www-form-urlencoded类型
         options.data = utils.queryStringify(options.data);
@@ -68,8 +68,11 @@ export default function request(
     }
 
     let cacheUrl = url;
-    if (type == "GET" && dataType == "json") {
-        options.url = options.data ? url + "?" + options.data : url;
+    if (type.toLocaleUpperCase() === "POST") {
+        options.data && (options.data = JSON.stringify(options.data));
+    }
+    if (type.toLocaleUpperCase() == "GET") {
+        options.url = options.data ? url + "?" + utils.queryStringify(options.data) : url;
         cacheUrl = optionData ? url + "?" + optionData : url;
     }
 
@@ -79,7 +82,7 @@ export default function request(
                 times: new Date().getTime() + expires,
                 results
             };
-            if (results.suceeded && cache) {
+            if (results.suceeded && results.code === "0" && cache) {
                 store.set(cacheUrl, cacheData, "local");
             }
             resolve(results);
