@@ -3,7 +3,6 @@ node_modules
 /dist
 /target
 /sh_msa
-upload
 # local env files
 .env.local
 .env.*.local
