@@ -79,7 +79,7 @@ export default function request(
                 times: new Date().getTime() + expires,
                 results
             };
-            if (results.resultCode == "0000" && cache) {
+            if (results.suceeded && cache) {
                 store.set(cacheUrl, cacheData, "local");
             }
             resolve(results);

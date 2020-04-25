@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-25 00:59:47
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 01:32:56
+ * @LastEditTime: 2020-04-25 17:33:17
  * @Description:
  */
 
@@ -12,7 +12,6 @@ module.exports = {
     },
     parserOptions: {
         // 检查js 语法为es6
-        ecmaVersion: 6,
-        parser: "babel-eslint"
+        ecmaVersion: 7
     }
 };

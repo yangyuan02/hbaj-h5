@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-24 23:56:12
+ * @LastEditTime: 2020-04-25 17:46:34
  * @Description:
  */
 const path = require("path");
@@ -92,9 +92,10 @@ module.exports = {
         hotOnly: false,
         open: false, // 配置自动启动浏览器
         proxy: {
-            "/returnOrder": {
-                target: "http://192.168.1.43:9207",
-                changeOrigin: true
+            "/": {
+                target: "https://api-pano.vr2shipping.com",
+                changeOrigin: true,
+                ws: false
             }
         }
     }
