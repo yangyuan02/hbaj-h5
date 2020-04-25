@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-14 21:39:08
+ * @LastEditTime: 2020-04-25 23:28:32
  * @Description:
  */
 import Vue from "vue";
@@ -21,21 +21,18 @@ Vue.use(pageLoading);
 Vue.use(Toast);
 
 router.beforeEach((to, from, next) => {
-    if (
-        to.name == "hdInsuranceLogin" &&
-        window.localStorage.getItem("moblie")
-    ) {
+    if (to.name == "login" && window.localStorage.getItem("authorization")) {
         //解决登陆后 用户输入登录地址重定向到首页
-        next({ path: "/activity/hd/insurance/serverNianJian" });
+        next({ path: "/home" });
     }
 
     if (to.meta.requireLogin) {
         // 页面是否需要登录
-        if (window.localStorage.getItem("moblie")) {
+        if (window.localStorage.getItem("authorization")) {
             // token是否存在
             next();
         } else {
-            next({ path: "/activity" });
+            next({ path: "/login" });
         }
     } else {
         // 不需要登录的直接next()

@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 19:30:20
+ * @LastEditTime: 2020-04-25 23:30:20
  * @Description:
  */
 import Vue from "vue";
@@ -74,7 +74,8 @@ export default new Router({
             name: "my",
             component: () => import("@/views/my"),
             meta: {
-                title: "个人中心"
+                title: "个人中心",
+                requireLogin: true
             }
         },
         {
@@ -82,7 +83,8 @@ export default new Router({
             name: "myMessage",
             component: () => import("@/views/my/message"),
             meta: {
-                title: "我的消息"
+                title: "我的消息",
+                requireLogin: true
             }
         },
         {
@@ -90,7 +92,8 @@ export default new Router({
             name: "myPerson",
             component: () => import("@/views/my/person"),
             meta: {
-                title: "我的信息"
+                title: "我的信息",
+                requireLogin: true
             }
         },
         {
@@ -98,7 +101,8 @@ export default new Router({
             name: "myTask",
             component: () => import("@/views/my/task"),
             meta: {
-                title: "我的任务"
+                title: "我的任务",
+                requireLogin: true
             }
         },
         {
@@ -106,7 +110,8 @@ export default new Router({
             name: "mySetting",
             component: () => import("@/views/my/setting"),
             meta: {
-                title: "编辑信息"
+                title: "编辑信息",
+                requireLogin: true
             }
         },
         {

@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-21 20:23:25
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 22:56:55
+ * @LastEditTime: 2020-04-25 23:25:41
  * @Description: 
  -->
 <template>
@@ -37,6 +37,7 @@
 <script>
 import { user } from "@/model/api";
 import validate from "@/widget/validate";
+import store from "@/widget/store";
 export default {
     data() {
         return {
@@ -73,8 +74,10 @@ export default {
             }
             this.$showLoading();
             user({ type: "GET", data: { mobile } }, "verifyCode").then(res => {
-                this.$hideLoading();
-                sendCode();
+                if (res.suceeded) {
+                    this.$hideLoading();
+                    sendCode();
+                }
             });
         },
         submit() {
@@ -86,9 +89,16 @@ export default {
                 return this.$toast("请输入验证码");
             }
             this.$showLoading();
-            user({ type: "POST", data: { mobile, verifyCode } }, "login").then(res => {
-                this.$hideLoading();
-                console.log(res);
+            user({ type: "POST", data: { mobile: "15927407635", password: "123456" } }, "login").then(res => {
+                const {
+                    suceeded,
+                    data: { authorization }
+                } = res;
+                console.log(suceeded, authorization);
+                if (res.suceeded) {
+                    this.$hideLoading();
+                    store.set("authorization", authorization, "local");
+                }
             });
         }
     },

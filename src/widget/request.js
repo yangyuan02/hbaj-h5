@@ -55,6 +55,10 @@ export default function request(
         options.data = data;
     }
 
+    if (store.get("authorization", "local")) {
+        options.headers["Authorization"] = `Bearer ${store.get("authorization", "local")}`;
+    }
+
     let optionData = data;
 
     if (headers && headers["Content-Type"] == "application/json") {
@@ -75,7 +79,6 @@ export default function request(
         options.url = options.data ? url + "?" + utils.queryStringify(options.data) : url;
         cacheUrl = optionData ? url + "?" + optionData : url;
     }
-
     function httpRequest(resolve, reject) {
         ajax(options).then(results => {
             const cacheData = {
