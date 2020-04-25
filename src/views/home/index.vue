@@ -2,31 +2,31 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 17:45:13
+ * @LastEditTime: 2020-04-25 22:59:36
  * @Description: 
  -->
 <template>
-    <div class="page-view">
-        <div class="scroll-view-wrapper">
-            <Header title="海宝安检"></Header>
-            <div class="home-banner">
-                <Banner :bannerList="bannerList"></Banner>
-            </div>
-            <Nav></Nav>
-            <div class="news">
-                <Title title="新闻咨询"></Title>
-                <div class="new-content">
-                    <p>突发！扬州籍内河船入海运砂时沉</p>
-                    <p>张家港海事局启动内河船舶配员专项整治行</p>
-                </div>
-            </div>
-            <div class="course-content">
-                <Title title="公众课件"></Title>
-                <List></List>
-            </div>
+  <div class="page-view">
+    <div class="scroll-view-wrapper">
+      <Header title="海宝安检"></Header>
+      <div class="home-banner">
+        <Banner :bannerList="bannerList"></Banner>
+      </div>
+      <Nav></Nav>
+      <div class="news">
+        <Title title="新闻咨询" :onClick="() => goTo('/news')"></Title>
+        <div class="new-content">
+          <p>突发！扬州籍内河船入海运砂时沉</p>
+          <p>张家港海事局启动内河船舶配员专项整治行</p>
         </div>
-        <Footer></Footer>
+      </div>
+      <div class="course-content">
+        <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
+        <List></List>
+      </div>
     </div>
+    <Footer></Footer>
+  </div>
 </template>
 <script>
 import Banner from "./banner.vue";
@@ -62,6 +62,9 @@ export default {
             home({ type: "GET" }, "pageInfo").then(res => {
                 console.log(res);
             });
+        },
+        goTo(path) {
+            this.$router.push({ path });
         }
     },
     mounted() {

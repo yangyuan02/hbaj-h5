@@ -2,14 +2,14 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 21:34:07
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 21:51:40
+ * @LastEditTime: 2020-04-25 22:41:16
  * @Description: 
  -->
 <template>
-    <div class="title-content">
-        <span>{{ title }}</span>
-        <i class="iconfont icontubiao-13"></i>
-    </div>
+  <div class="title-content">
+    <span>{{ title }}</span>
+    <i class="iconfont icontubiao-13" @click="dispatchEvent"></i>
+  </div>
 </template>
 
 <style lang="less">
@@ -45,6 +45,16 @@ export default {
         title: {
             type: String,
             default: ""
+        },
+        onClick: {
+            type: Function
+        }
+    },
+    methods: {
+        dispatchEvent() {
+            if (this.onClick && typeof this.onClick === "function") {
+                this.onClick();
+            }
         }
     }
 };
