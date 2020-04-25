@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 23:28:32
+ * @LastEditTime: 2020-04-26 00:15:26
  * @Description:
  */
 import Vue from "vue";
@@ -32,7 +32,7 @@ router.beforeEach((to, from, next) => {
             // token是否存在
             next();
         } else {
-            next({ path: "/login" });
+            next({ path: "/login", query: { from: location.href } });
         }
     } else {
         // 不需要登录的直接next()

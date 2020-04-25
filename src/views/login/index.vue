@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-21 20:23:25
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-25 23:25:41
+ * @LastEditTime: 2020-04-26 00:16:52
  * @Description: 
  -->
 <template>
@@ -89,15 +89,18 @@ export default {
                 return this.$toast("请输入验证码");
             }
             this.$showLoading();
-            user({ type: "POST", data: { mobile: "15927407635", password: "123456" } }, "login").then(res => {
+            user({ type: "POST", data: { mobile, verifyCode } }, "login").then(res => {
                 const {
                     suceeded,
                     data: { authorization }
                 } = res;
-                console.log(suceeded, authorization);
+                const { from } = this.$route.query;
                 if (res.suceeded) {
                     this.$hideLoading();
                     store.set("authorization", authorization, "local");
+                    if (from) {
+                        window.location.href = from;
+                    }
                 }
             });
         }
