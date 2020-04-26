@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-26 00:15:26
+ * @LastEditTime: 2020-04-26 10:49:40
  * @Description:
  */
 import Vue from "vue";
@@ -27,9 +27,9 @@ router.beforeEach((to, from, next) => {
     }
 
     if (to.meta.requireLogin) {
-        // 页面是否需要登录
+        // 是需要登录的页面
         if (window.localStorage.getItem("authorization")) {
-            // token是否存在
+            // token存在 且token没有过期
             next();
         } else {
             next({ path: "/login", query: { from: location.href } });
