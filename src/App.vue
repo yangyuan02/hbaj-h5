@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 20:15:15
+ * @LastEditTime: 2020-04-27 13:51:21
  * @Description: 
  -->
 <template>
-    <div id="app">
-        <router-view />
-    </div>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -28,21 +28,12 @@ export default {
             }).then(res => {
                 if (res && typeof res == "string") {
                     if (utils.isLocalStorageSupported()) {
-                        if (
-                            (!store.get(
-                                "/activity/activity-static/lizard/index.js"
-                            ),
-                            "local")
-                        ) {
+                        if ((!store.get("/activity-static/lizard/index.js"), "local")) {
                             let result = {
                                 times: new Date().getTime() + cacheTimes,
                                 results: res
                             };
-                            store.set(
-                                "/activity/activity-static/lizard/index.js",
-                                result,
-                                "local"
-                            );
+                            store.set("/activity-static/lizard/index.js", result, "local");
                         }
                     }
                 }
