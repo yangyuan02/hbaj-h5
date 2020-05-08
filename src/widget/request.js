@@ -57,6 +57,7 @@ export default function request(
 
     if (store.get("authorization", "local")) {
         options.headers["Authorization"] = `Bearer ${store.get("authorization", "local")}`;
+        utils.setCookie("authorization", store.get("authorization", "local"));
     }
 
     let optionData = data;

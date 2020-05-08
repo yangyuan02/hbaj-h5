@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-21 20:23:25
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-26 00:16:52
+ * @LastEditTime: 2020-05-08 20:22:50
  * @Description: 
  -->
 <template>
@@ -81,15 +81,15 @@ export default {
             });
         },
         submit() {
-            const { mobile, verifyCode } = this;
-            if (!validate.isMobile(mobile)) {
-                return this.$toast("请输入正确的手机号");
-            }
-            if (!verifyCode) {
-                return this.$toast("请输入验证码");
-            }
+            // const { mobile, verifyCode } = this;
+            // if (!validate.isMobile(mobile)) {
+            //     return this.$toast("请输入正确的手机号");
+            // }
+            // if (!verifyCode) {
+            //     return this.$toast("请输入验证码");
+            // }
             this.$showLoading();
-            user({ type: "POST", data: { mobile, verifyCode } }, "login").then(res => {
+            user({ type: "POST", data: { mobile: "15927407635", password: "123456" } }, "login").then(res => {
                 const {
                     suceeded,
                     data: { authorization }
@@ -100,6 +100,8 @@ export default {
                     store.set("authorization", authorization, "local");
                     if (from) {
                         window.location.href = from;
+                    } else {
+                        this.$router.push({ path: "/home" });
                     }
                 }
             });
