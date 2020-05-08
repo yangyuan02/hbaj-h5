@@ -1,44 +1,52 @@
 .ellipsis {
 
-  text-overflow: ellipsis;
+    text-overflow: ellipsis;
 
-  white-space: nowrap;
+    white-space: nowrap;
 
-  overflow: hidden;
+    overflow: hidden;
 
 }
 
 .clearfix:after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: "020";
-  clear: both;
-  height: 0;
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "020";
+    clear: both;
+    height: 0;
 }
 
 .clearfix {
-  zoom: 1;
-  clear: both;
+    zoom: 1;
+    clear: both;
 }
 
 .w100 {
-  width: 100% !important;
+    width: 100% !important;
 }
 
 .pLeftRight30 {
-  padding-left: .3rem !important;
-  padding-right: .3rem !important;
+    padding-left: .3rem !important;
+    padding-right: .3rem !important;
 }
 
 .placeholder {
-  color: #B2B2B2
+    color: #B2B2B2
 }
 
 .pLeft30 {
-  padding-left: .3rem !important;
+    padding-left: .3rem !important;
 }
 
 .pRight30 {
-  padding-right: .3rem !important;
+    padding-right: .3rem !important;
+}
+
+.menu-pBottom {
+    padding-bottom: 1.32rem;
+}
+
+.iphone-footer {
+    padding-bottom: .68rem;
 }

@@ -2,12 +2,12 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:40:15
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 20:15:44
+ * @LastEditTime: 2020-05-08 21:20:22
  * @Description: 
  -->
 <template>
   <div class="course-list">
-    <NewsItem v-for="(item, index) in [1, 2, 3, 4, 5, 6]" :key="index"></NewsItem>
+    <NewsItem v-for="(item, index) in list" :key="item.id" :item="item"></NewsItem>
   </div>
 </template>
 
@@ -16,7 +16,9 @@ import NewsItem from "@/components/news";
 import { news } from "@/model/api";
 export default {
     data() {
-        return {};
+        return {
+            list: []
+        };
     },
     components: {
         NewsItem
@@ -32,7 +34,8 @@ export default {
                 }
             }).then(res => {
                 if (res.suceeded) {
-                    console.log(res);
+                    const { content } = res.data;
+                    this.list = content;
                     this.$hideLoading();
                 }
             });

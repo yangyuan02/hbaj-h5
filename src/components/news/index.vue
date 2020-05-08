@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-17 21:30:42
+ * @LastEditTime: 2020-05-08 21:56:55
  * @Description: 
  -->
 <template>
@@ -10,26 +10,28 @@
     <div class="news-item-detail">
       <div class="news-item-title">
         <div class="text">
-          <p>上海宝山海事协助保障中国籍入 境船员顺利换</p>
+          <p>{{item.title}}</p>
         </div>
       </div>
       <div class="news-item-digest">
         <p>
-          国际航行船舶船员换班问题关系船
+          {{item.summary}}
         </p>
       </div>
       <div class="news-item-source">
         <div class="organization">
           <span>发布机构:</span>
-          <span>海宝安检</span>
+          <span>{{item.author}}</span>
         </div>
         <div class="publishTime">
           <span>发布时间:</span>
-          <span>2020-04-15</span>
+          <span>{{item.publishTime | formaData}}</span>
         </div>
       </div>
     </div>
-    <div class="news-item-thumb"></div>
+    <div class="news-item-thumb">
+      <img :src="item.imageUrl" :alt="item.title">
+    </div>
   </div>
 </template>
 
@@ -37,6 +39,12 @@
 export default {
     data() {
         return {};
+    },
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
     },
     methods: {
         toNewsDetail() {
@@ -57,6 +65,7 @@ export default {
         flex: 1;
         .news-item-title {
             .text {
+                height: 0.8rem;
                 p {
                     font-size: 0.28rem;
                     font-family: MicrosoftYaHei;
@@ -96,6 +105,10 @@ export default {
         height: 1.64rem;
         margin-left: 0.22rem;
         background: #f0f0f0;
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-26 10:49:40
+ * @LastEditTime: 2020-05-08 21:56:16
  * @Description:
  */
 import Vue from "vue";
@@ -12,8 +12,13 @@ import Toast from "@/components/toast";
 import loading from "@/components/loading";
 import pageLoading from "@/components/pageLoading";
 import showModal from "@/components/showModal";
+import filters from "./filters";
 
 Vue.config.productionTip = false;
+
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key]);
+});
 
 Vue.use(showModal);
 Vue.use(loading);

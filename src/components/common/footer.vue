@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-18 00:00:31
+ * @LastEditTime: 2020-05-08 23:43:35
  * @Description: 
  -->
 <template>
-  <footer>
+  <footer style="padding-bottom:.34rem">
     <ul>
       <li v-for="(item, index) in list" :key="index" :class="{ active:$route.path.startsWith(item.path) }" @click="goTo(item.path)">
         <div class="menu-bg">
@@ -20,9 +20,11 @@
   </footer>
 </template>
 <script>
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
+            isWeixinIphoneX: utils.isWeixinIphoneX(),
             list: [
                 {
                     icon: "icontubiao-02",
@@ -62,9 +64,11 @@ export default {
 <style lang="less">
 footer {
     width: 100%;
-    height: 0.98rem;
     background: rgba(255, 255, 255, 1);
     border: 0.01rem solid rgba(221, 221, 221, 1);
+    position: fixed;
+    left: 0;
+    bottom: 0;
     ul {
         display: flex;
         justify-content: space-around;
@@ -72,7 +76,7 @@ footer {
         padding-top: 0.17rem;
         padding-bottom: 0.12rem;
         li {
-            width: 25%;
+            flex: 1;
             .menu-bg {
                 text-align: center;
                 i {

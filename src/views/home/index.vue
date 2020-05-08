@@ -2,12 +2,12 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-26 00:07:39
+ * @LastEditTime: 2020-05-08 23:51:09
  * @Description: 
  -->
 <template>
   <div class="page-view">
-    <div class="scroll-view-wrapper">
+    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
       <Header title="海宝安检"></Header>
       <div class="home-banner">
         <Banner :bannerList="bannerList"></Banner>
@@ -36,9 +36,11 @@ import Title from "@/components/title";
 import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 import { home } from "@/model/api";
+
 export default {
     data() {
         return {
+            menupB: true,
             bannerList: [
                 {
                     poster: "https://via.placeholder.com/750x358.jpg?text=banner01"
