@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 23:43:35
+ * @LastEditTime: 2020-05-09 00:36:30
  * @Description: 
  -->
 <template>
@@ -56,7 +56,30 @@ export default {
     methods: {
         goTo(path) {
             this.$router.push({ path });
+        },
+        safaireBotton() {
+            /* 原可视区域 */
+            var innerHeight = window.innerHeight;
+            console.log(innerHeight);
+            window.οnresize = function() {
+                console.log(window.innerHeight);
+                /* safari浏览器的操作栏隐藏时可视区域会变大 */
+                if (window.innerHeight > innerHeight) {
+                    /* 
+                #tabBar 是底部导航栏的选择器
+                通过 修改style值 或 改变class值 请自行决定
+             */
+                    document.querySelector("footer").style.paddingBottom = "0.34rem";
+                } else {
+                    document.querySelector("footer").style.paddingBottom = "0rem";
+                }
+            };
         }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.safaireBotton();
+        });
     }
 };
 </script>
