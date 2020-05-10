@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:43:01
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 20:38:29
+ * @LastEditTime: 2020-05-10 20:48:23
  * @Description: 
  -->
 <template>
@@ -10,7 +10,7 @@
         <header><span>我的</span></header>
         <div class="my-person-info">
             <div class="person-thumb">
-                <input type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
+                <input v-if="isOnUplaod" type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
             </div>
             <div class="person-digest">
                 <div class="nickname">
@@ -38,6 +38,10 @@ export default {
         onUploadSuccess: {
             type: Function,
             default: () => {}
+        },
+        isOnUplaod: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {

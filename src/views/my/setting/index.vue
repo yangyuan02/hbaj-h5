@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 20:15:53
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 20:44:53
+ * @LastEditTime: 2020-05-10 20:49:14
  * @Description: 
  -->
 <!--
@@ -16,7 +16,7 @@
     <div class="page-view">
         <div class="scroll-view-wrapper">
             <div class="my-setting-content">
-                <my-header :info="user" :onUploadSuccess="onUploadSuccess"></my-header>
+                <my-header :info="user" :onUploadSuccess="onUploadSuccess" :isOnUplaod="true"></my-header>
                 <div class="setting-edit-box">
                     <div class="info">
                         <ul>
