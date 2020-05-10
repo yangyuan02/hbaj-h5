@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 23:51:09
+ * @LastEditTime: 2020-05-10 15:25:54
  * @Description: 
  -->
 <template>
@@ -22,7 +22,7 @@
       </div>
       <div class="course-content">
         <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
-        <List></List>
+        <List :recommendProjectList="recommendProjectList"></List>
       </div>
     </div>
     <Footer></Footer>
@@ -48,7 +48,8 @@ export default {
                 {
                     poster: "https://via.placeholder.com/750x358.jpg?text=banner02"
                 }
-            ]
+            ],
+            recommendProjectList: []
         };
     },
     components: {
@@ -61,8 +62,13 @@ export default {
     },
     methods: {
         getHome() {
+            this.$showLoading();
             home({ type: "GET" }, "pageInfo").then(res => {
-                console.log(res);
+                this.$hideLoading();
+                if (res.suceeded) {
+                    const { recommendProject } = res.data;
+                    this.recommendProjectList = recommendProject;
+                }
             });
         },
         goTo(path) {

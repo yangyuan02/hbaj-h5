@@ -2,18 +2,18 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 21:56:55
+ * @LastEditTime: 2020-05-10 15:40:05
  * @Description: 
  -->
 <template>
   <div class="news-content-item" @click="toNewsDetail">
     <div class="news-item-detail">
       <div class="news-item-title">
-        <div class="text">
+        <div class="text ellipsisLineTwo">
           <p>{{item.title}}</p>
         </div>
       </div>
-      <div class="news-item-digest">
+      <div class="news-item-digest ellipsis">
         <p>
           {{item.summary}}
         </p>

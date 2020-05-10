@@ -2,34 +2,36 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 22:21:06
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 21:26:58
+ * @LastEditTime: 2020-05-10 15:40:41
  * @Description: 
  -->
 <template>
   <div class="course-content-item">
-    <div class="course-item-thumb"></div>
+    <div class="course-item-thumb">
+      <img :src="item.imageUrl" alt="">
+    </div>
     <div class="course-item-detail">
       <div class="course-item-title">
-        <div class="text">
-          <p>2019年PSC集中大会战检查要 点-专题说</p>
+        <div class="text ellipsisLineTwo">
+          <p>{{item.name}}</p>
         </div>
         <div class="status">
-          <span>公开</span>
+          <span>{{item.status}}</span>
         </div>
       </div>
-      <div class="course-item-digest">
+      <div class="course-item-digest ellipsisLineTwo">
         <p>
-          宝山海事局执法人员通过具有增强现实（AR）技术支持的在线通讯协作办…
+          {{item.detail}}
         </p>
       </div>
       <div class="course-item-source">
         <div class="organization">
           <span>发布机构:</span>
-          <span>海宝安检</span>
+          <span>{{item.oriEnterpriseName}}</span>
         </div>
         <div class="publishTime">
           <span>发布时间:</span>
-          <span>2020-04-15</span>
+          <span>{{item.publishDate | formaData}}</span>
         </div>
       </div>
     </div>
@@ -39,6 +41,12 @@
 export default {
     data() {
         return {};
+    },
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
     }
 };
 </script>

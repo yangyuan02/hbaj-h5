@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:40:15
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 21:20:22
+ * @LastEditTime: 2020-05-10 15:25:12
  * @Description: 
  -->
 <template>
@@ -33,10 +33,10 @@ export default {
                     size: 10
                 }
             }).then(res => {
+                this.$hideLoading();
                 if (res.suceeded) {
                     const { content } = res.data;
                     this.list = content;
-                    this.$hideLoading();
                 }
             });
         }
