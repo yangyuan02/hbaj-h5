@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:39:40
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-20 20:37:05
+ * @LastEditTime: 2020-05-10 18:24:44
  * @Description: 
  -->
 <template>
@@ -18,15 +18,14 @@
         <div class="news-detail-bg"></div>
         <div class="news-detail-content">
           <div class="title">
-            <p>首家外国船级社获准在我国自贸区开展国际登记船舶入级检验业</p>
+            <p>{{data.title}}</p>
           </div>
           <div class="digest">
-            <span>中国海事</span>
-            <span>2020-03-01</span>
+            <span>{{data.author}}</span>
+            <span>{{data.publishTime | formaData}}</span>
           </div>
           <div class="text">
-            <p>中国海事局批准法国必维船级社（中国） 有限公司在我国自贸区开展国际登记船舶 入级检验业务。这是首家获准在我国自贸 区开展入级检验业务的外国船级社。</p>
-            <p>近日，依法国必维船级社（中国）有限公 司申请，根据《中华人民共和国海事局关 于放开自由贸易试验区国际登记船舶入级 检验有关事项的公告》</p>
+            {{data.contentHtml}}
           </div>
         </div>
       </div>
@@ -36,9 +35,32 @@
 </template>
 
 <script>
+import { newsDetail } from "@/model/api";
 export default {
     data() {
-        return {};
+        return {
+            data: {}
+        };
+    },
+    methods: {
+        getNewsDetail() {
+            this.$showLoading();
+            const { id } = this.$route.params;
+            newsDetail(
+                {
+                    type: "get"
+                },
+                id
+            ).then(res => {
+                this.$hideLoading();
+                if (res.suceeded) {
+                    this.data = res.data;
+                }
+            });
+        }
+    },
+    mounted() {
+        this.getNewsDetail();
     }
 };
 </script>

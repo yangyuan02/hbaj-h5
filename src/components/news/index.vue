@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 15:40:05
+ * @LastEditTime: 2020-05-10 18:15:14
  * @Description: 
  -->
 <template>
-  <div class="news-content-item" @click="toNewsDetail">
+  <div class="news-content-item" @click="toNewsDetail(item.id)">
     <div class="news-item-detail">
       <div class="news-item-title">
         <div class="text ellipsisLineTwo">
@@ -47,8 +47,13 @@ export default {
         }
     },
     methods: {
-        toNewsDetail() {
-            this.$router.push({ path: "/news/detail" });
+        toNewsDetail(id) {
+            this.$router.push({
+                name: "newsDetail",
+                params: {
+                    id
+                }
+            });
         }
     }
 };
