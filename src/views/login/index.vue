@@ -2,36 +2,36 @@
  * @Author: yangyuan
  * @Date: 2020-04-21 20:23:25
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 18:31:06
+ * @LastEditTime: 2020-05-10 21:13:37
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper">
-      <div class="login-content">
-        <div class="login-bg">
-          <div class="login-title">
-            <span>欢迎使用海宝安检</span>
-          </div>
+    <div class="page-view">
+        <div class="scroll-view-wrapper">
+            <div class="login-content">
+                <div class="login-bg">
+                    <div class="login-title">
+                        <span>欢迎使用海宝安检</span>
+                    </div>
+                </div>
+                <div class="login-box">
+                    <div class="tel">
+                        <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
+                    </div>
+                    <div class="code">
+                        <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
+                        <span @click="send">{{ buttonText }}</span>
+                    </div>
+                    <div class="login-button">
+                        <button @click="submit">登录</button>
+                    </div>
+                </div>
+                <div class="tips">
+                    <p>本应用尚未对外开放注册，如需注册成为会员请联系xxx-xxxxxxxxxxx</p>
+                </div>
+            </div>
         </div>
-        <div class="login-box">
-          <div class="tel">
-            <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
-          </div>
-          <div class="code">
-            <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
-            <span @click="send">{{buttonText}}</span>
-          </div>
-          <div class="login-button">
-            <button @click="submit">登录</button>
-          </div>
-        </div>
-        <div class="tips">
-          <p>本应用尚未对外开放注册，如需注册成为会员请联系xxx-xxxxxxxxxxx</p>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -99,6 +99,7 @@ export default {
                     this.$hideLoading();
                     store.set("authorization", authorization, "local");
                     store.set("userId", id, "local");
+                    store.set("user", res.data, "local");
                     if (from) {
                         window.location.href = from;
                     } else {

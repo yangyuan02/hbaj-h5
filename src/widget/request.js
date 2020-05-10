@@ -60,6 +60,10 @@ export default function request(
         utils.setCookie("authorization", store.get("authorization", "local"));
     }
 
+    // if (store.get("user", "local")) {
+    //     utils.setCookie("userId", store.get("user", "local"));
+    // }
+
     let optionData = data;
 
     if (headers && headers["Content-Type"] == "application/json") {
