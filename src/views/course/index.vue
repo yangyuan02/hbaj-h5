@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:46:41
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-17 21:28:28
+ * @LastEditTime: 2020-05-10 17:48:51
  * @Description: 
  -->
 <template>
@@ -13,7 +13,7 @@
       <Nav></Nav>
       <SubMenu></SubMenu>
       <div class="course-content">
-        <List></List>
+        <List :recommendProjectList="recommendProjectList"></List>
       </div>
     </div>
     <Footer></Footer>
@@ -34,9 +34,12 @@ import Search from "@/components/search";
 import Nav from "@/components/nav";
 import List from "./list.vue";
 import SubMenu from "./submenu.vue";
+import { home } from "@/model/api";
 export default {
     data() {
-        return {};
+        return {
+            recommendProjectList: []
+        };
     },
     components: {
         Nav,
@@ -45,6 +48,21 @@ export default {
         Search,
         List,
         SubMenu
+    },
+    methods: {
+        getCourseList() {
+            this.$showLoading();
+            home({ type: "GET" }, "pageInfo").then(res => {
+                this.$hideLoading();
+                if (res.suceeded) {
+                    const { recommendProject } = res.data;
+                    this.recommendProjectList = recommendProject;
+                }
+            });
+        }
+    },
+    mounted() {
+        this.getCourseList();
     }
 };
 </script>

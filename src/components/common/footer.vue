@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-09 00:36:30
+ * @LastEditTime: 2020-05-10 17:58:41
  * @Description: 
  -->
 <template>
   <footer style="padding-bottom:.34rem">
     <ul>
-      <li v-for="(item, index) in list" :key="index" :class="{ active:$route.path.startsWith(item.path) }" @click="goTo(item.path)">
+      <li v-for="(item, index) in list" :key="index" :class="{ active:$route.path.startsWith(item.path) || item.name === $route.name }" @click="goTo(item.path)">
         <div class="menu-bg">
           <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
         </div>
@@ -30,7 +30,8 @@ export default {
                     icon: "icontubiao-02",
                     bgColor: "rgba(254, 213, 26, 1)",
                     title: "首页",
-                    path: "/home"
+                    path: "/home",
+                    name: "Index"
                 },
                 {
                     icon: "icontubiao-01",
