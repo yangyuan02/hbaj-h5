@@ -2,31 +2,73 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:43:01
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-20 20:44:21
+ * @LastEditTime: 2020-05-10 20:38:29
  * @Description: 
  -->
- <template>
-  <div class="my-header-content">
-    <header><span>我的</span></header>
-    <div class="my-person-info">
-      <div class="person-thumb"></div>
-      <div class="person-digest">
-        <div class="nickname">
-          <span>船福</span>
+<template>
+    <div class="my-header-content">
+        <header><span>我的</span></header>
+        <div class="my-person-info">
+            <div class="person-thumb">
+                <input type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
+            </div>
+            <div class="person-digest">
+                <div class="nickname">
+                    <span>{{ info.namecard }}</span>
+                </div>
+                <div class="info">
+                    <span>{{ info.description }}</span>
+                </div>
+            </div>
         </div>
-        <div class="info">
-          <span>这是一段自我介绍的文字。这是一段自我介绍的文字这是一段自我介绍的文字这是一段自我介绍的文字这是一段自我介绍的文字这是一段自我 介绍的文字。这是一段自我介绍的文字</span>
-        </div>
-
-      </div>
     </div>
-  </div>
 </template>
 
- <script>
+<script>
+import ImageUpload from "@/widget/imageUpload";
 export default {
     data() {
         return {};
+    },
+    props: {
+        info: {
+            type: Object,
+            default: {}
+        },
+        onUploadSuccess: {
+            type: Function,
+            default: () => {}
+        }
+    },
+    methods: {
+        uploadAvatar(e, opt) {
+            this.$showLoading();
+
+            var file = e.currentTarget.files[0];
+            const info = this.info;
+            var imageUpload = new ImageUpload(file, {
+                url: `/api/file/upload?fileName=${info.namecard}&relatedId=${info.id}&fileType=USER_AVATAR`,
+                fileKey: "file",
+                onUpload: result => {
+                    this.$hideLoading();
+
+                    if (result.suceeded >= 1) {
+                        // this.params[opt.img] = result.data.img_dir
+                        e.target.value = "";
+                        if (this.onUploadSuccess && typeof this.onUploadSuccess === "function") {
+                            this.onUploadSuccess(result.data);
+                        }
+                        console.log(result);
+                    } else {
+                        this.$toast(result.msg);
+                    }
+                },
+                onError: () => {
+                    this.$toast("网络服务器错误");
+                }
+            });
+            imageUpload.start();
+        }
     }
 };
 </script>
@@ -61,6 +103,15 @@ export default {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+            .upload_file {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                z-index: 110;
+            }
         }
         .person-digest {
             flex: 1;

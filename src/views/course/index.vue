@@ -2,12 +2,12 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:46:41
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 17:48:51
+ * @LastEditTime: 2020-05-10 18:27:08
  * @Description: 
  -->
 <template>
   <div class="page-view">
-    <div class="scroll-view-wrapper">
+    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
       <Header title="公共课件资源"></Header>
       <Search></Search>
       <Nav></Nav>
@@ -38,7 +38,8 @@ import { home } from "@/model/api";
 export default {
     data() {
         return {
-            recommendProjectList: []
+            recommendProjectList: [],
+            menupB: true
         };
     },
     components: {

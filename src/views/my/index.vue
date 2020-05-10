@@ -2,14 +2,14 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:38:27
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-19 20:19:44
+ * @LastEditTime: 2020-05-10 19:25:20
  * @Description: 
  -->
 <template>
   <div class="page-view">
     <div class="scroll-view-wrapper">
       <div class="my-content">
-        <my-header></my-header>
+        <my-header :info="user"></my-header>
         <div class="my-list-content">
           <ul>
             <li v-for="(item, index) in list" :key="index" @click="goTo(item.path)">
@@ -34,6 +34,8 @@
 <script>
 import MyHeader from "@/components/my-header";
 import Footer from "@/components/common/footer";
+import { user } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
         return {
@@ -62,7 +64,8 @@ export default {
                     color: "rgba(238, 27, 27, 1)",
                     path: "/my/message"
                 }
-            ]
+            ],
+            user: {}
         };
     },
     components: {
@@ -72,7 +75,23 @@ export default {
     methods: {
         goTo(path) {
             this.$router.push({ path });
+        },
+        getUserDetail() {
+            const userId = store.get("userId", "local");
+            user(
+                {
+                    type: "get"
+                },
+                userId
+            ).then(res => {
+                if (res.suceeded) {
+                    this.user = res.data;
+                }
+            });
         }
+    },
+    mounted() {
+        this.getUserDetail();
     }
 };
 </script>

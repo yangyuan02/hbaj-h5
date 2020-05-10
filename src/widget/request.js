@@ -73,7 +73,7 @@ export default function request(
     }
 
     let cacheUrl = url;
-    if (type.toLocaleUpperCase() === "POST") {
+    if (type.toLocaleUpperCase() === "POST" || type.toLocaleUpperCase() === "PUT") {
         options.data && (options.data = JSON.stringify(options.data));
     }
     if (type.toLocaleUpperCase() == "GET") {

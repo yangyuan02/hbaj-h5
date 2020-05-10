@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 20:15:53
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-23 22:54:52
+ * @LastEditTime: 2020-05-10 20:44:53
  * @Description: 
  -->
 <!--
@@ -13,70 +13,106 @@
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper">
-      <div class="my-setting-content">
-        <my-header></my-header>
-        <div class="setting-edit-box">
-          <div class="info">
-            <ul>
-              <li>
-                <i class="iconfont icontubiao-18"></i>
-                <div class="border">
-                  <span>昵称</span>
-                  <input type="text" placeholder="请输入昵称">
+    <div class="page-view">
+        <div class="scroll-view-wrapper">
+            <div class="my-setting-content">
+                <my-header :info="user" :onUploadSuccess="onUploadSuccess"></my-header>
+                <div class="setting-edit-box">
+                    <div class="info">
+                        <ul>
+                            <li>
+                                <i class="iconfont icontubiao-18"></i>
+                                <div class="border">
+                                    <span>昵称</span>
+                                    <input type="text" placeholder="请输入昵称" v-model="user.namecard" />
+                                </div>
+                            </li>
+                            <li>
+                                <i class="iconfont icontubiao-19"></i>
+                                <div class="border"><span>邮箱</span> <input type="text" placeholder="请输入邮箱" v-model="user.email" /></div>
+                            </li>
+                            <li>
+                                <i class="iconfont icontubiao-20"></i>
+                                <div class="border">
+                                    <span>电话</span>
+                                    <input type="text" placeholder="请输入电话" v-model="user.mobile" />
+                                </div>
+                            </li>
+                            <li>
+                                <i class="iconfont icontubiao-21"></i>
+                                <div class="border">
+                                    <span>区域</span>
+                                    <input type="text" placeholder="请输入区域" v-model="user.address" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="digest">
+                        <textarea name="" id="" cols="30" rows="10" v-model="user.description"></textarea>
+                    </div>
+                    <div class="save">
+                        <button @click="updateUser">保存</button>
+                    </div>
                 </div>
-
-              </li>
-              <li>
-                <i class="iconfont icontubiao-19"></i>
-                <div class="border"><span>邮箱</span>
-                  <input type="text" placeholder="请输入邮箱"></div>
-
-              </li>
-              <li>
-                <i class="iconfont icontubiao-20"></i>
-                <div class="border">
-                  <span>电话</span>
-                  <input type="text" placeholder="请输入电话">
-                </div>
-
-              </li>
-              <li>
-                <i class="iconfont icontubiao-21"></i>
-                <div class="border">
-                  <span>区域</span>
-                  <input type="text" placeholder="请输入区域">
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="digest">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-          </div>
-          <div class="save">
-            <button>保存</button>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
 </template>
 
 <script>
 import MyHeader from "@/components/my-header";
+import { user } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
-        return {};
+        return {
+            user: {}
+        };
     },
     components: {
         MyHeader
     },
     methods: {
-        goTo(path) {
-            this.$router.push({ path });
+        getUserDetail() {
+            this.$showPageLoading();
+            const userId = store.get("userId", "local");
+            user(
+                {
+                    type: "get"
+                },
+                userId
+            ).then(res => {
+                this.$hidePageLoading();
+                if (res.suceeded) {
+                    this.user = res.data;
+                }
+
+                console.log(res);
+            });
+        },
+        onUploadSuccess(data) {
+            this.user.avatar = data.path;
+        },
+        updateUser() {
+            this.$showLoading();
+            const userId = store.get("userId", "local");
+            user(
+                {
+                    type: "put",
+                    data: this.user
+                },
+                `${userId}/profile`
+            ).then(res => {
+                this.$hideLoading();
+                if (res.suceeded) {
+                    this.$router.push("/my");
+                }
+                console.log(res);
+            });
         }
+    },
+    mounted() {
+        this.getUserDetail();
     }
 };
 </script>
