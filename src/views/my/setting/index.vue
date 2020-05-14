@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 20:15:53
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 20:49:14
+ * @LastEditTime: 2020-05-14 20:19:00
  * @Description: 
  -->
 <!--
@@ -35,7 +35,7 @@
                                 <i class="iconfont icontubiao-20"></i>
                                 <div class="border">
                                     <span>电话</span>
-                                    <input type="text" placeholder="请输入电话" v-model="user.mobile" />
+                                    <input type="text" placeholder="请输入电话" v-model="user.mobile" disabled />
                                 </div>
                             </li>
                             <li>

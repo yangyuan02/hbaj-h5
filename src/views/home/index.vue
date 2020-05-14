@@ -2,31 +2,31 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 15:25:54
+ * @LastEditTime: 2020-05-14 20:22:50
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
-      <Header title="海宝安检"></Header>
-      <div class="home-banner">
-        <Banner :bannerList="bannerList"></Banner>
-      </div>
-      <Nav></Nav>
-      <div class="news">
-        <Title title="新闻咨询" :onClick="() => goTo('/news')"></Title>
-        <div class="new-content">
-          <p>突发！扬州籍内河船入海运砂时沉</p>
-          <p>张家港海事局启动内河船舶配员专项整治行</p>
+    <div class="page-view">
+        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Header title="海宝安检"></Header>
+            <div class="home-banner">
+                <Banner :bannerList="bannerList"></Banner>
+            </div>
+            <Nav></Nav>
+            <div class="news">
+                <Title title="新闻咨询" :onClick="() => goTo('/news')"></Title>
+                <div class="new-content">
+                    <p>突发！扬州籍内河船入海运砂时沉</p>
+                    <p>张家港海事局启动内河船舶配员专项整治行</p>
+                </div>
+            </div>
+            <div class="course-content">
+                <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
+                <List :recommendProjectList="recommendProjectList"></List>
+            </div>
         </div>
-      </div>
-      <div class="course-content">
-        <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
-        <List :recommendProjectList="recommendProjectList"></List>
-      </div>
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
 </template>
 <script>
 import Banner from "./banner.vue";
@@ -63,7 +63,7 @@ export default {
     methods: {
         getHome() {
             this.$showLoading();
-            home({ type: "GET" }, "pageInfo").then(res => {
+            home({ type: "GET" }, "app/pageInfo").then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
                     const { recommendProject } = res.data;

@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-05-08 21:47:07
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 21:58:49
+ * @LastEditTime: 2020-05-14 20:31:55
  * @Description:
  */
 
@@ -20,6 +20,15 @@ const formaData = dateTime => {
     return result;
 };
 
+const formPublicFlg = flg => {
+    const publicFlg = {
+        0: "不公开",
+        1: "公开"
+    };
+    return flg ? publicFlg[flg] : flg;
+};
+
 export default {
-    formaData
+    formaData,
+    formPublicFlg
 };
