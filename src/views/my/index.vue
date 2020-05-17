@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:38:27
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 19:25:20
+ * @LastEditTime: 2020-05-17 23:50:42
  * @Description: 
  -->
 <template>
@@ -16,6 +16,7 @@
               <div class="info">
                 <i class="iconfont" :class="[item.icon ? item.icon : '']" :style="{color:item.color}"></i>
                 <span>{{item.text}}</span>
+                <span v-if="item.text === '我的通知' && count !== 0 " class="unreadCount">10</span>
               </div>
               <div class="arrows">
                 <i class="iconfont icontubiao-13"></i>
@@ -34,7 +35,7 @@
 <script>
 import MyHeader from "@/components/my-header";
 import Footer from "@/components/common/footer";
-import { user } from "@/model/api";
+import { user, messageDetail } from "@/model/api";
 import store from "@/widget/store";
 export default {
     data() {
@@ -65,7 +66,8 @@ export default {
                     path: "/my/message"
                 }
             ],
-            user: {}
+            user: {},
+            count: 0
         };
     },
     components: {
@@ -88,10 +90,25 @@ export default {
                     this.user = res.data;
                 }
             });
+        },
+        getMessageDetail() {
+            messageDetail(
+                {
+                    type: "get"
+                },
+                "unreadCount"
+            ).then(res => {
+                if (res.suceeded) {
+                    const { count } = res.data;
+                    this.count = count;
+                }
+                console.log(res);
+            });
         }
     },
     mounted() {
         this.getUserDetail();
+        this.getMessageDetail();
     }
 };
 </script>
@@ -128,6 +145,16 @@ export default {
                         line-height: 0.37rem;
                         -webkit-background-clip: text;
                         margin-left: 0.3rem;
+                    }
+                    .unreadCount {
+                        width: 0.44rem;
+                        height: 0.44rem;
+                        background: rgba(238, 27, 27, 1);
+                        text-align: center;
+                        line-height: 0.44rem;
+                        border-radius: 50%;
+                        color: #fff;
+                        display: inline-block;
                     }
                 }
                 .arrows {
