@@ -1,8 +1,8 @@
 <template>
-    <div class="slideshow-wrap" :class="{ 'ui-lazyLoad-pic': picLazyLoad }">
-        <slot name="banner"></slot>
-        <slot name="dot"></slot>
-    </div>
+  <div class="slideshow-wrap" :class="{ 'ui-lazyLoad-pic': picLazyLoad }">
+    <slot name="banner"></slot>
+    <slot name="dot"></slot>
+  </div>
 </template>
 
 <style lang="less">
@@ -186,8 +186,7 @@ export default {
         },
         setWrapperPos(x) {
             this.wrapper.style.transform = "translate3d(" + x + "px, 0, 0)";
-            this.wrapper.style.WebkitTransform =
-                "translate3d(" + x + "px, 0, 0)";
+            this.wrapper.style.WebkitTransform = "translate3d(" + x + "px, 0, 0)";
         },
         clearAnimate() {
             this.wrapper.style.transition = "none";
@@ -205,20 +204,12 @@ export default {
                     this.setWrapperPos(-this.itemWidth);
                 }, 310);
             }
-            this.wrapper.style.cssText =
-                "transition:300ms ease-in; -webkit-transition:300ms ease-in; transform: translate3d(" +
-                x +
-                "px, 0, 0); -webkit-transform:translate3d(" +
-                x +
-                "px, 0, 0)";
+            this.wrapper.style.cssText = "transition:300ms ease-in; -webkit-transition:300ms ease-in; transform: translate3d(" + x + "px, 0, 0); -webkit-transform:translate3d(" + x + "px, 0, 0)";
         },
         startAutoPlay() {
             if (this.isAutoPlay && this.itemLength > 1) {
                 this.stopAutoPlay();
-                this.autoPlayTimer = setInterval(
-                    () => this.autoPlay(),
-                    this.autoTime
-                );
+                this.autoPlayTimer = setInterval(() => this.autoPlay(), this.autoTime);
             }
         },
         stopAutoPlay() {
@@ -228,9 +219,12 @@ export default {
             }
         }
     },
-    mounted() {
-        this.$nextTick(() => {
-            this.init();
+    watch: {
+        list() {
+            setTimeout(() => {
+                this.init();
+            }, 0);
+
             this.$el.addEventListener(
                 "touchstart",
                 e => {
@@ -252,7 +246,7 @@ export default {
                 },
                 false
             );
-        });
+        }
     },
     destroyed() {
         clearInterval(this.autoPlayTimer);
