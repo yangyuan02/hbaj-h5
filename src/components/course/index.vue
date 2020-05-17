@@ -2,45 +2,47 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 22:21:06
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-14 20:32:34
+ * @LastEditTime: 2020-05-17 21:35:46
  * @Description: 
  -->
 <template>
-    <div class="course-content-item">
-        <div class="course-item-thumb">
-            <img :src="item.imageUrl" alt="" />
-        </div>
-        <div class="course-item-detail">
-            <div class="course-item-title">
-                <div class="text ellipsisLineTwo">
-                    <p>{{ item.name }}</p>
-                </div>
-                <div class="status">
-                    <span>{{ item.publicFlg | formPublicFlg }}</span>
-                </div>
-            </div>
-            <div class="course-item-digest ellipsisLineTwo">
-                <p>
-                    {{ item.detail }}
-                </p>
-            </div>
-            <div class="course-item-source">
-                <div class="organization">
-                    <span>发布机构:</span>
-                    <span>{{ item.oriEnterpriseName }}</span>
-                </div>
-                <div class="publishTime">
-                    <span>发布时间:</span>
-                    <span>{{ item.publishDate | formaData }}</span>
-                </div>
-            </div>
-        </div>
+  <div class="course-content-item">
+    <div class="course-item-thumb">
+      <img :src="imagePath + item.imageUrl" alt="" />
     </div>
+    <div class="course-item-detail">
+      <div class="course-item-title">
+        <div class="text ellipsisLineTwo">
+          <p>{{ item.name }}</p>
+        </div>
+        <div class="status">
+          <span>{{ item.publicFlg | formPublicFlg }}</span>
+        </div>
+      </div>
+      <div class="course-item-digest ellipsisLineTwo">
+        <p>
+          {{ item.detail }}
+        </p>
+      </div>
+      <div class="course-item-source">
+        <div class="organization">
+          <span>发布机构:</span>
+          <span>{{ item.oriEnterpriseName }}</span>
+        </div>
+        <div class="publishTime">
+          <span>发布时间:</span>
+          <span>{{ item.publishDate | formaData }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
     data() {
-        return {};
+        return {
+            imagePath: globalConfig.imagePath
+        };
     },
     props: {
         item: {
@@ -61,6 +63,11 @@ export default {
         height: 2.1rem;
         margin-right: 0.22rem;
         background: #f0f0f0;
+        img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+        }
     }
     .course-item-detail {
         flex: 1;

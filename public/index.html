@@ -18,6 +18,9 @@
         <title>加载中...</title>
         <!-- <script src="/activity-static/lizard/index.js"></script> -->
         <script type="text/javascript">
+            window.globalConfig = {
+                imagePath: "<%= htmlWebpackPlugin.options.imagePath%>"
+            };
             function isLocalStorageSupported() {
                 var testKey = "test",
                     storage = window.sessionStorage;

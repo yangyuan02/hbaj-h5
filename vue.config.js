@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-14 20:00:37
+ * @LastEditTime: 2020-05-17 21:19:56
  * @Description:
  */
 const path = require("path");
@@ -30,7 +30,7 @@ module.exports = {
             new HtmlWebpackPlugin({
                 template: "public/index.html",
                 filename: path.resolve(__dirname, "sh_msa/index.html"),
-                // staticPath: process.env.VUE_APP_STATIC_PATH,
+                imagePath: process.env.VUE_APP_IMAGE_PATH,
                 getTime: new Date().getTime(),
                 inject: true,
                 attributes: {
