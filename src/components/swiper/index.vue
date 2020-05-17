@@ -78,6 +78,11 @@ export default {
         itemWidth: {
             type: Number,
             default: 750
+        },
+        picLazyLoad: {
+            // 是否开启懒加载
+            type: Boolean,
+            default: true
         }
     },
     data() {

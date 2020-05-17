@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 21:56:16
+ * @LastEditTime: 2020-05-17 23:23:05
  * @Description:
  */
 import Vue from "vue";
@@ -24,6 +24,8 @@ Vue.use(showModal);
 Vue.use(loading);
 Vue.use(pageLoading);
 Vue.use(Toast);
+
+Vue.prototype.globalConfig = window.globalConfig;
 
 router.beforeEach((to, from, next) => {
     if (to.name == "login" && window.localStorage.getItem("authorization")) {

@@ -2,26 +2,26 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:43:01
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 20:48:23
+ * @LastEditTime: 2020-05-17 23:31:55
  * @Description: 
  -->
 <template>
-    <div class="my-header-content">
-        <header><span>我的</span></header>
-        <div class="my-person-info">
-            <div class="person-thumb">
-                <input v-if="isOnUplaod" type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
-            </div>
-            <div class="person-digest">
-                <div class="nickname">
-                    <span>{{ info.namecard }}</span>
-                </div>
-                <div class="info">
-                    <span>{{ info.description }}</span>
-                </div>
-            </div>
+  <div class="my-header-content">
+    <header><span>我的</span></header>
+    <div class="my-person-info">
+      <div class="person-thumb" :style="{'background-url':globalConfig.imagePath + info.avatar}">
+        <input v-if="isOnUplaod" type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
+      </div>
+      <div class="person-digest">
+        <div class="nickname">
+          <span>{{ info.namecard }}</span>
         </div>
+        <div class="info">
+          <span>{{ info.description }}</span>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

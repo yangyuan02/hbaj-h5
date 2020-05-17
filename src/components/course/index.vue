@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 22:21:06
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 21:35:46
+ * @LastEditTime: 2020-05-17 23:24:35
  * @Description: 
  -->
 <template>
   <div class="course-content-item">
     <div class="course-item-thumb">
-      <img :src="imagePath + item.imageUrl" alt="" />
+      <img :src="globalConfig.imagePath + item.imageUrl" alt="" />
     </div>
     <div class="course-item-detail">
       <div class="course-item-title">
@@ -40,9 +40,7 @@
 <script>
 export default {
     data() {
-        return {
-            imagePath: globalConfig.imagePath
-        };
+        return {};
     },
     props: {
         item: {
