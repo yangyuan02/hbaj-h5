@@ -2,15 +2,19 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:43:01
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 23:31:55
+ * @LastEditTime: 2020-05-18 21:30:13
  * @Description: 
  -->
 <template>
   <div class="my-header-content">
-    <header><span>我的</span></header>
+    <header>
+      <span>我的</span>
+      <i class="iconfont icontubiao-251 edit" @click="edit" v-if="isEdit"></i>
+    </header>
     <div class="my-person-info">
-      <div class="person-thumb" :style="{'background-url':globalConfig.imagePath + info.avatar}">
+      <div class="person-thumb">
         <input v-if="isOnUplaod" type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
+        <img :src="globalConfig.imagePath + info.avatar" alt="" v-if="info.avatar">
       </div>
       <div class="person-digest">
         <div class="nickname">
@@ -42,6 +46,10 @@ export default {
         isOnUplaod: {
             type: Boolean,
             default: false
+        },
+        isEdit: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {
@@ -72,6 +80,9 @@ export default {
                 }
             });
             imageUpload.start();
+        },
+        edit() {
+            this.$router.push({ name: "mySetting" });
         }
     }
 };
@@ -91,8 +102,17 @@ export default {
         align-items: center;
         justify-content: center;
         background: transparent;
+        position: relative;
         span {
             color: #fff;
+        }
+        i {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 0.34rem;
         }
     }
     .my-person-info {
@@ -107,6 +127,11 @@ export default {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
             .upload_file {
                 width: 100%;
                 height: 100%;

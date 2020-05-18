@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "14384852",
+      "name": "图标-29",
+      "font_class": "tubiao-29",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "14384851",
+      "name": "图标-28",
+      "font_class": "tubiao-28",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
       "icon_id": "14132858",
       "name": "图标-27",
       "font_class": "tubiao-27",
