@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 22:21:06
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 23:24:35
+ * @LastEditTime: 2020-05-24 20:46:12
  * @Description: 
  -->
 <template>
-  <div class="course-content-item">
+  <div class="course-content-item" @click="goDetail">
     <div class="course-item-thumb">
       <img :src="globalConfig.imagePath + item.imageUrl" alt="" />
     </div>
@@ -46,6 +46,11 @@ export default {
         item: {
             type: Object,
             default: {}
+        }
+    },
+    methods: {
+        goDetail() {
+            window.location.href = "http://www.ship2vr.com/hb/";
         }
     }
 };
