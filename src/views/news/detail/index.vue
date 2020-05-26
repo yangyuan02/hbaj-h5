@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:39:40
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 18:24:44
+ * @LastEditTime: 2020-05-26 21:38:47
  * @Description: 
  -->
 <template>
@@ -24,9 +24,7 @@
             <span>{{data.author}}</span>
             <span>{{data.publishTime | formaData}}</span>
           </div>
-          <div class="text">
-            {{data.contentHtml}}
-          </div>
+          <div class="text" v-html="data.contentHtml"></div>
         </div>
       </div>
 

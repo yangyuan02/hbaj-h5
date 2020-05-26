@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 23:06:45
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 23:25:03
+ * @LastEditTime: 2020-05-26 21:32:15
  * @Description: 
  -->
 <template>
@@ -28,8 +28,8 @@ export default {
     data() {
         return {
             index: 1,
-            wrapperWidth: 750,
-            itemWidth: 750,
+            wrapperWidth: document.documentElement.clientWidth,
+            itemWidth: document.documentElement.clientWidth,
             itemHeight: "3.58rem"
         };
     },
