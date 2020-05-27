@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-21 20:23:25
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-26 22:05:51
+ * @LastEditTime: 2020-05-27 23:02:49
  * @Description: 
  -->
 <template>
@@ -31,10 +31,12 @@
         </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from "@/components/common/footer";
 import { user } from "@/model/api";
 import validate from "@/widget/validate";
 import store from "@/widget/store";
@@ -47,6 +49,9 @@ export default {
             buttonText: "发送验证码",
             time: 60
         };
+    },
+    components: {
+        Footer
     },
     methods: {
         send() {
