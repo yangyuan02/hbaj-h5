@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2853205",
+      "name": "空箱子",
+      "font_class": "kongxiangzi",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
       "icon_id": "14384852",
       "name": "图标-29",
       "font_class": "tubiao-29",
