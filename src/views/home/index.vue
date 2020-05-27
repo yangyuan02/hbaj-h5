@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-27 22:48:08
+ * @LastEditTime: 2020-05-27 23:28:59
  * @Description: 
  -->
 <template>
@@ -16,7 +16,14 @@
       <div class="news">
         <Title title="海宝资讯" :onClick="() => goTo('/news')"></Title>
         <div class="new-content">
-          <p v-for="(item, index) in newsList" @click="toNewsDetail(item.id)" class="ellipsis">{{item.title}}</p>
+          <div class="news-item" v-for="(item, index) in newsList" @click="toNewsDetail(item.id)">
+            <div class="title">
+              <p class="ellipsis">{{item.title}}</p>
+            </div>
+            <div class="digest ">
+              <p class="ellipsisLineTwo">{{item.summary}}</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="course-content">
@@ -93,6 +100,34 @@ export default {
             width: 100%;
             background: #fff;
             padding: 0.22rem 0.24rem;
+            .news-item {
+                padding-top: 0.18rem;
+                padding-bottom: 0.15rem;
+                border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
+                &:last-child {
+                    border-bottom: 0;
+                }
+                .title {
+                    p {
+                        font-size: 0.28rem;
+                        font-family: MicrosoftYaHei;
+                        color: rgba(51, 51, 51, 1);
+                        line-height: 0.37rem;
+                        letter-spacing: 0.01rem;
+                        -webkit-background-clip: text;
+                    }
+                    margin-bottom: 0.18rem;
+                }
+                .digest {
+                    p {
+                        font-family: MicrosoftYaHei;
+                        color: rgba(102, 102, 102, 1);
+                        line-height: 0.31rem;
+                        letter-spacing: 0.01rem;
+                        -webkit-background-clip: text;
+                    }
+                }
+            }
             p {
                 font-family: MicrosoftYaHei;
                 color: rgba(102, 102, 102, 1);
