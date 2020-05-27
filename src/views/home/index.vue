@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 23:06:25
+ * @LastEditTime: 2020-05-26 22:51:53
  * @Description: 
  -->
 <template>
@@ -14,7 +14,7 @@
       </div>
       <Nav></Nav>
       <div class="news">
-        <Title title="新闻咨询" :onClick="() => goTo('/news')"></Title>
+        <Title title="海宝咨询" :onClick="() => goTo('/news')"></Title>
         <div class="new-content">
           <p v-for="(item, index) in newsList" @click="toNewsDetail(item.id)" class="ellipsis">{{item.title}}</p>
         </div>

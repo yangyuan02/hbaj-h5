@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 17:58:41
+ * @LastEditTime: 2020-05-26 22:56:15
  * @Description: 
  -->
 <template>
@@ -42,7 +42,7 @@ export default {
                 {
                     icon: "icontubiao-04",
                     bgColor: "rgba(148, 203, 243, 1)",
-                    title: "新闻咨询",
+                    title: "新闻资讯",
                     path: "/news"
                 },
                 {
