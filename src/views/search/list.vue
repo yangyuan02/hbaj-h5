@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:40:15
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-18 00:00:33
+ * @LastEditTime: 2020-05-27 23:40:49
  * @Description: 
  -->
 <template>
@@ -32,9 +32,14 @@ export default {
 <style lang="less">
 .course-list {
     padding: 0 0.2rem;
+    height: 100%;
+    min-height: 100%;
     .no-list {
         height: 100%;
         min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 </style>

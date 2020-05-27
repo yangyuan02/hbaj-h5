@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 20:34:22
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 20:53:55
+ * @LastEditTime: 2020-05-27 23:39:45
  * @Description: 
  -->
 <template>
@@ -63,5 +63,7 @@ export default {
 .course-content {
     width: 100%;
     background: #fff;
+    min-height: 100%;
+    height: calc(100% - 1.14rem);
 }
 </style>
