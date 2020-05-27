@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-26 22:51:53
+ * @LastEditTime: 2020-05-27 21:46:39
  * @Description: 
  -->
 <template>
@@ -35,6 +35,7 @@ import Title from "@/components/title";
 import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 import { home } from "@/model/api";
+import store from "@/widget/store";
 
 export default {
     data() {
@@ -59,10 +60,11 @@ export default {
             home({ type: "GET" }, "app/pageInfo").then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
-                    const { recommendProject, navImage, newsList } = res.data;
+                    const { recommendProject, navImage, newsList, newsDefaultImage } = res.data;
                     this.recommendProjectList = recommendProject;
                     this.bannerList = navImage.map(item => (item = JSON.parse(item)));
                     this.newsList = newsList;
+                    store.set("newsDefaultImage", newsDefaultImage, "local");
                 }
             });
         },

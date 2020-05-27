@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 18:15:14
+ * @LastEditTime: 2020-05-27 21:49:18
  * @Description: 
  -->
 <template>
@@ -30,15 +30,19 @@
       </div>
     </div>
     <div class="news-item-thumb">
-      <img :src="item.imageUrl" :alt="item.title">
+      <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title">
     </div>
   </div>
 </template>
 
 <script>
+import store from "@/widget/store";
+
 export default {
     data() {
-        return {};
+        return {
+            newsDefaultImage: store.get("newsDefaultImage", "local")
+        };
     },
     props: {
         item: {
