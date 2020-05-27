@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:39:40
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-26 21:38:47
+ * @LastEditTime: 2020-05-27 22:30:17
  * @Description: 
  -->
 <template>
@@ -11,7 +11,7 @@
       <div class="news-detail">
         <div class="news-detail-header">
           <header>
-            <i class="iconfont icontubiao-13"></i>
+            <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
             <span>新闻资讯</span>
           </header>
         </div>
@@ -127,7 +127,10 @@ export default {
         }
         .text {
             p {
-                font-size: 0.32rem;
+                &[style] {
+                    font-size: 0.32rem !important;
+                }
+
                 font-family: MicrosoftYaHei;
                 color: rgba(51, 51, 51, 1);
                 line-height: 0.33rem;

@@ -2,11 +2,14 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:26:49
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-18 22:07:24
+ * @LastEditTime: 2020-05-27 22:40:14
  * @Description: 
  -->
 <template>
   <header>
+    <div class="logo">
+      <img src="../images/logo.png" alt="">
+    </div>
     <span>{{ title }}</span>
     <i class="iconfont icontubiao-23 calendar-icon" @click="click" v-if="isCb" :class="[isShowCalendar ? 'active':'']"></i>
   </header>
@@ -55,7 +58,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(15, 79, 168, 1);
+    background: linear-gradient(180deg, rgba(15, 79, 168, 1) 0%, rgba(0, 126, 255, 1) 100%);
     text-align: center;
     position: relative;
     span {
@@ -73,6 +76,16 @@ header {
         font-size: 0.34rem;
         &.active {
             color: rgba(255, 213, 26, 1);
+        }
+    }
+    .logo {
+        position: absolute;
+        top: 50%;
+        left: 0.2rem;
+        transform: translateY(-50%);
+        img {
+            width: 0.58rem;
+            max-width: 100%;
         }
     }
 }
