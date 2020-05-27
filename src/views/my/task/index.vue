@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 20:14:55
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-18 22:10:26
+ * @LastEditTime: 2020-05-28 00:11:43
  * @Description: 
  -->
 <template>
@@ -11,7 +11,7 @@
       <Header title="我的任务" :isCb="true" :onClick="() => showCalendar(isShowCalendar)" :isShowCalendar="isShowCalendar"></Header>
       <div class="task-content">
         <Calendar v-if="isShowCalendar" class="calendar-box"></Calendar>
-        <List></List>
+        <List :isPaddingTop="isShowCalendar"></List>
       </div>
     </div>
     <Footer></Footer>
