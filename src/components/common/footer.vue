@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-26 22:56:15
+ * @LastEditTime: 2020-05-27 23:46:04
  * @Description: 
  -->
 <template>
-  <footer style="padding-bottom:.34rem">
+  <footer>
     <ul>
       <li v-for="(item, index) in list" :key="index" :class="{ active:$route.path.startsWith(item.path) || item.name === $route.name }" @click="goTo(item.path)">
         <div class="menu-bg">
