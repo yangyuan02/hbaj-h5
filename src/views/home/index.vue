@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 11:11:55
+ * @LastEditTime: 2020-05-28 16:29:30
  * @Description: 
  -->
 <template>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="course-content">
+      <div class="course-content" v-if="defer(10)">
         <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
         <List :recommendProjectList="recommendProjectList"></List>
       </div>
@@ -51,6 +51,7 @@ import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 import { home } from "@/model/api";
 import store from "@/widget/store";
+import defer from "@/widget/defer";
 
 export default {
     data() {
@@ -69,6 +70,7 @@ export default {
         Header,
         Title
     },
+    mixins: [defer()],
     methods: {
         getHome() {
             this.$showLoading();
