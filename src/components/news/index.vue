@@ -2,19 +2,19 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-27 21:49:18
+ * @LastEditTime: 2020-05-28 10:14:14
  * @Description: 
  -->
 <template>
   <div class="news-content-item" @click="toNewsDetail(item.id)">
     <div class="news-item-detail">
       <div class="news-item-title">
-        <div class="text ellipsisLineTwo">
-          <p>{{item.title}}</p>
+        <div class="text">
+          <p class="ellipsisLineTwo">{{item.title}}</p>
         </div>
       </div>
-      <div class="news-item-digest ellipsis">
-        <p>
+      <div class="news-item-digest">
+        <p class="ellipsis">
           {{item.summary}}
         </p>
       </div>
@@ -72,7 +72,9 @@ export default {
     border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
     .news-item-detail {
         flex: 1;
+        width: 4.44rem;
         .news-item-title {
+            width: 100%;
             .text {
                 height: 0.8rem;
                 p {
@@ -86,6 +88,7 @@ export default {
             }
         }
         .news-item-digest {
+            width: 100%;
             margin-top: 0.14rem;
             margin-bottom: 0.15rem;
             p {
@@ -100,12 +103,14 @@ export default {
             display: flex;
             align-content: center;
             justify-content: space-between;
+            width: 100%;
             span {
-                font-size: 0.2rem;
+                font-size: 0.19rem;
                 font-family: MicrosoftYaHei;
                 color: rgba(153, 153, 153, 1);
                 line-height: 0.26rem;
                 -webkit-background-clip: text;
+                word-break: break-all;
             }
         }
     }
