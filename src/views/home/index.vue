@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 09:47:30
+ * @LastEditTime: 2020-05-28 10:51:41
  * @Description: 
  -->
 <template>
@@ -16,12 +16,20 @@
       <div class="news">
         <Title title="海宝资讯" :onClick="() => goTo('/news')"></Title>
         <div class="new-content">
-          <div class="news-item" v-for="(item, index) in newsList.slice(0,2)" @click="toNewsDetail(item.id)">
+          <div class="news-item" v-for="(item, index) in newsList" @click="toNewsDetail(item.id)">
             <div class="title">
               <p class="ellipsis">{{item.title}}</p>
             </div>
-            <div class="digest ">
-              <p class="ellipsisLineTwo">{{item.summary}}</p>
+            <div class="digest">
+              <!-- <p class="ellipsisLineTwo">{{item.summary}}</p> -->
+              <div class="organization">
+                <span>发布机构:</span>
+                <span>{{item.author}}</span>
+              </div>
+              <div class="publishTime">
+                <span>发布时间:</span>
+                <span>{{item.publishTime | formaData}}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -50,7 +58,8 @@ export default {
             menupB: true,
             bannerList: [],
             recommendProjectList: [],
-            newList: []
+            newList: [],
+            items: []
         };
     },
     components: {
@@ -70,7 +79,7 @@ export default {
                     const { recommendProject, navImage, newsList, newsDefaultImage } = res.data;
                     this.recommendProjectList = recommendProject;
                     this.bannerList = navImage.map(item => (item = JSON.parse(item)));
-                    this.newsList = newsList;
+                    this.items = newsList;
                     store.set("newsDefaultImage", newsDefaultImage, "local");
                 }
             });
@@ -85,6 +94,11 @@ export default {
         },
         goTo(path) {
             this.$router.push({ path });
+        }
+    },
+    computed: {
+        newsList: function() {
+            return this.items.slice(0, 2);
         }
     },
     mounted() {
@@ -119,6 +133,11 @@ export default {
                     margin-bottom: 0.18rem;
                 }
                 .digest {
+                    display: flex;
+                    color: rgba(153, 153, 153, 1);
+                    .publishTime {
+                        margin-left: 0.2rem;
+                    }
                     p {
                         font-family: MicrosoftYaHei;
                         color: rgba(102, 102, 102, 1);
