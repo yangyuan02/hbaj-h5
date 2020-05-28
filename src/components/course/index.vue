@@ -2,12 +2,12 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 22:21:06
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-24 20:46:12
+ * @LastEditTime: 2020-05-28 15:02:06
  * @Description: 
  -->
 <template>
   <div class="course-content-item" @click="goDetail">
-    <div class="course-item-thumb">
+    <div class="course-item-thumb ui-lazyLoad-pic">
       <img :src="globalConfig.imagePath + item.imageUrl" alt="" />
     </div>
     <div class="course-item-detail">
@@ -65,7 +65,6 @@ export default {
         width: 2.1rem;
         height: 2.1rem;
         margin-right: 0.22rem;
-        background: #f0f0f0;
         img {
             width: 100%;
             height: 100%;

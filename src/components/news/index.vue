@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 10:14:14
+ * @LastEditTime: 2020-05-28 15:03:53
  * @Description: 
  -->
 <template>
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="news-item-thumb">
+    <div class="news-item-thumb ui-lazyLoad-pic">
       <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title">
     </div>
   </div>
@@ -118,7 +118,7 @@ export default {
         width: 2.44rem;
         height: 1.64rem;
         margin-left: 0.22rem;
-        background: #f0f0f0;
+        // background: #f0f0f0;
         img {
             width: 100%;
             height: 100%;
