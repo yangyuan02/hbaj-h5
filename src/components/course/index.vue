@@ -2,13 +2,13 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 22:21:06
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 15:02:06
+ * @LastEditTime: 2020-05-28 17:30:39
  * @Description: 
  -->
 <template>
   <div class="course-content-item" @click="goDetail">
-    <div class="course-item-thumb ui-lazyLoad-pic">
-      <img :src="globalConfig.imagePath + item.imageUrl" alt="" />
+    <div class="course-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.imageUrl">
+      <!-- <img :src="globalConfig.imagePath + item.imageUrl" alt="" /> -->
     </div>
     <div class="course-item-detail">
       <div class="course-item-title">
@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+import "@/widget/lazyLoad";
 export default {
     data() {
         return {};
@@ -55,7 +56,7 @@ export default {
     }
 };
 </script>
-<style lang="less">
+<style lang="less" scope>
 .course-content-item {
     display: flex;
     padding-top: 0.28rem;

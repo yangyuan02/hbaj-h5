@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 21:03:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 15:03:53
+ * @LastEditTime: 2020-05-28 17:37:11
  * @Description: 
  -->
 <template>
@@ -29,15 +29,15 @@
         </div>
       </div>
     </div>
-    <div class="news-item-thumb ui-lazyLoad-pic">
-      <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title">
+    <div class="news-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.imageUrl">
+      <!-- <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title"> -->
     </div>
   </div>
 </template>
 
 <script>
 import store from "@/widget/store";
-
+import "@/widget/lazyLoad";
 export default {
     data() {
         return {
