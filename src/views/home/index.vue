@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 16:29:30
+ * @LastEditTime: 2020-05-28 16:36:17
  * @Description: 
  -->
 <template>
@@ -78,9 +78,9 @@ export default {
                 this.$hideLoading();
                 if (res.suceeded) {
                     const { recommendProject, navImage, newsList, newsDefaultImage } = res.data;
-                    this.recommendProjectList = recommendProject;
-                    this.bannerList = navImage.map(item => (item = JSON.parse(item)));
-                    this.items = newsList;
+                    this.recommendProjectList = Object.freeze(recommendProject);
+                    this.bannerList = Object.freeze(navImage.map(item => (item = JSON.parse(item))));
+                    this.items = Object.freeze(newsList);
                     store.set("newsDefaultImage", newsDefaultImage, "local");
                 }
             });
