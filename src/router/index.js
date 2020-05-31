@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 18:05:11
+ * @LastEditTime: 2020-05-31 22:04:37
  * @Description:
  */
 import Vue from "vue";
@@ -93,6 +93,15 @@ export default new Router({
             component: () => import("@/views/my/person"),
             meta: {
                 title: "我的信息",
+                requireLogin: true
+            }
+        },
+        {
+            path: "/my/course",
+            name: "myCourse",
+            component: () => import("@/views/my/course"),
+            meta: {
+                title: "我的课件",
                 requireLogin: true
             }
         },

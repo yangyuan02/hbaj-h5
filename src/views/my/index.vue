@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 21:38:27
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 23:50:42
+ * @LastEditTime: 2020-05-31 22:07:01
  * @Description: 
  -->
 <template>
@@ -51,7 +51,7 @@ export default {
                     icon: "icontubiao-15",
                     text: "我的课件",
                     color: "rgba(60, 206, 181, 1)",
-                    path: "/my/person"
+                    path: "/my/course"
                 },
                 {
                     icon: "icontubiao-17",
