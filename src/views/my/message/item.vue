@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 18:58:59
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 21:16:53
+ * @LastEditTime: 2020-05-31 21:56:02
  * @Description: 
  -->
 <template>
-  <div class="message-item-content" :class="[item.status === 0 ? 'unread': '']" @click="message(item.id)">
+  <div class="message-item-content" :class="[item.status === 0 ? 'unread': '']" @click="message(item)">
     <div class="role">
       <div class="role-type">
         <div class="thumb"></div>
@@ -40,9 +40,10 @@ export default {
         }
     },
     methods: {
-        message(id, status) {
+        message(item) {
+            const { id, status } = item;
             if (status === 1) {
-                this.$toast("消息是已读状态");
+                return this.$toast("消息是已读状态");
             }
             messageDetail(
                 {
@@ -51,6 +52,7 @@ export default {
                 `${id}/read`
             ).then(res => {
                 if (res.suceeded) {
+                    item.status = 0;
                     this.$toast("消息已读");
                 }
                 console.log(res);
