@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:46:41
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 22:09:17
+ * @LastEditTime: 2020-05-31 22:11:37
  * @Description: 
  -->
 <template>
@@ -26,6 +26,7 @@
 
 <script>
 import Header from "@/components/common/header";
+import Footer from "@/components/common/footer";
 import List from "./list.vue";
 import { home } from "@/model/api";
 export default {
@@ -37,7 +38,8 @@ export default {
     },
     components: {
         List,
-        Header
+        Header,
+        Footer
     },
     methods: {
         getCourseList() {
