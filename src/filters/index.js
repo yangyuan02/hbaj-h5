@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-05-08 21:47:07
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-14 20:31:55
+ * @LastEditTime: 2020-05-31 20:58:53
  * @Description:
  */
 
@@ -28,7 +28,19 @@ const formPublicFlg = flg => {
     return flg ? publicFlg[flg] : flg;
 };
 
+const formMessageText = type => {
+    const message = {
+        PROJECT: "课件类",
+        TASK: "任务类",
+        NEWS: "新闻资讯类",
+        ROLE: "权限变更",
+        DEPARTMENT: "部门变更"
+    };
+    return type ? message[type] : type;
+};
+
 export default {
     formaData,
-    formPublicFlg
+    formPublicFlg,
+    formMessageText
 };

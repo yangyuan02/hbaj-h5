@@ -2,11 +2,11 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 18:58:59
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-19 20:07:53
+ * @LastEditTime: 2020-05-31 21:16:53
  * @Description: 
  -->
 <template>
-  <div class="message-item-content">
+  <div class="message-item-content" :class="[item.status === 0 ? 'unread': '']" @click="message(item.id)">
     <div class="role">
       <div class="role-type">
         <div class="thumb"></div>
@@ -20,18 +20,44 @@
           <i class="iconfont icontubiao-17"></i>
         </div>
         <div class="tags">
-          <span>资讯通知</span>
+          <span>{{item.messageType | formMessageText}} </span>
         </div>
       </div>
     </div>
     <div class="digest">
-      <p>宝山海事局发布海报安检VR平台，平台实现对。 宝山海事局发布海报安检VR平台，平台实现对</p>
+      <p>{{item.content}}</p>
     </div>
   </div>
 </template>
-
 <script>
-export default {};
+import { messageDetail } from "@/model/api";
+
+export default {
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
+    },
+    methods: {
+        message(id, status) {
+            if (status === 1) {
+                this.$toast("消息是已读状态");
+            }
+            messageDetail(
+                {
+                    type: "PATCH"
+                },
+                `${id}/read`
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$toast("消息已读");
+                }
+                console.log(res);
+            });
+        }
+    }
+};
 </script>
 
 <style lang="less">
@@ -46,6 +72,9 @@ export default {};
     filter: blur(0px);
     &:last-child {
         margin-bottom: 0;
+    }
+    &.unread {
+        background: rgba(238, 238, 238, 1);
     }
     .role {
         height: 1.8rem;

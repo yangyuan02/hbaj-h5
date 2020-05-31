@@ -7,7 +7,7 @@
  -->
 <template>
   <div class="message-list">
-    <messageItem v-for="(item, index) in [1, 2, 3, 4, 5, 6]" :key="index"></messageItem>
+    <messageItem v-for="(item, index) in list" :key="item.id" :item="item"></messageItem>
   </div>
 </template>
 
@@ -18,7 +18,8 @@ import store from "@/widget/store";
 export default {
     data() {
         return {
-            userId: store.get("userId", "local")
+            userId: store.get("userId", "local"),
+            list: []
         };
     },
     components: {
@@ -40,6 +41,8 @@ export default {
             ).then(res => {
                 this.$hidePageLoading();
                 if (res.suceeded) {
+                    const { content } = res.data;
+                    this.list = content;
                     console.log(res);
                 }
             });
