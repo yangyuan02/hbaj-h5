@@ -2,17 +2,17 @@
  * @Author: yangyuan
  * @Date: 2020-04-20 22:10:56
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-20 23:03:39
+ * @LastEditTime: 2020-05-31 22:53:56
  * @Description: 
  -->
 <template>
   <div class="task-item-content">
     <div class="task-item-title">
       <div class="text">
-        <p>2019年PSC集中大会战检查要点-专题说2019年PSC集中大会战检查要点-专题说</p>
+        <p class="ellipsisLineTwo">{{item.name}}</p>
       </div>
       <div class="status">
-        <span>待审核</span>
+        <span>{{ item.status | formTaskText }}</span>
       </div>
     </div>
     <div class="task-item-detail">
@@ -22,20 +22,13 @@
         </div>
       </div>
       <div class="task-item-digest">
-        <div class="duty"><span>负责人:</span><span>船福科技</span></div>
-        <div class="start-time"><span>发起时间:</span><span>2010-01-01</span></div>
-        <div class="end-time"><span>结束时间:</span><span>2010-03-30</span></div>
+        <div class="duty"><span>负责人:</span><span>{{item.creatorSgname}}</span></div>
+        <div class="start-time"><span>发起时间:</span><span>{{item.startDate| formaData }}</span></div>
+        <div class="end-time"><span>结束时间:</span><span>{{item.expireDate | formaData }}</span></div>
         <div class="member-content">
           <div class="text"><span>协作成员:</span></div>
           <div class="member-item">
-            <span>张三</span>
-            <span>李四</span>
-            <span>李四</span>
-            <span>李四</span>
-            <span>李四</span>
-            <span>李四</span>
-            <span>李四</span>
-            <span>李四</span>
+            <span v-for="(k,index) in item.project.userList">{{k.sgname}}</span>
           </div>
         </div>
       </div>
@@ -44,7 +37,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
+    }
+};
 </script>
 
 <style lang="less">
@@ -130,6 +130,11 @@ export default {};
             .member-content {
                 display: flex;
                 flex: 1;
+                .member-item {
+                    span {
+                        margin-right: 0.1rem;
+                    }
+                }
             }
         }
     }

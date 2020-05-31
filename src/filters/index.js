@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-05-08 21:47:07
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 20:58:53
+ * @LastEditTime: 2020-05-31 22:45:29
  * @Description:
  */
 
@@ -39,8 +39,19 @@ const formMessageText = type => {
     return type ? message[type] : type;
 };
 
+const formTaskText = type => {
+    const task = {
+        0: "待接收",
+        1: "进行中",
+        2: "已完成",
+        3: "已到期"
+    };
+    return type ? task[type] : type;
+};
+
 export default {
     formaData,
     formPublicFlg,
-    formMessageText
+    formMessageText,
+    formTaskText
 };

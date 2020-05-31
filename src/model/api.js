@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-13 16:26:21
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-17 23:41:31
+ * @LastEditTime: 2020-05-31 22:17:04
  * @Description:
  */
 import request from "../widget/request";
@@ -20,3 +20,5 @@ export const newsDetail = (data, url) => request(`${baseUrl}/home/news/${url}`, 
 export const message = (data, url) => request(`${baseUrl}/message`, data);
 
 export const messageDetail = (data, url) => request(`${baseUrl}/message/${url}`, data);
+
+export const task = data => request(`${baseUrl}/task`, data);
