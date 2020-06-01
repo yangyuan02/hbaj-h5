@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-05-08 21:47:07
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 22:45:29
+ * @LastEditTime: 2020-06-01 21:13:22
  * @Description:
  */
 
@@ -46,7 +46,7 @@ const formTaskText = type => {
         2: "已完成",
         3: "已到期"
     };
-    return type ? task[type] : type;
+    return type || type === 0 ? task[type] : type;
 };
 
 export default {

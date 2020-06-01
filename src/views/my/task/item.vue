@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-20 22:10:56
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 22:53:56
+ * @LastEditTime: 2020-06-01 21:20:39
  * @Description: 
  -->
 <template>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="task-item-detail">
-      <div class="task-item-thumb">
+      <div class="task-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.project.imageUrl">
         <div class="action">
           <span>立即执行</span>
         </div>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import "@/widget/lazyLoad";
 export default {
     props: {
         item: {
@@ -95,7 +96,7 @@ export default {
         .task-item-thumb {
             width: 2.1rem;
             height: 2.1rem;
-            background: #f0f0f0;
+            // background: #f0f0f0;
             margin-right: 0.3rem;
             display: flex;
             justify-content: center;
