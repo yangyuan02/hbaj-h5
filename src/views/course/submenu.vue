@@ -2,25 +2,46 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 00:21:12
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-16 00:36:31
+ * @LastEditTime: 2020-06-01 22:00:20
  * @Description: 
  -->
 <template>
-    <div class="sub-menu">
-        <ul>
-            <li v-for="(item, index) in list" :key="index">
-                <div class="sub-menu-bg">
-                    <i
-                        class="iconfont"
-                        :class="[item.icon ? item.icon : '']"
-                    ></i>
-                </div>
-                <div class="sub-menu-title">
-                    <span>{{ item.title }}</span>
-                </div>
-            </li>
-        </ul>
+  <div class="sub-menu">
+    <div class="parent-menu">
+      <ul>
+        <li v-for="(item, index) in list" :key="index">
+          <div class="sub-menu-bg">
+            <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+          </div>
+          <div class="sub-menu-title">
+            <span>{{ item.title }}</span>
+          </div>
+        </li>
+      </ul>
     </div>
+    <div class="child-meun">
+      <ul>
+        <li class="active">
+          <span>救生</span>
+        </li>
+        <li>
+          <span>救生救生</span>
+        </li>
+        <li>
+          <span>救生救生救生</span>
+        </li>
+        <li>
+          <span>救生救生救生救生</span>
+        </li>
+        <li>
+          <span>救生救生救生救生</span>
+        </li>
+        <li>
+          <span>救生救生救生救生</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <style lang="less">
@@ -28,32 +49,70 @@
     width: 100%;
     padding-top: 0.22rem;
     background: rgba(255, 255, 255, 1);
-    ul {
-        display: flex;
-        justify-content: space-around;
-        height: 100%;
-        li {
-            width: 25%;
-            .sub-menu-bg {
-                text-align: center;
-                i {
-                    font-size: 0.55rem;
-                    color: rgba(15, 79, 168, 1);
+    overflow: hidden;
+    padding: 0.2rem 0.2rem;
+    margin: 0.2rem 0rem;
+    .parent-menu {
+        ul {
+            display: flex;
+            // justify-content: space-around;
+            height: 100%;
+            touch-action: pan-x;
+            overflow-x: auto;
+            padding-bottom: 0.2rem;
+            li {
+                width: 25%;
+                flex-shrink: 0;
+                .sub-menu-bg {
+                    text-align: center;
+                    i {
+                        font-size: 0.55rem;
+                        color: rgba(15, 79, 168, 1);
+                    }
+                }
+                .sub-menu-title {
+                    margin-top: 0.2rem;
+                    text-align: center;
+                    span {
+                        font-size: 0.26rem;
+                        font-family: MicrosoftYaHei;
+                        color: rgba(102, 102, 102, 1);
+                        line-height: 0.35rem;
+                        -webkit-background-clip: text;
+                    }
+                }
+                &.active {
+                    //当前需要加下划线未写完
                 }
             }
-            .sub-menu-title {
-                margin-top: 0.2rem;
-                text-align: center;
+        }
+    }
+    .child-meun {
+        ul {
+            display: flex;
+            // justify-content: space-around;
+            height: 100%;
+            touch-action: pan-x;
+            overflow-x: auto;
+            padding: 0.1rem 0;
+            li {
+                flex-shrink: 0;
+                padding: 0.02rem 0.2rem;
                 span {
                     font-size: 0.26rem;
                     font-family: MicrosoftYaHei;
-                    color: rgba(102, 102, 102, 1);
+                    color: rgba(255, 255, 255, 1);
                     line-height: 0.35rem;
                     -webkit-background-clip: text;
+                    color: rgba(102, 102, 102, 1);
                 }
-            }
-            &.active {
-                //当前需要加下划线未写完
+                &.active {
+                    background: rgba(255, 158, 58, 1);
+                    border-radius: 0.04rem;
+                    span {
+                        color: #fff;
+                    }
+                }
             }
         }
     }
@@ -76,6 +135,14 @@ export default {
                 {
                     icon: "icontubiao-10",
                     title: "普通干货船"
+                },
+                {
+                    icon: "icontubiao-11",
+                    title: "集装箱船"
+                },
+                {
+                    icon: "icontubiao-11",
+                    title: "集装箱船"
                 },
                 {
                     icon: "icontubiao-11",
