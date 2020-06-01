@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:46:41
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-10 18:27:08
+ * @LastEditTime: 2020-06-02 00:10:17
  * @Description: 
  -->
 <template>
@@ -10,8 +10,8 @@
     <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
       <Header title="公共课件资源"></Header>
       <Search></Search>
-      <Nav></Nav>
-      <SubMenu></SubMenu>
+      <Nav :modulesList=modulesList></Nav>
+      <SubMenu :modulesList=modulesList></SubMenu>
       <div class="course-content">
         <List :recommendProjectList="recommendProjectList"></List>
       </div>
@@ -35,11 +35,13 @@ import Nav from "@/components/nav";
 import List from "./list.vue";
 import SubMenu from "./submenu.vue";
 import { home } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
         return {
             recommendProjectList: [],
-            menupB: true
+            menupB: true,
+            modulesList: store.set("modulesList", "local")
         };
     },
     components: {

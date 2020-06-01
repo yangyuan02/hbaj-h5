@@ -2,14 +2,14 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 23:06:45
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-26 21:32:15
+ * @LastEditTime: 2020-06-01 23:39:16
  * @Description: 
  -->
 <template>
   <Swiper :style="{ height: itemHeight }" :list="list" :index="index" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex">
     <template #banner>
       <ul class="slideshow-item" :style="{ height: itemHeight }">
-        <li v-for="(item, index) in list" :style="{ width: itemWidth + 'px' }" @click="pageAction(item.url)" :key="index">
+        <li v-for="(item, index) in list" :style="{ width: itemWidth + 'px' }" @click="pageAction(item)" :key="index">
           <img :src="globalConfig.imagePath + item.url" :style="{ width: itemWidth + 'px', height: itemHeight }" />
         </li>
       </ul>
@@ -61,9 +61,16 @@ export default {
         // this.itemWidth = itemWidth;
     },
     methods: {
-        pageAction(url) {
-            if (url) {
-                location.href = url;
+        pageAction({ type, aim_id }) {
+            if (type === "PROJECT") {
+                window.location.href = "http://www.ship2vr.com/hb/";
+            } else {
+                this.$router.push({
+                    name: "newsDetail",
+                    params: {
+                        id: aim_id
+                    }
+                });
             }
         },
         toggleIndex(val) {

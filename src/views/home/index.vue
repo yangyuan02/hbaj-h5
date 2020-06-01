@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-28 16:36:17
+ * @LastEditTime: 2020-06-01 23:58:02
  * @Description: 
  -->
 <template>
@@ -77,11 +77,26 @@ export default {
             home({ type: "GET" }, "app/pageInfo").then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
-                    const { recommendProject, navImage, newsList, newsDefaultImage } = res.data;
+                    const { recommendProject, navImage, newsList, newsDefaultImage, blockModuleList } = res.data;
+                    const hash = {};
+                    const modulesList = [];
                     this.recommendProjectList = Object.freeze(recommendProject);
                     this.bannerList = Object.freeze(navImage.map(item => (item = JSON.parse(item))));
                     this.items = Object.freeze(newsList);
                     store.set("newsDefaultImage", newsDefaultImage, "local");
+                    blockModuleList.forEach(item => {
+                        if (!hash[item.name]) {
+                            hash[item.name] = item.name;
+                        }
+                    });
+                    Object.keys(hash).forEach(item => {
+                        const data = {
+                            name: item
+                        };
+                        data.children = blockModuleList.filter(k => k.name === item);
+                        modulesList.push(data);
+                    });
+                    store.set("modulesList", modulesList, "local");
                 }
             });
         },

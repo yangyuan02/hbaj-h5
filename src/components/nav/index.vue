@@ -2,25 +2,22 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:44:26
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-15 20:38:13
+ * @LastEditTime: 2020-06-02 00:11:55
  * @Description: 
  -->
 <template>
-    <nav>
-        <ul>
-            <li v-for="(item, index) in list" :key="index">
-                <div class="nav-bg" :style="{ background: item.bgColor }">
-                    <i
-                        class="iconfont"
-                        :class="[item.icon ? item.icon : '']"
-                    ></i>
-                </div>
-                <div class="nav-title">
-                    <span>{{ item.title }}</span>
-                </div>
-            </li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li v-for="(item, index) in list" :key="index" :class="[$route.query.name === item.title ? 'active' : '']">
+        <div class="nav-bg" :style="{ background: item.bgColor }">
+          <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+        </div>
+        <div class="nav-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -45,6 +42,12 @@ export default {
                 }
             ]
         };
+    },
+    props: {
+        modulesList: {
+            type: Array,
+            default: []
+        }
     }
 };
 </script>
@@ -81,6 +84,13 @@ nav {
                     color: rgba(102, 102, 102, 1);
                     font-size: 0.26rem;
                     line-height: 0.35rem;
+                }
+            }
+            &.active {
+                .nav-title {
+                    span {
+                        color: rgba(255, 158, 58, 1);
+                    }
                 }
             }
         }

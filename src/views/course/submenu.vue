@@ -2,14 +2,14 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 00:21:12
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-01 22:17:19
+ * @LastEditTime: 2020-06-02 00:15:07
  * @Description: 
  -->
 <template>
   <div class="sub-menu">
     <div class="parent-menu">
       <ul>
-        <li v-for="(item, index) in list" :key="index" :class="[index === 0 ? 'active': '']">
+        <li v-for="(item, index) in list" :key="index" :class="[$route.query.blockId === 0 ? 'active': '']">
           <div class="sub-menu-bg">
             <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
           </div>
@@ -156,6 +156,12 @@ export default {
                 }
             ]
         };
+    },
+    props: {
+        modulesList: {
+            type: Array,
+            default: []
+        }
     }
 };
 </script>
