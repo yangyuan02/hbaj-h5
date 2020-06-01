@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-19 18:58:59
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 21:56:02
+ * @LastEditTime: 2020-06-01 21:25:43
  * @Description: 
  -->
 <template>
@@ -92,7 +92,7 @@ export default {
                 width: 1.03rem;
                 height: 1.03rem;
                 border-radius: 50%;
-                background: #fff;
+                background: url("./images/admin.png");
             }
             .text {
                 margin-left: 0.27rem;
