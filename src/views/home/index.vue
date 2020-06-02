@@ -2,45 +2,45 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:30:31
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-01 23:58:02
+ * @LastEditTime: 2020-06-02 21:16:01
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
-      <Header title="海宝安检"></Header>
-      <div class="home-banner">
-        <Banner :bannerList="bannerList"></Banner>
-      </div>
-      <Nav></Nav>
-      <div class="news">
-        <Title title="海宝资讯" :onClick="() => goTo('/news')"></Title>
-        <div class="new-content">
-          <div class="news-item" v-for="(item, index) in newsList" @click="toNewsDetail(item.id)">
-            <div class="title">
-              <p class="ellipsis">{{item.title}}</p>
+    <div class="page-view">
+        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Header title="海宝安检"></Header>
+            <div class="home-banner">
+                <Banner :bannerList="bannerList"></Banner>
             </div>
-            <div class="digest">
-              <!-- <p class="ellipsisLineTwo">{{item.summary}}</p> -->
-              <div class="organization">
-                <span>发布机构:</span>
-                <span>{{item.author}}</span>
-              </div>
-              <div class="publishTime">
-                <span>发布时间:</span>
-                <span>{{item.publishTime | formaData}}</span>
-              </div>
+            <Nav :modulesList="modulesList"></Nav>
+            <div class="news">
+                <Title title="海宝资讯" :onClick="() => goTo('/news')"></Title>
+                <div class="new-content">
+                    <div class="news-item" v-for="(item, index) in newsList" :key="index" @click="toNewsDetail(item.id)">
+                        <div class="title">
+                            <p class="ellipsis">{{ item.title }}</p>
+                        </div>
+                        <div class="digest">
+                            <!-- <p class="ellipsisLineTwo">{{item.summary}}</p> -->
+                            <div class="organization">
+                                <span>发布机构:</span>
+                                <span>{{ item.author }}</span>
+                            </div>
+                            <div class="publishTime">
+                                <span>发布时间:</span>
+                                <span>{{ item.publishTime | formaData }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="course-content" v-if="defer(10)">
+                <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
+                <List :recommendProjectList="recommendProjectList"></List>
+            </div>
         </div>
-      </div>
-      <div class="course-content" v-if="defer(10)">
-        <Title title="公众课件" :onClick="() => goTo('/course')"></Title>
-        <List :recommendProjectList="recommendProjectList"></List>
-      </div>
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
 </template>
 <script>
 import Banner from "./banner.vue";
@@ -59,7 +59,8 @@ export default {
             menupB: true,
             bannerList: [],
             recommendProjectList: [],
-            items: []
+            items: [],
+            modulesList: []
         };
     },
     components: {
@@ -96,6 +97,7 @@ export default {
                         data.children = blockModuleList.filter(k => k.name === item);
                         modulesList.push(data);
                     });
+                    this.modulesList = modulesList;
                     store.set("modulesList", modulesList, "local");
                 }
             });

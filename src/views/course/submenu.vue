@@ -2,46 +2,31 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 00:21:12
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-02 00:15:07
+ * @LastEditTime: 2020-06-03 01:10:11
  * @Description: 
  -->
 <template>
-  <div class="sub-menu">
-    <div class="parent-menu">
-      <ul>
-        <li v-for="(item, index) in list" :key="index" :class="[$route.query.blockId === 0 ? 'active': '']">
-          <div class="sub-menu-bg">
-            <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
-          </div>
-          <div class="sub-menu-title">
-            <span>{{ item.title }}</span>
-          </div>
-        </li>
-      </ul>
+    <div class="sub-menu">
+        <div class="parent-menu">
+            <ul>
+                <li v-for="(item, index) in shipList" :key="index" :class="[$route.query.blockId.toString() === item.blockId.toString() ? 'active' : '']">
+                    <div class="sub-menu-bg">
+                        <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+                    </div>
+                    <div class="sub-menu-title">
+                        <span>{{ item.title }}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="child-meun">
+            <ul>
+                <li v-for="(item, index) in classList" :key="index" :class="[$route.query.classListId.toString() === item.id.toString() ? 'active' : '']">
+                    <span>{{ item.name }}</span>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="child-meun">
-      <ul>
-        <li class="active">
-          <span>救生</span>
-        </li>
-        <li>
-          <span>救生救生</span>
-        </li>
-        <li>
-          <span>救生救生救生</span>
-        </li>
-        <li>
-          <span>救生救生救生救生</span>
-        </li>
-        <li>
-          <span>救生救生救生救生</span>
-        </li>
-        <li>
-          <span>救生救生救生救生</span>
-        </li>
-      </ul>
-    </div>
-  </div>
 </template>
 
 <style lang="less">
@@ -132,7 +117,7 @@ export default {
             list: [
                 {
                     icon: "icontubiao-08",
-                    title: "豪华游览"
+                    title: "豪华邮轮"
                 },
                 {
                     icon: "icontubiao-09",
@@ -145,22 +130,42 @@ export default {
                 {
                     icon: "icontubiao-11",
                     title: "集装箱船"
-                },
-                {
-                    icon: "icontubiao-11",
-                    title: "集装箱船"
-                },
-                {
-                    icon: "icontubiao-11",
-                    title: "集装箱船"
                 }
-            ]
+            ],
+            classList: [],
+            shipList: []
         };
     },
     props: {
         modulesList: {
             type: Array,
             default: []
+        }
+    },
+    watch: {
+        $route: {
+            handler() {
+                this.getShipList();
+                this.getClassList();
+            },
+            immediate: true
+        }
+    },
+    methods: {
+        getShipList() {
+            const { name } = this.$route.query;
+            this.shipList = [];
+            const shipList = this.modulesList.filter(item => item.name === name);
+            const list = (shipList[0]["children"] || []).map(item => ({
+                ...item,
+                ...this.list.find(k => k.title === item.blockName)
+            }));
+            this.shipList = list;
+        },
+        getClassList() {
+            const { blockId } = this.$route.query;
+            this.classList = [];
+            this.classList = (this.shipList || []).find(item => item.blockId.toString() === blockId.toString())["classList"];
         }
     }
 };

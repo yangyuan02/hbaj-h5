@@ -2,22 +2,22 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 21:44:26
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-02 00:32:42
+ * @LastEditTime: 2020-06-02 23:01:09
  * @Description: 
  -->
 <template>
-  <nav>
-    <ul>
-      <li v-for="(item, index) in list" :key="index" :class="[$route.query.name === item.title ? 'active' : '']">
-        <div class="nav-bg" :style="{ background: item.bgColor }">
-          <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
-        </div>
-        <div class="nav-title">
-          <span>{{ item.title }}</span>
-        </div>
-      </li>
-    </ul>
-  </nav>
+    <nav>
+        <ul>
+            <li v-for="(item, index) in listNav" :key="index" :class="[$route.query.name === item.title ? 'active' : '']" @click="handClick(item)">
+                <div class="nav-bg" :style="{ background: item.bgColor }">
+                    <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+                </div>
+                <div class="nav-title">
+                    <span>{{ item.title }}</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
 </template>
 
 <script>
@@ -47,6 +47,33 @@ export default {
         modulesList: {
             type: Array,
             default: []
+        }
+    },
+    computed: {
+        listNav: function() {
+            return (this.modulesList || []).map(item => ({
+                ...item,
+                ...this.list.find(k => k.title === item.name)
+            }));
+        }
+    },
+    methods: {
+        handClick(data) {
+            const { title, children } = data;
+            const query = {
+                name: title
+            };
+            if (children && children.length > 0) {
+                // query.moduleId = children[0].id;
+                query.blockId = children[0].blockId;
+                if (children[0].classList && children[0].classList.length > 0) {
+                    query.classListId = children[0].classList[0].id;
+                }
+            }
+            this.$router.push({
+                path: "/course",
+                query
+            });
         }
     }
 };

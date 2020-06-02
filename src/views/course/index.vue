@@ -2,22 +2,22 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:46:41
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-02 00:10:17
+ * @LastEditTime: 2020-06-02 21:06:44
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
-      <Header title="公共课件资源"></Header>
-      <Search></Search>
-      <Nav :modulesList=modulesList></Nav>
-      <SubMenu :modulesList=modulesList></SubMenu>
-      <div class="course-content">
-        <List :recommendProjectList="recommendProjectList"></List>
-      </div>
+    <div class="page-view">
+        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Header title="公共课件资源"></Header>
+            <Search></Search>
+            <Nav :modulesList="modulesList"></Nav>
+            <SubMenu :modulesList="modulesList"></SubMenu>
+            <div class="course-content">
+                <List :recommendProjectList="recommendProjectList"></List>
+            </div>
+        </div>
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
 </template>
 
 <style lang="less">
@@ -41,7 +41,7 @@ export default {
         return {
             recommendProjectList: [],
             menupB: true,
-            modulesList: store.set("modulesList", "local")
+            modulesList: store.get("modulesList", "local")
         };
     },
     components: {

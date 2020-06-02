@@ -2,25 +2,26 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-27 23:46:04
+ * @LastEditTime: 2020-06-02 23:55:12
  * @Description: 
  -->
 <template>
-  <footer>
-    <ul>
-      <li v-for="(item, index) in list" :key="index" :class="{ active:$route.path.startsWith(item.path) || item.name === $route.name }" @click="goTo(item.path)">
-        <div class="menu-bg">
-          <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
-        </div>
-        <div class="menu-title">
-          <span>{{ item.title }}</span>
-        </div>
-      </li>
-    </ul>
-  </footer>
+    <footer>
+        <ul>
+            <li v-for="(item, index) in list" :key="index" :class="{ active: $route.path.startsWith(item.path) || item.name === $route.name }" @click="goTo(item.path)">
+                <div class="menu-bg">
+                    <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+                </div>
+                <div class="menu-title">
+                    <span>{{ item.title }}</span>
+                </div>
+            </li>
+        </ul>
+    </footer>
 </template>
 <script>
 import utils from "@/widget/utils";
+import store from "@/widget/store";
 export default {
     data() {
         return {
@@ -51,12 +52,31 @@ export default {
                     title: "我的",
                     path: "/my"
                 }
-            ]
+            ],
+            modulesList: store.get("modulesList", "local")
         };
     },
     methods: {
         goTo(path) {
-            this.$router.push({ path });
+            if (path === "/course") {
+                const { name, children } = this.modulesList[0];
+                const query = {
+                    name
+                };
+                if (children && children.length > 0) {
+                    // query.moduleId = children[0].id;
+                    query.blockId = children[0].blockId;
+                    if (children[0].classList && children[0].classList.length > 0) {
+                        query.classListId = children[0].classList[0].id;
+                    }
+                }
+                this.$router.push({
+                    path: "/course",
+                    query
+                });
+            } else {
+                this.$router.push({ path });
+            }
         },
         safaireBotton() {
             /* 原可视区域 */
