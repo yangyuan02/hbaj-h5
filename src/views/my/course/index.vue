@@ -2,19 +2,19 @@
  * @Author: yangyuan
  * @Date: 2020-04-15 23:46:41
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-31 22:11:37
+ * @LastEditTime: 2020-06-04 01:27:12
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
-      <Header title="我的课件"></Header>
-      <div class="course-content">
-        <List :recommendProjectList="recommendProjectList"></List>
-      </div>
+    <div class="page-view">
+        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Header title="我的课件"></Header>
+            <div class="course-content">
+                <List :recommendProjectList="recommendProjectList"></List>
+            </div>
+        </div>
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
 </template>
 
 <style lang="less">
@@ -44,11 +44,20 @@ export default {
     methods: {
         getCourseList() {
             this.$showLoading();
-            home({ type: "GET" }, "pageInfo").then(res => {
+            home(
+                {
+                    type: "GET",
+                    data: {
+                        page: 1,
+                        size: 10000
+                    }
+                },
+                "project"
+            ).then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
-                    const { recommendProject } = res.data;
-                    this.recommendProjectList = recommendProject;
+                    const { content } = res.data;
+                    this.recommendProjectList = content;
                 }
             });
         }
