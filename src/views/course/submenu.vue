@@ -2,14 +2,14 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 00:21:12
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-03 01:10:11
+ * @LastEditTime: 2020-06-03 23:30:20
  * @Description: 
  -->
 <template>
     <div class="sub-menu">
         <div class="parent-menu">
             <ul>
-                <li v-for="(item, index) in shipList" :key="index" :class="[$route.query.blockId.toString() === item.blockId.toString() ? 'active' : '']">
+                <li v-for="(item, index) in shipList" :key="index" :class="[$route.query.blockId.toString() === item.blockId.toString() ? 'active' : '']" @click="handShip(item)">
                     <div class="sub-menu-bg">
                         <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
                     </div>
@@ -21,9 +21,10 @@
         </div>
         <div class="child-meun">
             <ul>
-                <li v-for="(item, index) in classList" :key="index" :class="[$route.query.classListId.toString() === item.id.toString() ? 'active' : '']">
-                    <span>{{ item.name }}</span>
+                <li v-for="(item, index) in classList" :key="index" :class="[$route.query.classListId.toString() === item.id.toString() ? 'active' : '']" @click="handClass(item)">
+                    <span class="ellipsis">{{ item.name }}</span>
                 </li>
+                <li v-for="(item, index) in emptyList" :key="index" class="empty"></li>
             </ul>
         </div>
     </div>
@@ -81,16 +82,28 @@
     .child-meun {
         ul {
             display: flex;
-            // justify-content: space-around;
+            justify-content: space-around;
+            flex-wrap: wrap;
             height: 100%;
-            touch-action: pan-x;
-            overflow-x: auto;
             padding: 0.1rem 0;
+            .empty {
+                height: 0;
+                visibility: hidden;
+            }
             li {
-                flex-shrink: 0;
-                padding: 0.02rem 0.2rem;
+                width: 1.28rem;
+                height: 0.4rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: rgba(238, 240, 243, 1);
+                border-radius: 0.2rem;
+                margin-bottom: 0.16rem;
+                &:nth-last-child(-n + 5) {
+                    margin-bottom: 0;
+                }
                 span {
-                    font-size: 0.26rem;
+                    font-size: 0.24rem;
                     font-family: MicrosoftYaHei;
                     color: rgba(255, 255, 255, 1);
                     line-height: 0.35rem;
@@ -99,7 +112,7 @@
                 }
                 &.active {
                     background: rgba(255, 158, 58, 1);
-                    border-radius: 0.04rem;
+
                     span {
                         color: #fff;
                     }
@@ -142,6 +155,11 @@ export default {
             default: []
         }
     },
+    computed: {
+        emptyList: function() {
+            return 5 - (this.classList.length % 5);
+        }
+    },
     watch: {
         $route: {
             handler() {
@@ -166,6 +184,28 @@ export default {
             const { blockId } = this.$route.query;
             this.classList = [];
             this.classList = (this.shipList || []).find(item => item.blockId.toString() === blockId.toString())["classList"];
+        },
+        handShip({ blockId, classList = [] }) {
+            const query = {
+                ...this.$route.query,
+                blockId,
+                classListId: (classList.length && classList[0].id) || ""
+            };
+            this.routerChange(query);
+        },
+        handClass(data) {
+            const { id } = data;
+            const query = {
+                ...this.$route.query,
+                classListId: id
+            };
+            this.routerChange(query);
+        },
+        routerChange(query) {
+            this.$router.push({
+                path: "/course",
+                query
+            });
         }
     }
 };
