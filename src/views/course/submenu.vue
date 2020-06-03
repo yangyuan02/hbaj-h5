@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-16 00:21:12
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-03 23:30:20
+ * @LastEditTime: 2020-06-03 23:43:14
  * @Description: 
  -->
 <template>
@@ -185,9 +185,10 @@ export default {
             this.classList = [];
             this.classList = (this.shipList || []).find(item => item.blockId.toString() === blockId.toString())["classList"];
         },
-        handShip({ blockId, classList = [] }) {
+        handShip({ blockId, classList = [], id }) {
             const query = {
                 ...this.$route.query,
+                moduleId: id,
                 blockId,
                 classListId: (classList.length && classList[0].id) || ""
             };

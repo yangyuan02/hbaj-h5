@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-14 22:15:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-02 23:55:12
+ * @LastEditTime: 2020-06-03 23:38:28
  * @Description: 
  -->
 <template>
@@ -64,7 +64,7 @@ export default {
                     name
                 };
                 if (children && children.length > 0) {
-                    // query.moduleId = children[0].id;
+                    query.moduleId = children[0].id;
                     query.blockId = children[0].blockId;
                     if (children[0].classList && children[0].classList.length > 0) {
                         query.classListId = children[0].classList[0].id;
