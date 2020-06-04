@@ -86,6 +86,7 @@ export default {
                     this.items = Object.freeze(newsList);
                     store.set("newsDefaultImage", newsDefaultImage, "local");
                     blockModuleList.forEach(item => {
+                        item.classList.unshift({ id: -1, moduleId: item.id, name: "全部" });
                         if (!hash[item.name]) {
                             hash[item.name] = item.name;
                         }

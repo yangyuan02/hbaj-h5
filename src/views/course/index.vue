@@ -60,7 +60,8 @@ export default {
     methods: {
         getCourseList() {
             this.$showLoading();
-            const { moduleId, blockId, classListId } = this.$route.query;
+            let { moduleId, blockId, classListId } = this.$route.query;
+            classListId = classListId.toString() === "-1" ? "" : classListId;
             home(
                 {
                     type: "GET",
