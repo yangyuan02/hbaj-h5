@@ -11,11 +11,11 @@
             <div class="search-content">
                 <div class="search-input">
                     <i class="iconfont icontubiao-12"></i>
-                    <input type="text" placeholder="请输入搜索条件" />
+                    <input type="text" placeholder="请输入搜索条件" v-model="name" @change="getCourseList()" />
                 </div>
             </div>
             <div class="course-content">
-                <List></List>
+                <List :recommendProjectList="recommendProjectList"></List>
             </div>
         </div>
     </div>
@@ -23,12 +23,39 @@
 
 <script>
 import List from "./list.vue";
+import { home } from "@/model/api";
 export default {
     data() {
-        return {};
+        return {
+            name: "",
+            recommendProjectList: []
+        };
     },
     components: {
         List
+    },
+    methods: {
+        getCourseList() {
+            const { name } = this;
+            this.$showLoading();
+            home(
+                {
+                    type: "GET",
+                    data: {
+                        page: 1,
+                        size: 10000,
+                        name: name
+                    }
+                },
+                "project"
+            ).then(res => {
+                this.$hideLoading();
+                if (res.suceeded) {
+                    const { content } = res.data;
+                    this.recommendProjectList = content;
+                }
+            });
+        }
     }
 };
 </script>

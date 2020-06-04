@@ -6,24 +6,23 @@
  * @Description: 
  -->
 <template>
-  <div class="course-list">
-    <div class="list" v-if="list.length>0">
-      <CourseItem v-for="(item, index) in [1, 2, 3, 4, 5, 6]" :key="index"></CourseItem>
-    </div>
-    <div class="no-list" v-else>
-      <div class="tips-box">
-        <div class="no-icon">
-          <i class="iconfont iconkongxiangzi"></i>
+    <div class="course-list">
+        <div class="list" v-if="recommendProjectList.length > 0">
+            <CourseItem v-for="(item, index) in recommendProjectList" :key="index" :item="item"></CourseItem>
         </div>
-        <div class="tips">
-          <span>
-            暂无内容
-          </span>
+        <div class="no-list" v-else>
+            <div class="tips-box">
+                <div class="no-icon">
+                    <i class="iconfont iconkongxiangzi"></i>
+                </div>
+                <div class="tips">
+                    <span>
+                        暂无内容
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-
     </div>
-  </div>
 </template>
 
 <script>
@@ -36,6 +35,12 @@ export default {
     },
     components: {
         CourseItem
+    },
+    props: {
+        recommendProjectList: {
+            type: Array,
+            default: []
+        }
     }
 };
 </script>
