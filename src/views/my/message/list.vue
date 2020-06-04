@@ -6,33 +6,44 @@
  * @Description: 
  -->
 <template>
-  <div class="message-list">
-    <messageItem v-for="(item, index) in list" :key="item.id" :item="item"></messageItem>
-  </div>
+    <div class="message-list">
+        <messageItem v-for="(item, index) in list" :key="item.id" :item="item"></messageItem>
+        <div class="" v-show="showLoading">
+            <LoadMore :showLoading="showLoading"></LoadMore>
+        </div>
+    </div>
 </template>
 
 <script>
 import messageItem from "./item";
 import { messageDetail } from "@/model/api";
 import store from "@/widget/store";
+import utils from "@/widget/utils";
+import LoadMore from "@/components/loadMore";
 export default {
     data() {
         return {
             userId: store.get("userId", "local"),
-            list: []
+            list: [],
+            pageIndex: 1,
+            isScrollLoad: true,
+            pageTotal: 0,
+            showLoading: false
         };
     },
     components: {
-        messageItem
+        messageItem,
+        LoadMore
     },
     methods: {
         getMessageList() {
             this.$showPageLoading();
+            const { pageIndex } = this;
             messageDetail(
                 {
                     type: "get",
                     data: {
-                        page: "1",
+                        page: pageIndex,
                         size: "10",
                         receiver: this.userId
                     }
@@ -41,15 +52,49 @@ export default {
             ).then(res => {
                 this.$hidePageLoading();
                 if (res.suceeded) {
-                    const { content } = res.data;
-                    this.list = content;
-                    console.log(res);
+                    const { content, total } = res.data;
+                    if (pageIndex > 1) {
+                        setTimeout(() => {
+                            this.showLoading = false;
+                            this.isScrollLoad = true;
+                            this.list = this.list.concat(content || []);
+                        }, 500);
+                    } else {
+                        this.list = content || [];
+                    }
+                    this.pageTotal = total;
+                    if (pageIndex == Math.ceil(total / 10) || !content.length) {
+                        this.showLoading = false;
+                    }
                 }
             });
+        },
+        scrollLoadList() {
+            const winHeight = window.innerHeight;
+            const scrollTop = document.scrollingElement.scrollTop;
+            const scrollViewHeight = document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
+            const realFunc = () => {
+                if (winHeight + scrollTop >= scrollViewHeight && this.list.length < this.pageTotal) {
+                    this.showLoading = true;
+                    this.pageIndex += 1;
+                    this.getMessageList();
+                } else {
+                    this.isScrollLoad = true;
+                }
+            };
+            if (this.isScrollLoad) {
+                this.isScrollLoad = false;
+                this.timer = window.requestAnimationFrame(realFunc);
+            }
         }
     },
     mounted() {
         this.getMessageList();
+        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+    },
+    beforeDestroy() {
+        cancelAnimationFrame(this.timer);
+        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>

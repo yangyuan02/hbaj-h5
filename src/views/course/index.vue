@@ -14,6 +14,9 @@
             <SubMenu :modulesList="modulesList"></SubMenu>
             <div class="course-content">
                 <List :recommendProjectList="recommendProjectList"></List>
+                <div class="" v-show="showLoading">
+                    <LoadMore :showLoading="showLoading"></LoadMore>
+                </div>
             </div>
         </div>
         <Footer></Footer>
@@ -41,12 +44,18 @@ import List from "./list.vue";
 import SubMenu from "./submenu.vue";
 import { home } from "@/model/api";
 import store from "@/widget/store";
+import utils from "@/widget/utils";
+import LoadMore from "@/components/loadMore";
 export default {
     data() {
         return {
             recommendProjectList: [],
             menupB: true,
-            modulesList: store.get("modulesList", "local")
+            modulesList: store.get("modulesList", "local"),
+            pageIndex: 1,
+            isScrollLoad: true,
+            showLoading: false,
+            pageTotal: 0
         };
     },
     components: {
@@ -55,18 +64,20 @@ export default {
         Footer,
         Search,
         List,
-        SubMenu
+        SubMenu,
+        LoadMore
     },
     methods: {
         getCourseList() {
             this.$showLoading();
+            const { pageIndex } = this;
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
             home(
                 {
                     type: "GET",
                     data: {
-                        page: 1,
+                        page: pageIndex,
                         size: 10,
                         moduleId,
                         classId: classListId,
@@ -77,19 +88,55 @@ export default {
             ).then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
-                    const { content } = res.data;
-                    this.recommendProjectList = content;
+                    const { content, total } = res.data;
+                    if (pageIndex > 1) {
+                        setTimeout(() => {
+                            this.showLoading = false;
+                            this.isScrollLoad = true;
+                            this.recommendProjectList = this.recommendProjectList.concat(content || []);
+                        }, 500);
+                    } else {
+                        this.recommendProjectList = content || [];
+                    }
+                    this.pageTotal = total;
+                    if (pageIndex == Math.ceil(total / 10) || !content.length) {
+                        this.showLoading = false;
+                    }
                 }
             });
+        },
+        scrollLoadList() {
+            const winHeight = window.innerHeight;
+            const scrollTop = document.scrollingElement.scrollTop;
+            const scrollViewHeight = document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
+            const realFunc = () => {
+                if (winHeight + scrollTop >= scrollViewHeight && this.recommendProjectList.length < this.pageTotal) {
+                    this.showLoading = true;
+                    this.pageIndex += 1;
+                    this.getCourseList();
+                } else {
+                    this.isScrollLoad = true;
+                }
+            };
+            if (this.isScrollLoad) {
+                this.isScrollLoad = false;
+                this.timer = window.requestAnimationFrame(realFunc);
+            }
         }
     },
     watch: {
         $route: function() {
+            this.pageIndex = 1;
             this.getCourseList();
         }
     },
     mounted() {
         this.getCourseList();
+        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+    },
+    beforeDestroy() {
+        cancelAnimationFrame(this.timer);
+        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>

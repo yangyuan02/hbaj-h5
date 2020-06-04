@@ -5,19 +5,29 @@
  * @LastEditTime: 2020-05-31 22:24:36
  * @Description: 
  -->
- <template>
-  <div class="task-list" :class="[isPaddingTop ? '' : 'pd20']">
-    <taskItem v-for="(item, index) in list" :key="index" :item="item"></taskItem>
-  </div>
+<template>
+    <div class="task-list" :class="[isPaddingTop ? '' : 'pd20']">
+        <taskItem v-for="(item, index) in list" :key="index" :item="item"></taskItem>
+        <div class="" v-show="showLoading">
+            <LoadMore :showLoading="showLoading"></LoadMore>
+        </div>
+    </div>
 </template>
 
- <script>
+<script>
 import taskItem from "./item";
 import { task } from "@/model/api";
+import utils from "@/widget/utils";
+import LoadMore from "@/components/loadMore";
+
 export default {
     data() {
         return {
-            list: []
+            list: [],
+            pageIndex: 1,
+            isScrollLoad: true,
+            showLoading: false,
+            pageTotal: 0
         };
     },
     props: {
@@ -27,28 +37,65 @@ export default {
         }
     },
     components: {
-        taskItem
+        taskItem,
+        LoadMore
     },
     methods: {
         getTaskList() {
             this.$showLoading();
+            const { pageIndex } = this;
             task({
                 type: "GET",
                 data: {
-                    page: 1,
+                    page: pageIndex,
                     size: 10
                 }
             }).then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
-                    const { content } = res.data;
-                    this.list = content;
+                    const { content, total } = res.data;
+                    if (pageIndex > 1) {
+                        setTimeout(() => {
+                            this.showLoading = false;
+                            this.isScrollLoad = true;
+                            this.list = this.list.concat(content || []);
+                        }, 500);
+                    } else {
+                        this.list = content || [];
+                    }
+                    this.pageTotal = total;
+                    if (pageIndex == Math.ceil(total / 10) || !content.length) {
+                        this.showLoading = false;
+                    }
                 }
             });
+        },
+        scrollLoadList() {
+            const winHeight = window.innerHeight;
+            const scrollTop = document.scrollingElement.scrollTop;
+            const scrollViewHeight = document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
+            const realFunc = () => {
+                if (winHeight + scrollTop >= scrollViewHeight && this.list.length < this.pageTotal) {
+                    this.showLoading = true;
+                    this.pageIndex += 1;
+                    this.getTaskList();
+                } else {
+                    this.isScrollLoad = true;
+                }
+            };
+            if (this.isScrollLoad) {
+                this.isScrollLoad = false;
+                this.timer = window.requestAnimationFrame(realFunc);
+            }
         }
     },
     mounted() {
         this.getTaskList();
+        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+    },
+    beforeDestroy() {
+        cancelAnimationFrame(this.timer);
+        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>
