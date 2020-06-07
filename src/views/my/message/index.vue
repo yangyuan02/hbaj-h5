@@ -6,16 +6,15 @@
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
-      <Header title="我的通知"></Header>
-      <div class="message-content">
-        <List></List>
-      </div>
+    <div class="page-view">
+        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Header title="我的通知" :isBack="true"></Header>
+            <div class="message-content">
+                <List></List>
+            </div>
+        </div>
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
-
 </template>
 
 <script>

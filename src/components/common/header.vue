@@ -6,13 +6,17 @@
  * @Description: 
  -->
 <template>
-  <header>
-    <div class="logo">
-      <img src="../images/logo.png" alt="">
-    </div>
-    <span>{{ title }}</span>
-    <i class="iconfont icontubiao-23 calendar-icon" @click="click" v-if="isCb" :class="[isShowCalendar ? 'active':'']"></i>
-  </header>
+    <header>
+        <div class="back" v-if="isBack">
+            <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
+        </div>
+
+        <div class="logo" v-else>
+            <img src="../images/logo.png" alt="" />
+        </div>
+        <span>{{ title }}</span>
+        <i class="iconfont icontubiao-23 calendar-icon" @click="click" v-if="isCb" :class="[isShowCalendar ? 'active' : '']"></i>
+    </header>
 </template>
 
 <script type="text/javascript">
@@ -36,6 +40,10 @@ export default {
             default: () => {}
         },
         isShowCalendar: {
+            type: Boolean,
+            default: false
+        },
+        isBack: {
             type: Boolean,
             default: false
         }
@@ -86,6 +94,16 @@ header {
         img {
             width: 0.58rem;
             max-width: 100%;
+        }
+    }
+    .back {
+        position: absolute;
+        top: 50%;
+        left: 0.2rem;
+        transform: translateY(-50%);
+        i {
+            color: #fff;
+            font-size: 0.26rem;
         }
     }
 }

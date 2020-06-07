@@ -8,7 +8,7 @@
 <template>
     <div class="page-view">
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
-            <Header title="我的课件"></Header>
+            <Header title="我的课件" :isBack="true"></Header>
             <div class="course-content">
                 <List :recommendProjectList="recommendProjectList"></List>
             </div>

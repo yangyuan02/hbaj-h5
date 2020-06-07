@@ -1,11 +1,9 @@
 .ellipsis {
-
     text-overflow: ellipsis;
 
     white-space: nowrap;
 
     overflow: hidden;
-
 }
 
 .ellipsisLineTwo {
@@ -35,26 +33,26 @@
 }
 
 .pLeftRight30 {
-    padding-left: .3rem !important;
-    padding-right: .3rem !important;
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
 }
 
 .placeholder {
-    color: #B2B2B2
+    color: #b2b2b2;
 }
 
 .pLeft30 {
-    padding-left: .3rem !important;
+    padding-left: 0.3rem !important;
 }
 
 .pRight30 {
-    padding-right: .3rem !important;
+    padding-right: 0.3rem !important;
 }
 
 .menu-pBottom {
-    padding-bottom: 1.32rem;
+    padding-bottom: 1.08rem;
 }
 
 .iphone-footer {
-    padding-bottom: .68rem;
+    padding-bottom: 0.68rem;
 }

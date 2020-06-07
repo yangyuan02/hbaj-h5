@@ -6,26 +6,27 @@
  * @Description: 
  -->
 <template>
-  <div class="my-header-content">
-    <header>
-      <span>我的</span>
-      <i class="iconfont icontubiao-251 edit" @click="edit" v-if="isEdit"></i>
-    </header>
-    <div class="my-person-info">
-      <div class="person-thumb">
-        <input v-if="isOnUplaod" type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
-        <img :src="globalConfig.imagePath + info.avatar" alt="" v-if="info.avatar">
-      </div>
-      <div class="person-digest">
-        <div class="nickname">
-          <span>{{ info.namecard }}</span>
+    <div class="my-header-content">
+        <header>
+            <i class="iconfont icontubiao-13 goBack" @click="$router.back(-1)" v-if="isBack"></i>
+            <span>我的</span>
+            <i class="iconfont icontubiao-251 edit" @click="edit" v-if="isEdit"></i>
+        </header>
+        <div class="my-person-info">
+            <div class="person-thumb">
+                <input v-if="isOnUplaod" type="file" @change="uploadAvatar($event)" class="upload_file" accept="image/png,image/jpeg,image/jpg" />
+                <img :src="globalConfig.imagePath + info.avatar" alt="" v-if="info.avatar" />
+            </div>
+            <div class="person-digest">
+                <div class="nickname">
+                    <span>{{ info.namecard }}</span>
+                </div>
+                <div class="info">
+                    <span>{{ info.description }}</span>
+                </div>
+            </div>
         </div>
-        <div class="info">
-          <span>{{ info.description }}</span>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -48,6 +49,10 @@ export default {
             default: false
         },
         isEdit: {
+            type: Boolean,
+            default: true
+        },
+        isBack: {
             type: Boolean,
             default: true
         }
@@ -106,13 +111,21 @@ export default {
         span {
             color: #fff;
         }
-        i {
+        .edit {
             position: absolute;
             right: 0;
             top: 50%;
             transform: translate(-50%, -50%);
             color: #fff;
             font-size: 0.34rem;
+        }
+        .goBack {
+            position: absolute;
+            left: 0.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 0.3rem;
         }
     }
     .my-person-info {

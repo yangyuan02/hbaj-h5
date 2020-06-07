@@ -6,30 +6,28 @@
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper">
-      <div class="my-content">
-        <my-header :info="user"></my-header>
-        <div class="my-list-content">
-          <ul>
-            <li v-for="(item, index) in list" :key="index" @click="goTo(item.path)">
-              <div class="info">
-                <i class="iconfont" :class="[item.icon ? item.icon : '']" :style="{color:item.color}"></i>
-                <span>{{item.text}}</span>
-                <span v-if="item.text === '我的通知' && count !== 0 " class="unreadCount">10</span>
-              </div>
-              <div class="arrows">
-                <i class="iconfont icontubiao-13"></i>
-              </div>
-            </li>
-          </ul>
+    <div class="page-view">
+        <div class="scroll-view-wrapper">
+            <div class="my-content">
+                <my-header :info="user" :isBack="false"></my-header>
+                <div class="my-list-content">
+                    <ul>
+                        <li v-for="(item, index) in list" :key="index" @click="goTo(item.path)">
+                            <div class="info">
+                                <i class="iconfont" :class="[item.icon ? item.icon : '']" :style="{ color: item.color }"></i>
+                                <span>{{ item.text }}</span>
+                                <span v-if="item.text === '我的通知' && count !== 0" class="unreadCount">10</span>
+                            </div>
+                            <div class="arrows">
+                                <i class="iconfont icontubiao-13"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
-
 </template>
 
 <script>

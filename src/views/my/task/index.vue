@@ -6,16 +6,16 @@
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper" :class="{'menu-pBottom' :menupB}">
-      <Header title="我的任务" :isCb="true" :onClick="() => showCalendar(isShowCalendar)" :isShowCalendar="isShowCalendar"></Header>
-      <div class="task-content">
-        <Calendar v-if="isShowCalendar" class="calendar-box"></Calendar>
-        <List :isPaddingTop="isShowCalendar"></List>
-      </div>
+    <div class="page-view">
+        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Header title="我的任务" :isCb="true" :onClick="() => showCalendar(isShowCalendar)" :isShowCalendar="isShowCalendar" :isBack="true"></Header>
+            <div class="task-content">
+                <Calendar v-if="isShowCalendar" class="calendar-box"></Calendar>
+                <List :isPaddingTop="isShowCalendar"></List>
+            </div>
+        </div>
+        <Footer></Footer>
     </div>
-    <Footer></Footer>
-  </div>
 </template>
 
 <script>
