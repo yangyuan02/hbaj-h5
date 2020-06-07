@@ -9,6 +9,9 @@
     <div class="page-view">
         <div class="scroll-view-wrapper search">
             <div class="search-content">
+                <div class="back">
+                    <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
+                </div>
                 <div class="search-input">
                     <i class="iconfont icontubiao-12"></i>
                     <input type="text" placeholder="请输入搜索条件" v-model="name" @change="getCourseList()" />
@@ -66,9 +69,19 @@ export default {
         width: 100%;
         height: 1.14rem;
         background: rgba(15, 79, 168, 1);
-        padding: 0.2rem 0.3rem;
+        padding: 0.2rem;
+        display: flex;
+        align-items: center;
+        .back {
+            i {
+                color: #fff;
+                font-size: 0.3rem;
+            }
+            margin-right: 0.2rem;
+        }
         .search-input {
-            width: 100%;
+            // width: 100%;
+            flex: 1;
             height: 0.7rem;
             display: flex;
             line-height: 0.7rem;
