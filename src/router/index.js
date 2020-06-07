@@ -130,6 +130,15 @@ export default new Router({
             meta: {
                 title: "登录"
             }
+        },
+        {
+            path: "/comment",
+            name: "comment",
+            component: () => import("@/views/news/comment"),
+            meta: {
+                title: "评论",
+                requireLogin: true
+            }
         }
     ]
 });
