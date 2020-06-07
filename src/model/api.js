@@ -22,3 +22,7 @@ export const message = (data, url) => request(`${baseUrl}/message`, data);
 export const messageDetail = (data, url) => request(`${baseUrl}/message/${url}`, data);
 
 export const task = data => request(`${baseUrl}/task`, data);
+
+export const comment = (data, url) => request(`${baseUrl}/comment/${url}`, data);
+
+export const addComment = data => request(`${baseUrl}/comment`, data);

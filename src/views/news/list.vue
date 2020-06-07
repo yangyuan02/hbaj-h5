@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         getNewsList() {
-            this.$showLoading();
+            this.$showPageLoading();
             const { pageIndex } = this;
             news({
                 type: "GET",
@@ -44,7 +44,7 @@ export default {
                     size: 10
                 }
             }).then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     const { content, total } = res.data;
                     if (pageIndex > 1) {

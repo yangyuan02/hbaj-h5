@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         getCourseList() {
-            this.$showLoading();
+            this.$showPageLoading();
             home(
                 {
                     type: "GET",
@@ -54,7 +54,7 @@ export default {
                 },
                 "project"
             ).then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     const { content } = res.data;
                     this.recommendProjectList = content;

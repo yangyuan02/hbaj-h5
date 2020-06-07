@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         getNewsDetail() {
-            this.$showLoading();
+            this.$showPageLoading();
             const { id } = this.$route.params;
             newsDetail(
                 {
@@ -62,15 +62,19 @@ export default {
                 },
                 id
             ).then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     this.data = res.data;
                 }
             });
         },
         write() {
+            const { id } = this.$route.params;
             this.$router.push({
-                path: "/comment"
+                name: "comment",
+                params: {
+                    id
+                }
             });
         }
     },

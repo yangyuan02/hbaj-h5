@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         getTaskList() {
-            this.$showLoading();
+            this.$showPageLoading();
             const { pageIndex } = this;
             task({
                 type: "GET",
@@ -51,7 +51,7 @@ export default {
                     size: 10
                 }
             }).then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     const { content, total } = res.data;
                     if (pageIndex > 1) {

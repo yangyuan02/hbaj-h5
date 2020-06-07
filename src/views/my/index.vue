@@ -78,12 +78,14 @@ export default {
         },
         getUserDetail() {
             const userId = store.get("userId", "local");
+            this.$showPageLoading();
             user(
                 {
                     type: "get"
                 },
                 userId
             ).then(res => {
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     this.user = res.data;
                 }

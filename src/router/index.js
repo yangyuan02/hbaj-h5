@@ -132,11 +132,11 @@ export default new Router({
             }
         },
         {
-            path: "/comment",
+            path: "/comment/:id",
             name: "comment",
             component: () => import("@/views/news/comment"),
             meta: {
-                title: "评论",
+                title: "全部评论",
                 requireLogin: true
             }
         }

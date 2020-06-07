@@ -1,17 +1,24 @@
 <template>
     <div class="comment-list">
-        <CommentItem v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index"></CommentItem>
+        <CommentItem v-for="(item, index) in list" :key="index"></CommentItem>
     </div>
 </template>
 
 <script>
 import CommentItem from "./item";
+import { comment } from "@/model/api";
 export default {
     data() {
         return {};
     },
     components: {
         CommentItem
+    },
+    props: {
+        list: {
+            type: Array,
+            default: []
+        }
     }
 };
 </script>

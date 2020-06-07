@@ -88,7 +88,7 @@ export default {
     },
     methods: {
         getUserDetail() {
-            this.$showLoading();
+            this.$showPageLoading();
             const userId = store.get("userId", "local");
             user(
                 {
@@ -96,7 +96,7 @@ export default {
                 },
                 userId
             ).then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     const { blocks, roleList, enterprises } = res.data;
                     (blocks || []).forEach(item => {

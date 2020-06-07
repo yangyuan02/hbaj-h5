@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         getCourseList() {
-            this.$showLoading();
+            this.$showPageLoading();
             const { pageIndex } = this;
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
@@ -86,7 +86,7 @@ export default {
                 },
                 "project"
             ).then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     const { content, total } = res.data;
                     if (pageIndex > 1) {

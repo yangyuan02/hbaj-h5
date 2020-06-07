@@ -5,7 +5,7 @@
             <div class="comment">
                 <List></List>
                 <div class="comment-input">
-                    <input type="text" placeholder="写下你的评论" ref="input" />
+                    <input type="text" placeholder="写下你的评论" ref="input" v-model="content" />
                 </div>
             </div>
         </div>
@@ -15,9 +15,13 @@
 <script>
 import List from "./list";
 import Header from "@/components/common/header";
+import { comment, addComment } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
-        return {};
+        return {
+            content: ""
+        };
     },
     components: {
         List,
@@ -26,9 +30,48 @@ export default {
     methods: {
         setInputFocus() {
             this.$refs.input.focus();
+        },
+        getComment() {
+            this.$showPageLoading();
+            const { id } = this.$route.params;
+            comment(
+                {
+                    type: "GET",
+                    data: {
+                        page: 1,
+                        size: 10,
+                        type: "NEWS"
+                    }
+                },
+                "all"
+            ).then(res => {
+                this.$hidePageLoading();
+                if (res.suceeded) {
+                    console.log(111);
+                }
+            });
+        },
+        addComment() {
+            const { id } = this.$route.params;
+            const { content } = this;
+            this.$showLoading();
+            addComment({
+                type: "POST",
+                data: {
+                    id,
+                    content,
+                    relatedId: id,
+                    type: "NEWS",
+                    userId: store.get("userId", "local")
+                }
+            }).then(res => {
+                this.$hideLoading();
+                console.log(1);
+            });
         }
     },
     mounted() {
+        this.getComment();
         this.setInputFocus();
     }
 };
@@ -41,6 +84,9 @@ export default {
     .comment-input {
         background: #fff;
         padding: 0.18rem 0.25rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
         input {
             width: 6.94rem;
             height: 0.61rem;

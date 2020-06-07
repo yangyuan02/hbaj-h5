@@ -74,9 +74,9 @@ export default {
     mixins: [defer()],
     methods: {
         getHome() {
-            this.$showLoading();
+            this.$showPageLoading();
             home({ type: "GET" }, "app/pageInfo").then(res => {
-                this.$hideLoading();
+                this.$hidePageLoading();
                 if (res.suceeded) {
                     const { recommendProject, navImage, newsList, newsDefaultImage, blockModuleList } = res.data;
                     const hash = {};
