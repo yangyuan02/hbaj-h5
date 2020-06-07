@@ -3,9 +3,9 @@
         <div class="scroll-view-wrapper">
             <Header title="全部评论" :isBack="true"></Header>
             <div class="comment">
-                <List></List>
+                <List :list="list"></List>
                 <div class="comment-input">
-                    <input type="text" placeholder="写下你的评论" ref="input" v-model="content" />
+                    <input type="text" placeholder="写下你的评论" ref="input" v-model="content" @change="addComment()" />
                 </div>
             </div>
         </div>
@@ -20,7 +20,8 @@ import store from "@/widget/store";
 export default {
     data() {
         return {
-            content: ""
+            content: "",
+            list: []
         };
     },
     components: {
@@ -47,7 +48,7 @@ export default {
             ).then(res => {
                 this.$hidePageLoading();
                 if (res.suceeded) {
-                    console.log(111);
+                    this.list = res.data;
                 }
             });
         },
@@ -58,7 +59,6 @@ export default {
             addComment({
                 type: "POST",
                 data: {
-                    id,
                     content,
                     relatedId: id,
                     type: "NEWS",

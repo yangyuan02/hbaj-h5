@@ -1,6 +1,6 @@
 <template>
     <div class="comment-list">
-        <CommentItem v-for="(item, index) in list" :key="index"></CommentItem>
+        <CommentItem v-for="(item, index) in list" :key="index" :item="item"></CommentItem>
     </div>
 </template>
 

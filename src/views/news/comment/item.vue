@@ -1,15 +1,19 @@
 <template>
     <div class="comment-item">
-        <div class="user"></div>
+        <div class="user">
+            <img :src="globalConfig.imagePath + item.userAvatar" alt="" />
+        </div>
         <div class="user-comment">
             <div class="user-name">
-                <p class="ellipsis">用户</p>
+                <p class="ellipsis">{{ item.userName }}</p>
             </div>
             <div class="user-comment-content">
-                <p>评论测试评论测试评论测试评论测试评论测试评论测试评论测试评论测试</p>
+                <p>{{ item.content }}</p>
             </div>
             <div class="digest">
-                <div class="time"><span>今天</span><span>13.36</span></div>
+                <div class="time">
+                    <span>{{ item.createTime | formaData }}</span>
+                </div>
                 <div class="like">
                     <i class="iconfont icondianzan-copy"></i>
                     <span>36</span>
@@ -23,6 +27,12 @@
 export default {
     data() {
         return {};
+    },
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
     }
 };
 </script>
@@ -36,9 +46,14 @@ export default {
     .user {
         width: 0.81rem;
         height: 0.81rem;
-        background: RGBA(216, 216, 216, 1);
+        background: #fff;
         border-radius: 50%;
         margin-right: 0.24rem;
+        img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+        }
     }
     .user-comment {
         flex: 1;
