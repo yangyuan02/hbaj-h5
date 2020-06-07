@@ -153,6 +153,10 @@ export default {
         modulesList: {
             type: Array,
             default: []
+        },
+        path: {
+            type: String,
+            default: ""
         }
     },
     computed: {
@@ -204,7 +208,7 @@ export default {
         },
         routerChange(query) {
             this.$router.push({
-                path: "/course",
+                path: this.path,
                 query
             });
         }

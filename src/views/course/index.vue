@@ -10,8 +10,8 @@
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
             <Header title="公共课件资源"></Header>
             <Search></Search>
-            <Nav :modulesList="modulesList"></Nav>
-            <SubMenu :modulesList="modulesList"></SubMenu>
+            <Nav :modulesList="modulesList" path="course"></Nav>
+            <SubMenu :modulesList="modulesList" path="course"></SubMenu>
             <div class="course-content">
                 <List :recommendProjectList="recommendProjectList"></List>
                 <div class="" v-show="showLoading">

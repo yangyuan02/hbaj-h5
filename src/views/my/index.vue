@@ -65,7 +65,8 @@ export default {
                 }
             ],
             user: {},
-            count: 0
+            count: 0,
+            modulesList: store.get("modulesList", "local")
         };
     },
     components: {
@@ -74,7 +75,25 @@ export default {
     },
     methods: {
         goTo(path) {
-            this.$router.push({ path });
+            if (path === "/my/course") {
+                const { name, children } = this.modulesList[0];
+                const query = {
+                    name
+                };
+                if (children && children.length > 0) {
+                    query.moduleId = children[0].id;
+                    query.blockId = children[0].blockId;
+                    if (children[0].classList && children[0].classList.length > 0) {
+                        query.classListId = children[0].classList[0].id;
+                    }
+                }
+                this.$router.push({
+                    path: "/my/course",
+                    query
+                });
+            } else {
+                this.$router.push({ path });
+            }
         },
         getUserDetail() {
             const userId = store.get("userId", "local");

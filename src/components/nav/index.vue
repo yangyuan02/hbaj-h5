@@ -47,6 +47,10 @@ export default {
         modulesList: {
             type: Array,
             default: []
+        },
+        path: {
+            type: String,
+            default: ""
         }
     },
     computed: {
@@ -71,7 +75,7 @@ export default {
                 }
             }
             this.$router.push({
-                path: "/course",
+                path: this.path,
                 query
             });
         }

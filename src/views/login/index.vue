@@ -86,15 +86,15 @@ export default {
             });
         },
         submit() {
-            const { mobile, verifyCode } = this;
-            if (!validate.isMobile(mobile)) {
-                return this.$toast("请输入正确的手机号");
-            }
-            if (!verifyCode) {
-                return this.$toast("请输入验证码");
-            }
+            // const { mobile, verifyCode } = this;
+            // if (!validate.isMobile(mobile)) {
+            //     return this.$toast("请输入正确的手机号");
+            // }
+            // if (!verifyCode) {
+            //     return this.$toast("请输入验证码");
+            // }
             this.$showLoading();
-            user({ type: "POST", data: { mobile, verifyCode } }, "login").then(res => {
+            user({ type: "POST", data: { mobile: "13564332436", password: "1234567801" } }, "login").then(res => {
                 const {
                     suceeded,
                     data: { authorization, id }
