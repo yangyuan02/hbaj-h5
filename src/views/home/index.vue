@@ -12,7 +12,7 @@
             <div class="home-banner">
                 <Banner :bannerList="bannerList"></Banner>
             </div>
-            <Nav :modulesList="modulesList"></Nav>
+            <Nav :modulesList="modulesList" path="course"></Nav>
             <div class="news">
                 <Title title="海宝资讯" :onClick="() => goTo('/news')"></Title>
                 <div class="new-content">
