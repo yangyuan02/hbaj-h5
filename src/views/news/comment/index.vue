@@ -5,7 +5,7 @@
             <div class="comment">
                 <List></List>
                 <div class="comment-input">
-                    <input type="text" placeholder="写下你的评论" />
+                    <input type="text" placeholder="写下你的评论" ref="input" />
                 </div>
             </div>
         </div>
@@ -20,6 +20,14 @@ export default {
     components: {
         List,
         Header
+    },
+    methods: {
+        setInputFocus() {
+            this.$refs.input.focus();
+        }
+    },
+    mounted() {
+        this.setInputFocus();
     }
 };
 </script>

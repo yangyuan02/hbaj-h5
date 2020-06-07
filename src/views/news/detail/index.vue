@@ -26,6 +26,19 @@
                     </div>
                     <div class="text" v-html="data.contentHtml"></div>
                 </div>
+                <div class="news-comment">
+                    <div class="write" @click="write">
+                        <span>写下你的评论</span>
+                    </div>
+                    <div class="comment-count">
+                        <i class="iconfont iconpinglun"></i>
+                        <span>36</span>
+                    </div>
+                    <div class="like-count">
+                        <i class="iconfont icondianzan-copy"></i>
+                        <span>36</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,6 +66,11 @@ export default {
                 if (res.suceeded) {
                     this.data = res.data;
                 }
+            });
+        },
+        write() {
+            this.$router.push({
+                path: "/comment"
             });
         }
     },
@@ -94,9 +112,8 @@ export default {
         }
     }
     .news-detail-bg {
-        width: 6.9rem;
+        width: 100%;
         height: 2.94rem;
-        // margin: 0 auto;
         background: url("../images/news-detail-bg.png");
         background-size: 100%;
     }
@@ -140,6 +157,54 @@ export default {
                     margin-bottom: 0rem;
                 }
             }
+        }
+    }
+    .news-comment {
+        padding: 0.18rem 0rem;
+        padding-left: 0.26rem;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        border: 0.01rem solid rgba(221, 221, 221, 1);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        .write {
+            width: 2.94rem;
+            height: 0.6rem;
+            background: rgba(238, 240, 243, 1);
+            border-radius: 0.31rem;
+            display: flex;
+            align-items: center;
+            padding-left: 0.28rem;
+            span {
+                font-size: 0.28rem;
+                font-family: MicrosoftYaHei;
+                color: rgba(153, 153, 153, 1);
+                line-height: 0.37rem;
+                letter-spacing: 0.01rem;
+                -webkit-background-clip: text;
+            }
+        }
+        .comment-count,
+        .like-count {
+            color: rgba(219, 219, 219, 1);
+            i {
+                font-size: 0.36rem;
+            }
+            span {
+                margin-left: 0.1rem;
+            }
+        }
+        .comment-count {
+            margin-left: 0.6rem;
+            margin-right: 0.3rem;
+            display: flex;
+            align-items: center;
+        }
+        .like-count {
+            display: flex;
+            align-items: center;
         }
     }
 }
