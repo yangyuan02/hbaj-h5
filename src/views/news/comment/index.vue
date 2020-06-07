@@ -1,7 +1,7 @@
 <template>
     <div class="page-view">
         <div class="scroll-view-wrapper">
-            <Header title="全部评论"></Header>
+            <Header title="全部评论" :isBack="true"></Header>
             <div class="comment">
                 <List></List>
                 <div class="comment-input">
@@ -16,7 +16,9 @@
 import List from "./list";
 import Header from "@/components/common/header";
 export default {
-    data() {},
+    data() {
+        return {};
+    },
     components: {
         List,
         Header

@@ -7,7 +7,9 @@
 <script>
 import CommentItem from "./item";
 export default {
-    data() {},
+    data() {
+        return {};
+    },
     components: {
         CommentItem
     }
