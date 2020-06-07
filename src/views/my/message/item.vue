@@ -6,28 +6,27 @@
  * @Description: 
  -->
 <template>
-  <div class="message-item-content" :class="[item.status === 0 ? 'unread': '']" @click="message(item)">
-    <div class="role">
-      <div class="role-type">
-        <div class="thumb"></div>
-        <div class="text">
-          <span>系统管理员</span>
+    <div class="message-item-content" :class="[item.status === 0 ? 'unread' : '']" @click="message(item)">
+        <div class="role">
+            <div class="role-type">
+                <div class="thumb"></div>
+                <div class="text">
+                    <span>系统管理员</span>
+                </div>
+            </div>
+            <div class="role-info">
+                <div class="type-thumb-bg">
+                    <i class="iconfont icontubiao-17"></i>
+                </div>
+                <div class="tags">
+                    <span>{{ item.messageType | formMessageText }} </span>
+                </div>
+            </div>
         </div>
-
-      </div>
-      <div class="role-info">
-        <div class="type-thumb-bg">
-          <i class="iconfont icontubiao-17"></i>
+        <div class="digest">
+            <p>{{ item.content }}</p>
         </div>
-        <div class="tags">
-          <span>{{item.messageType | formMessageText}} </span>
-        </div>
-      </div>
     </div>
-    <div class="digest">
-      <p>{{item.content}}</p>
-    </div>
-  </div>
 </template>
 <script>
 import { messageDetail } from "@/model/api";
@@ -92,7 +91,8 @@ export default {
                 width: 1.03rem;
                 height: 1.03rem;
                 border-radius: 50%;
-                background: url("./images/admin.png");
+                background: url("./images/admin.png") no-repeat;
+                background-size: 100%;
             }
             .text {
                 margin-left: 0.27rem;
