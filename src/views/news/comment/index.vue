@@ -4,6 +4,9 @@
             <Header title="全部评论" :isBack="true"></Header>
             <div class="comment">
                 <List :list="list"></List>
+                <div class="" v-show="showLoading">
+                    <LoadMore :showLoading="showLoading"></LoadMore>
+                </div>
                 <div class="comment-input">
                     <input type="text" placeholder="写下你的评论" ref="input" v-model="content" @change="addComment()" />
                 </div>
@@ -17,16 +20,23 @@ import List from "./list";
 import Header from "@/components/common/header";
 import { comment, addComment } from "@/model/api";
 import store from "@/widget/store";
+import LoadMore from "@/components/loadMore";
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
             content: "",
-            list: []
+            list: [],
+            pageIndex: 1,
+            isScrollLoad: true,
+            showLoading: false,
+            pageTotal: 0
         };
     },
     components: {
         List,
-        Header
+        Header,
+        LoadMore
     },
     methods: {
         setInputFocus() {
@@ -34,23 +44,52 @@ export default {
         },
         getComment() {
             this.$showPageLoading();
+            const { pageIndex } = this;
             const { id } = this.$route.params;
             comment(
                 {
                     type: "GET",
                     data: {
-                        page: 1,
+                        page: pageIndex,
                         size: 10,
+                        relatedId: id,
                         type: "NEWS"
                     }
                 },
-                "all"
+                "list"
             ).then(res => {
                 this.$hidePageLoading();
                 if (res.suceeded) {
-                    this.list = res.data;
+                    const { content, total } = res.data;
+                    if (pageIndex > 1) {
+                        setTimeout(() => {
+                            this.showLoading = false;
+                            this.isScrollLoad = true;
+                            this.list = this.list.concat(content || []);
+                        }, 500);
+                    } else {
+                        this.list = content || [];
+                    }
                 }
             });
+        },
+        scrollLoadList() {
+            const winHeight = window.innerHeight;
+            const scrollTop = document.scrollingElement.scrollTop;
+            const scrollViewHeight = document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
+            const realFunc = () => {
+                if (winHeight + scrollTop >= scrollViewHeight && this.recommendProjectList.length < this.pageTotal) {
+                    this.showLoading = true;
+                    this.pageIndex += 1;
+                    this.getComment();
+                } else {
+                    this.isScrollLoad = true;
+                }
+            };
+            if (this.isScrollLoad) {
+                this.isScrollLoad = false;
+                this.timer = window.requestAnimationFrame(realFunc);
+            }
         },
         addComment() {
             const { id } = this.$route.params;
@@ -72,7 +111,13 @@ export default {
     },
     mounted() {
         this.getComment();
+        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+
         this.setInputFocus();
+    },
+    beforeDestroy() {
+        cancelAnimationFrame(this.timer);
+        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>
