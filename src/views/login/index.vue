@@ -18,10 +18,13 @@
                     <div class="tel">
                         <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
                     </div>
-                    <div class="code">
+                    <div class="tel">
+                        <input type="password" maxlength="11" placeholder="请输入密码" v-model="password" />
+                    </div>
+                    <!-- <div class="code">
                         <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
                         <span @click="send">{{ buttonText }}</span>
-                    </div>
+                    </div> -->
                     <div class="login-button">
                         <button @click="submit">登录</button>
                     </div>
@@ -86,15 +89,15 @@ export default {
             });
         },
         submit() {
-            const { mobile, verifyCode } = this;
+            const { mobile, verifyCode, password } = this;
             if (!validate.isMobile(mobile)) {
                 return this.$toast("请输入正确的手机号");
             }
-            if (!verifyCode) {
-                return this.$toast("请输入验证码");
-            }
+            // if (!verifyCode) {
+            //     return this.$toast("请输入验证码");
+            // }
             this.$showLoading();
-            user({ type: "POST", data: { mobile, verifyCode } }, "login").then(res => {
+            user({ type: "POST", data: { mobile, password } }, "login").then(res => {
                 const {
                     suceeded,
                     data: { authorization, id }
