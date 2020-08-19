@@ -51,7 +51,14 @@ export default {
     },
     methods: {
         goDetail() {
-            window.location.href = "http://www.ship2vr.com/hb/";
+            this.$router.push({
+                name: "panoEditor",
+                params: {
+                    taskId: "0",
+                    projectId: "0",
+                    from: "2"
+                }
+            });
         }
     }
 };

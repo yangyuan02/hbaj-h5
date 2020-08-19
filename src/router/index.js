@@ -139,6 +139,15 @@ export default new Router({
                 title: "全部评论",
                 requireLogin: true
             }
+        },
+        {
+            path: "/my/p_ditor/:taskId/:projectId/:from",
+            name: "panoEditor",
+            component: () => import("@/views/my/panoEditor"),
+            meta: {
+                title: "全景编辑器"
+                // requireLogin: true
+            }
         }
     ]
 });

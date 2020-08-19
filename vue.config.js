@@ -97,6 +97,10 @@ module.exports = {
                 target: "https://api-msa.vr2shipping.com",
                 changeOrigin: true,
                 pathRewrite: (path, req) => path.replace("/api", "")
+            },
+            "/pano": {
+                target: "http://msa_pc.vr2shipping.com",
+                changeOrigin: true
             }
         }
     }
