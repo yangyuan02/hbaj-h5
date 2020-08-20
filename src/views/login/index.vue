@@ -98,12 +98,12 @@ export default {
             // }
             this.$showLoading();
             user({ type: "POST", data: { mobile, password } }, "login").then(res => {
-                const {
-                    suceeded,
-                    data: { authorization, id }
-                } = res;
                 const { from } = this.$route.query;
                 if (res.suceeded) {
+                    const {
+                        suceeded,
+                        data: { authorization, id }
+                    } = res;
                     this.$hideLoading();
                     store.set("authorization", authorization, "local");
                     store.set("userId", id, "local");
@@ -113,6 +113,9 @@ export default {
                     } else {
                         this.$router.push({ path: "/home" });
                     }
+                } else {
+                    this.$hideLoading();
+                    res.message && this.$toast(res.message);
                 }
             });
         }
