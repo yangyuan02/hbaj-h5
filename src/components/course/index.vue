@@ -6,7 +6,7 @@
  * @Description: 
  -->
 <template>
-    <div class="course-content-item" @click="goDetail">
+    <div class="course-content-item" @click="goDetail(item)">
         <div class="course-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.imageUrl">
             <!-- <img :src="globalConfig.imagePath + item.imageUrl" alt="" /> -->
         </div>
@@ -50,12 +50,12 @@ export default {
         }
     },
     methods: {
-        goDetail() {
+        goDetail({ id }) {
             this.$router.push({
                 name: "panoEditor",
                 params: {
                     taskId: "0",
-                    projectId: "0",
+                    projectId: id,
                     from: "2"
                 }
             });
