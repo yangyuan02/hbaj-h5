@@ -15,8 +15,8 @@ export default {
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
-                    swf: "http://msa_pc.vr2shipping.com/pano/tour.swf",
-                    xml: `http://msa_pc.vr2shipping.com/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
+                    swf: "https://msa_pc.vr2shipping.com/pano/tour.swf",
+                    xml: `https://msa_pc.vr2shipping.com/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
                     target: "p_editor",
                     html5: "prefer",
                     mobilescale: 1.0,
