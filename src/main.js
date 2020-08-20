@@ -26,8 +26,15 @@ Vue.use(pageLoading);
 Vue.use(Toast);
 
 Vue.prototype.globalConfig = window.globalConfig;
-
+const metaEl = document.querySelector('meta[name="viewport"]');
+const oldattr = metaEl.getAttribute("content");
 router.beforeEach((to, from, next) => {
+    if (to.name == "panoEditor") {
+        metaEl.setAttribute("content", "width=device-width,user-scalable=no,initial-scale=" + 1 + ",maximum-scale=" + 1 + ",minimum-scale=" + 1);
+    } else {
+        metaEl.setAttribute("content", oldattr);
+    }
+
     if (to.name == "login" && window.localStorage.getItem("authorization")) {
         //解决登陆后 用户输入登录地址重定向到首页
         next({ path: "/home" });
