@@ -11,11 +11,12 @@ export default {
     },
     methods: {
         initPano() {
+            console.log("111");
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
-                    swf: "/pano/tour.swf",
-                    xml: `/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
+                    swf: "http://msa_pc.vr2shipping.com/pano/tour.swf",
+                    xml: `http://msa_pc.vr2shipping.com/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
                     target: "p_editor",
                     html5: "prefer",
                     mobilescale: 1.0,
@@ -35,3 +36,14 @@ export default {
     }
 };
 </script>
+
+<style lang="less" scoped>
+.p_editor_container {
+    width: 100%;
+    height: 100%;
+    #p_editor {
+        width: 100%;
+        height: 100%;
+    }
+}
+</style>
