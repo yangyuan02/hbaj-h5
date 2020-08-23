@@ -26,11 +26,11 @@
             </div>
             <div class="course-item-source">
                 <div class="organization">
-                    <span>发布机构:</span>
+                    <!-- <span>发布机构:</span> -->
                     <span>{{ item.oriEnterpriseName }}</span>
                 </div>
                 <div class="publishTime">
-                    <span>发布时间:</span>
+                    <!-- <span>发布时间:</span> -->
                     <span>{{ item.publishDate | formaData }}</span>
                 </div>
             </div>

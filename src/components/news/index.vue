@@ -6,33 +6,33 @@
  * @Description: 
  -->
 <template>
-  <div class="news-content-item" @click="toNewsDetail(item.id)">
-    <div class="news-item-detail">
-      <div class="news-item-title">
-        <div class="text">
-          <p class="ellipsisLineTwo">{{item.title}}</p>
+    <div class="news-content-item" @click="toNewsDetail(item.id)">
+        <div class="news-item-detail">
+            <div class="news-item-title">
+                <div class="text">
+                    <p class="ellipsisLineTwo">{{ item.title }}</p>
+                </div>
+            </div>
+            <div class="news-item-digest">
+                <p class="ellipsis">
+                    {{ item.summary }}
+                </p>
+            </div>
+            <div class="news-item-source">
+                <div class="organization">
+                    <!-- <span>发布机构:</span> -->
+                    <span>{{ item.author }}</span>
+                </div>
+                <div class="publishTime">
+                    <!-- <span>发布时间:</span> -->
+                    <span>{{ item.publishTime | formaData }}</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="news-item-digest">
-        <p class="ellipsis">
-          {{item.summary}}
-        </p>
-      </div>
-      <div class="news-item-source">
-        <div class="organization">
-          <span>发布机构:</span>
-          <span>{{item.author}}</span>
+        <div class="news-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.imageUrl">
+            <!-- <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title"> -->
         </div>
-        <div class="publishTime">
-          <span>发布时间:</span>
-          <span>{{item.publishTime | formaData}}</span>
-        </div>
-      </div>
     </div>
-    <div class="news-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.imageUrl">
-      <!-- <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title"> -->
-    </div>
-  </div>
 </template>
 
 <script>

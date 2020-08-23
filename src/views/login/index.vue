@@ -108,11 +108,13 @@ export default {
                     store.set("authorization", authorization, "local");
                     store.set("userId", id, "local");
                     store.set("user", res.data, "local");
-                    if (from) {
-                        window.location.href = from;
-                    } else {
-                        this.$router.push({ path: "/home" });
-                    }
+
+                    this.$router.push({ path: "/home" });
+                    // if (from) {
+                    //     window.location.href = from;
+                    // } else {
+
+                    // }
                 } else {
                     this.$hideLoading();
                     res.message && this.$toast(res.message);

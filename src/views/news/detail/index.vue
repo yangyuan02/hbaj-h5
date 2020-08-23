@@ -30,14 +30,14 @@
                     <div class="write" @click="write">
                         <span>写下你的评论</span>
                     </div>
-                    <div class="comment-count">
+                    <!-- <div class="comment-count">
                         <i class="iconfont iconpinglun"></i>
                         <span>36</span>
                     </div>
                     <div class="like-count">
                         <i class="iconfont icondianzan-copy"></i>
                         <span>36</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -164,8 +164,8 @@ export default {
         }
     }
     .news-comment {
-        padding: 0.18rem 0rem;
-        padding-left: 0.26rem;
+        padding: 0.18rem 0.26rem;
+        // padding-left: 0.26rem;
         position: fixed;
         left: 0;
         bottom: 0;
@@ -174,7 +174,7 @@ export default {
         display: flex;
         align-items: center;
         .write {
-            width: 2.94rem;
+            width: 100%;
             height: 0.6rem;
             background: rgba(238, 240, 243, 1);
             border-radius: 0.31rem;

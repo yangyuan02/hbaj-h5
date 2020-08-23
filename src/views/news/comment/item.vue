@@ -14,10 +14,10 @@
                 <div class="time">
                     <span>{{ item.createTime | formaData }}</span>
                 </div>
-                <div class="like">
+                <!-- <div class="like">
                     <i class="iconfont icondianzan-copy"></i>
                     <span>36</span>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

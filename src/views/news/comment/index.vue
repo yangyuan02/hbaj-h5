@@ -8,7 +8,8 @@
                     <LoadMore :showLoading="showLoading"></LoadMore>
                 </div>
                 <div class="comment-input">
-                    <input type="text" placeholder="写下你的评论" ref="input" v-model="content" @change="addComment()" />
+                    <input type="text" placeholder="写下你的评论" ref="input" v-model="content" />
+                    <button @click="addComment()">确定</button>
                 </div>
             </div>
         </div>
@@ -46,18 +47,15 @@ export default {
             this.$showPageLoading();
             const { pageIndex } = this;
             const { id } = this.$route.params;
-            comment(
-                {
-                    type: "GET",
-                    data: {
-                        page: pageIndex,
-                        size: 10,
-                        relatedId: id,
-                        type: "NEWS"
-                    }
-                },
-                "list"
-            ).then(res => {
+            comment({
+                type: "GET",
+                data: {
+                    page: pageIndex,
+                    size: 10,
+                    relatedId: id,
+                    type: "NEWS"
+                }
+            }).then(res => {
                 this.$hidePageLoading();
                 if (res.suceeded) {
                     const { content, total } = res.data;
@@ -132,12 +130,21 @@ export default {
         position: fixed;
         bottom: 0;
         left: 0;
+        display: flex;
+        width: 100%;
         input {
-            width: 6.94rem;
+            // width: 6.94rem;
             height: 0.61rem;
             background: rgba(238, 240, 243, 1);
-            border-radius: 0.31rem;
+            // border-radius: 0.31rem;
             padding-left: 0.28rem;
+            flex: 1;
+        }
+        button {
+            width: 1.2rem;
+            height: 0.61rem;
+            background: #ff9e3a;
+            color: #fff;
         }
     }
 }
