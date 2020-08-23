@@ -78,7 +78,7 @@ export default {
                     type: "GET",
                     data: {
                         page: pageIndex,
-                        size: 10,
+                        size: 100000,
                         moduleId,
                         classId: classListId,
                         blockId
@@ -132,11 +132,11 @@ export default {
     },
     mounted() {
         this.getCourseList();
-        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+        // window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     },
     beforeDestroy() {
         cancelAnimationFrame(this.timer);
-        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+        // window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>

@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="message-list">
-        <messageItem v-for="(item, index) in list" :key="item.id" :item="item"></messageItem>
+        <messageItem v-for="item in list" :key="item.id" :item="item"></messageItem>
         <div class="" v-show="showLoading">
             <LoadMore :showLoading="showLoading"></LoadMore>
         </div>
@@ -44,7 +44,7 @@ export default {
                     type: "get",
                     data: {
                         page: pageIndex,
-                        size: "10",
+                        size: "10000",
                         receiver: this.userId
                     }
                 },
@@ -90,11 +90,11 @@ export default {
     },
     mounted() {
         this.getMessageList();
-        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+        // window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     },
     beforeDestroy() {
         cancelAnimationFrame(this.timer);
-        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+        // window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>
