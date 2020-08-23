@@ -92,13 +92,19 @@ export default {
                         }
                     });
                     Object.keys(hash).forEach(item => {
+                        const order = {
+                            技术解读: 1,
+                            专业英语: 2,
+                            模拟训练: 3
+                        };
                         const data = {
-                            name: item
+                            name: item,
+                            order: order[item]
                         };
                         data.children = blockModuleList.filter(k => k.name === item);
                         modulesList.push(data);
                     });
-                    this.modulesList = modulesList;
+                    this.modulesList = modulesList.sort((a, b) => a.order - b.order);
                     store.set("modulesList", modulesList, "local");
                 }
             });
