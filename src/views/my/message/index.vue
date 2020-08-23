@@ -7,8 +7,8 @@
  -->
 <template>
     <div class="page-view">
+        <Header title="我的通知" :isBack="true"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
-            <Header title="我的通知" :isBack="true"></Header>
             <div class="message-content">
                 <List></List>
             </div>

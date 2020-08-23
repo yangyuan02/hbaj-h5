@@ -127,10 +127,13 @@ export default {
 <style lang="less">
 .my-content {
     // height: 100%;
+    display: flex;
+    flex-direction: column;
     .person-box {
         padding: 0.27rem 0.35rem;
         background: #fff;
         min-height: 100%;
+        flex: 1;
         .common {
             display: flex;
             align-items: center;

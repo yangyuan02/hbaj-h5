@@ -7,8 +7,8 @@
  -->
 <template>
     <div class="page-view">
+        <Header title="我的课件" :isBack="true"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
-            <Header title="我的课件" :isBack="true"></Header>
             <Nav :modulesList="modulesList" path="/my/course"></Nav>
             <SubMenu :modulesList="modulesList" path="/my/course"></SubMenu>
             <div class="course-content">

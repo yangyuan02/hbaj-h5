@@ -7,8 +7,8 @@
  -->
 <template>
     <div class="page-view">
+        <Header title="海宝安检"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
-            <Header title="海宝安检"></Header>
             <div class="home-banner">
                 <Banner :bannerList="bannerList"></Banner>
             </div>

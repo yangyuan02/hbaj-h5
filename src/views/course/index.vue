@@ -7,8 +7,8 @@
  -->
 <template>
     <div class="page-view course">
+        <Header title="公共课件资源"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
-            <Header title="公共课件资源"></Header>
             <Search></Search>
             <Nav :modulesList="modulesList" path="course"></Nav>
             <SubMenu :modulesList="modulesList" path="course"></SubMenu>
