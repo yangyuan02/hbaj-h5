@@ -1,7 +1,7 @@
 <template>
     <div class="comment-item">
-        <div class="user">
-            <img :src="globalConfig.imagePath + item.userAvatar" alt="" />
+        <div class="user ui-lazyLoad-pic" v-skeleton="globalConfig.imagePath + item.userAvatar">
+            <!-- <img :src="globalConfig.imagePath + item.userAvatar" alt="" /> -->
         </div>
         <div class="user-comment">
             <div class="user-name">
@@ -49,6 +49,8 @@ export default {
         background: #fff;
         border-radius: 50%;
         margin-right: 0.24rem;
+        background-size: 100%;
+        background-position: center center;
         img {
             width: 100%;
             height: 100%;

@@ -13,6 +13,7 @@ import loading from "@/components/loading";
 import pageLoading from "@/components/pageLoading";
 import showModal from "@/components/showModal";
 import filters from "./filters";
+import "@/widget/skeleton";
 
 Vue.config.productionTip = false;
 
