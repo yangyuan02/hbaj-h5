@@ -103,6 +103,7 @@ export default {
                 }
             }).then(res => {
                 this.$hideLoading();
+                this.getComment();
                 console.log(1);
             });
         }

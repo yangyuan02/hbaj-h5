@@ -12,6 +12,7 @@ export default {
     methods: {
         initPano() {
             const projectId = this.$route.params.projectId;
+            const scale = window.devicePixelRatio || 1;
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
@@ -19,7 +20,7 @@ export default {
                     xml: `https://msa_pc.vr2shipping.com/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
                     target: "p_editor",
                     html5: "prefer",
-                    mobilescale: 1.0,
+                    mobilescale: 1 / scale,
                     passQueryParameters: true,
                     onready: buildProject(projectId)
                 });
