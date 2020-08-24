@@ -12,7 +12,7 @@ export default {
     methods: {
         initPano() {
             const projectId = this.$route.params.projectId;
-            const scale = window.devicePixelRatio || 1;
+            const scale = 1 / window.devicePixelRatio || 1;
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
