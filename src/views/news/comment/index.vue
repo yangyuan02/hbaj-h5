@@ -1,17 +1,17 @@
 <template>
     <div class="page-view">
+        <Header title="全部评论" :isBack="true"></Header>
         <div class="scroll-view-wrapper">
-            <Header title="全部评论" :isBack="true"></Header>
             <div class="comment">
                 <List :list="list"></List>
                 <div class="" v-show="showLoading">
                     <LoadMore :showLoading="showLoading"></LoadMore>
                 </div>
-                <div class="comment-input">
-                    <input type="text" placeholder="写下你的评论" ref="input" v-model="content" />
-                    <button @click="addComment()">确定</button>
-                </div>
             </div>
+        </div>
+        <div class="comment-input">
+            <input type="text" placeholder="写下你的评论" ref="input" v-model="content" />
+            <button @click="addComment()">确定</button>
         </div>
     </div>
 </template>
@@ -124,28 +124,28 @@ export default {
 .comment {
     height: 100%;
     background: #fff;
-    .comment-input {
-        background: #fff;
-        padding: 0.18rem 0.25rem;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        width: 100%;
-        input {
-            // width: 6.94rem;
-            height: 0.61rem;
-            background: rgba(238, 240, 243, 1);
-            // border-radius: 0.31rem;
-            padding-left: 0.28rem;
-            flex: 1;
-        }
-        button {
-            width: 1.2rem;
-            height: 0.61rem;
-            background: #ff9e3a;
-            color: #fff;
-        }
+}
+.comment-input {
+    background: #fff;
+    padding: 0.18rem 0.25rem;
+    // position: fixed;
+    // bottom: 0;
+    // left: 0;
+    display: flex;
+    width: 100%;
+    input {
+        // width: 6.94rem;
+        height: 0.61rem;
+        background: rgba(238, 240, 243, 1);
+        // border-radius: 0.31rem;
+        padding-left: 0.28rem;
+        flex: 1;
+    }
+    button {
+        width: 1.2rem;
+        height: 0.61rem;
+        background: #ff9e3a;
+        color: #fff;
     }
 }
 </style>
