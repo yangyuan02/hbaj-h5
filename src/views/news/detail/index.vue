@@ -7,14 +7,14 @@
  -->
 <template>
     <div class="page-view">
+        <div class="news-detail-header">
+            <header>
+                <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
+                <span>新闻资讯</span>
+            </header>
+        </div>
         <div class="scroll-view-wrapper">
             <div class="news-detail">
-                <div class="news-detail-header">
-                    <header>
-                        <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
-                        <span>新闻资讯</span>
-                    </header>
-                </div>
                 <div class="news-detail-bg"></div>
                 <div class="news-detail-content">
                     <div class="title">
@@ -26,11 +26,13 @@
                     </div>
                     <div class="text" v-html="data.contentHtml"></div>
                 </div>
-                <div class="news-comment">
-                    <div class="write" @click="write">
-                        <span>写下你的评论</span>
-                    </div>
-                    <!-- <div class="comment-count">
+            </div>
+        </div>
+        <div class="news-comment">
+            <div class="write" @click="write">
+                <span>写下你的评论</span>
+            </div>
+            <!-- <div class="comment-count">
                         <i class="iconfont iconpinglun"></i>
                         <span>36</span>
                     </div>
@@ -38,8 +40,6 @@
                         <i class="iconfont icondianzan-copy"></i>
                         <span>36</span>
                     </div> -->
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -84,37 +84,38 @@ export default {
 };
 </script>
 <style lang="less">
+.news-detail-header {
+    header {
+        width: 100%;
+        height: 0.88rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background: #fff;
+        i {
+            font-size: 0.28rem;
+            color: rgba(15, 79, 168, 1);
+            position: absolute;
+            top: 50%;
+            left: 0.2rem;
+            transform: translateY(-50%);
+        }
+        span {
+            font-size: 0.32rem;
+            font-family: MicrosoftYaHei;
+            color: rgba(0, 0, 0, 1);
+            line-height: 0.42rem;
+            -webkit-background-clip: text;
+        }
+    }
+}
 .news-detail {
     padding: 0 0.2rem;
     background: #fff;
     min-height: 100%;
-    .news-detail-header {
-        header {
-            width: 100%;
-            height: 0.88rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: #fff;
-            i {
-                font-size: 0.28rem;
-                color: rgba(15, 79, 168, 1);
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }
-            span {
-                font-size: 0.32rem;
-                font-family: MicrosoftYaHei;
-                color: rgba(0, 0, 0, 1);
-                line-height: 0.42rem;
-                -webkit-background-clip: text;
-            }
-        }
-    }
+
     .news-detail-bg {
         width: 100%;
         height: 2.94rem;
@@ -163,53 +164,51 @@ export default {
             }
         }
     }
-    .news-comment {
-        padding: 0.18rem 0.26rem;
-        // padding-left: 0.26rem;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        border: 0.01rem solid rgba(221, 221, 221, 1);
+}
+.news-comment {
+    padding: 0.18rem 0.26rem;
+    // padding-left: 0.26rem;
+    border: 0.01rem solid rgba(221, 221, 221, 1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    .write {
         width: 100%;
+        height: 0.6rem;
+        background: rgba(238, 240, 243, 1);
+        border-radius: 0.31rem;
         display: flex;
         align-items: center;
-        .write {
-            width: 100%;
-            height: 0.6rem;
-            background: rgba(238, 240, 243, 1);
-            border-radius: 0.31rem;
-            display: flex;
-            align-items: center;
-            padding-left: 0.28rem;
-            span {
-                font-size: 0.28rem;
-                font-family: MicrosoftYaHei;
-                color: rgba(153, 153, 153, 1);
-                line-height: 0.37rem;
-                letter-spacing: 0.01rem;
-                -webkit-background-clip: text;
-            }
+        padding-left: 0.28rem;
+        span {
+            font-size: 0.28rem;
+            font-family: MicrosoftYaHei;
+            color: rgba(153, 153, 153, 1);
+            line-height: 0.37rem;
+            letter-spacing: 0.01rem;
+            -webkit-background-clip: text;
         }
-        .comment-count,
-        .like-count {
-            color: rgba(219, 219, 219, 1);
-            i {
-                font-size: 0.36rem;
-            }
-            span {
-                margin-left: 0.1rem;
-            }
+    }
+    .comment-count,
+    .like-count {
+        color: rgba(219, 219, 219, 1);
+        i {
+            font-size: 0.36rem;
         }
-        .comment-count {
-            margin-left: 0.6rem;
-            margin-right: 0.3rem;
-            display: flex;
-            align-items: center;
+        span {
+            margin-left: 0.1rem;
         }
-        .like-count {
-            display: flex;
-            align-items: center;
-        }
+    }
+    .comment-count {
+        margin-left: 0.6rem;
+        margin-right: 0.3rem;
+        display: flex;
+        align-items: center;
+    }
+    .like-count {
+        display: flex;
+        align-items: center;
     }
 }
 </style>
