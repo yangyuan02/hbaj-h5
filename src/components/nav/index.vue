@@ -27,19 +27,19 @@ export default {
             list: [
                 {
                     icon: "icontubiao-05",
-                    bgColor: "rgba(254, 213, 26, 1)",
+                    bgColor: "#0F4FA8",
                     title: "技术解读",
                     order: 1
                 },
                 {
                     icon: "icontubiao-06",
-                    bgColor: "rgba(255, 158, 58, 1)",
+                    bgColor: "#FF6600",
                     title: "专业英语",
                     order: 2
                 },
                 {
                     icon: "icontubiao-07",
-                    bgColor: "rgba(148, 203, 243, 1)",
+                    bgColor: "#FF9E3A",
                     title: "模拟训练",
                     order: 3
                 }
