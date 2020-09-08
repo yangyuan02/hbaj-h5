@@ -14,6 +14,7 @@ import pageLoading from "@/components/pageLoading";
 import showModal from "@/components/showModal";
 import filters from "./filters";
 import "@/widget/skeleton";
+import store from "@/widget/store";
 
 Vue.config.productionTip = false;
 
@@ -27,15 +28,15 @@ Vue.use(pageLoading);
 Vue.use(Toast);
 
 Vue.prototype.globalConfig = window.globalConfig;
-// const metaEl = document.querySelector('meta[name="viewport"]');
-// const oldattr = metaEl.getAttribute("content");
+if (window.__wxjs_environment === "miniprogram") {
+    // 微信小程序环境
+    const searchParasm = new URLSearchParams(location.search);
+    const authorization = searchParasm.get("authorization");
+    const userId = searchParasm.get("userId");
+    store.set("authorization", authorization, "local");
+    store.set("userId", userId, "local");
+}
 router.beforeEach((to, from, next) => {
-    // if (to.name == "panoEditor") {
-    //     metaEl.setAttribute("content", "width=device-width,user-scalable=no,initial-scale=" + 1 + ",maximum-scale=" + 1 + ",minimum-scale=" + 1);
-    // } else {
-    //     metaEl.setAttribute("content", oldattr);
-    // }
-
     if (to.name == "login" && window.localStorage.getItem("authorization")) {
         //解决登陆后 用户输入登录地址重定向到首页
         next({ path: "/home" });
