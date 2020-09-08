@@ -103,4 +103,30 @@
     <body>
         <div id="app"></div>
     </body>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function(event) {
+                navigator.serviceWorker
+                    .register("./sw.js", {
+                        scope: "/"
+                    })
+                    .then(function(registeration) {
+                        console.log("Service worker register success with scope " + registeration.scope);
+                    });
+            });
+
+            navigator.serviceWorker.oncontrollerchange = function(event) {
+                console.log("页面已更新", "info");
+            };
+
+            // 如果用户处于断网状态进入页面，用户可能无法感知内容是过期，需要提示用户断网了，并在重新连接后告诉用户
+            if (!window.navigator.onLine) {
+                console.log("网络断开，内容可能已过期", "info");
+
+                window.addEventListener("online", function() {
+                    console.log("已连接网络", "info");
+                });
+            }
+        }
+    </script>
 </html>

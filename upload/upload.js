@@ -129,12 +129,19 @@ const runUploadTask = async () => {
     console.log(chalk.yellow(`--------->  欢迎使用 阳园牌 2020年自动部署工具  <---------`));
     //打包
     await compileDist();
+    // 替换
+    await runReplaceStatic();
     //压缩
     await zipDist();
     //连接服务器上传文件
     await uploadZipBySSH();
     successLog("大吉大利, 部署成功!");
     process.exit();
+};
+
+const runReplaceStatic = async () => {
+    const rootPath = path.resolve(__dirname, "../");
+    await shell.exec(`bash ${rootPath}/serviceWorker.sh`);
 };
 
 // 开始前的配置检查
