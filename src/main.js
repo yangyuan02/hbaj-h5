@@ -33,8 +33,10 @@ if (window.__wxjs_environment === "miniprogram") {
     const searchParasm = new URLSearchParams(location.search);
     const authorization = searchParasm.get("authorization");
     const userId = searchParasm.get("userId");
-    store.set("authorization", authorization, "local");
-    store.set("userId", userId, "local");
+    if (authorization && userId) {
+        store.set("authorization", authorization, "local");
+        store.set("userId", userId, "local");
+    }
 }
 router.beforeEach((to, from, next) => {
     if (to.name == "login" && window.localStorage.getItem("authorization")) {

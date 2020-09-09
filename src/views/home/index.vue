@@ -127,6 +127,7 @@ export default {
         }
     },
     mounted() {
+        console.log("更新");
         this.getHome();
     }
 };
