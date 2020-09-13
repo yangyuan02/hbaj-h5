@@ -94,7 +94,7 @@ export default {
         // window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     },
     beforeDestroy() {
-        cancelAnimationFrame(this.timer);
+        // cancelAnimationFrame(this.timer);
         // window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };

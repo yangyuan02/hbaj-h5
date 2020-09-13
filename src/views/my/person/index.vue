@@ -11,15 +11,15 @@
             <div class="my-content">
                 <my-header :info="user"></my-header>
                 <div class="person-box">
-                    <div class="role common" v-for="(item, index) in roleList" :key="index">
+                    <div class="role common">
                         <div class="thumb">
-                            <img src="https://msa_pc.vr2shipping.com/pano/static/role/cmsalogo.png" alt="" />
+                            <img :src="globalConfig.imagePath + 'static/app/department/group_01.jpg'" alt="" />
                         </div>
                         <div class="name">
-                            <span>{{ item.name }}</span>
+                            <span>{{ user.departmentName || "未指定用户组" }}</span>
                         </div>
                         <div class="tag">
-                            <span>角色</span>
+                            <span>群组</span>
                         </div>
                     </div>
                     <div class="organization common" v-for="(item, index) in enterprises" :key="index">
@@ -180,12 +180,19 @@ export default {
         }
         .role {
             margin-bottom: 0.16rem;
+            border-radius: 0.1rem;
+            .thumb {
+                img {
+                    border-radius: 50%;
+                }
+            }
             &:last-child {
                 margin-bottom: 0;
             }
         }
         .organization {
             margin: 0.16rem 0;
+            border-radius: 0.1rem;
             .tag {
                 background: rgba(255, 213, 26, 1);
             }
