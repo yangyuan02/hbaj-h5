@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <div class="news-detail-header">
+        <div class="news-detail-header" v-if="isMiniprogram">
             <header>
                 <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
                 <span>新闻资讯</span>
@@ -46,9 +46,11 @@
 
 <script>
 import { newsDetail } from "@/model/api";
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
+            isMiniprogram: utils.isMiniprogram(),
             data: {}
         };
     },
@@ -112,7 +114,6 @@ export default {
     }
 }
 .news-detail {
-    padding: 0 0.2rem;
     background: #fff;
     min-height: 100%;
 
@@ -123,6 +124,7 @@ export default {
         background-size: 100%;
     }
     .news-detail-content {
+        padding: 0 0.2rem;
         .title {
             margin-top: 0.33rem;
             p {

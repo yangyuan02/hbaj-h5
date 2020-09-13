@@ -265,6 +265,10 @@ const utils = {
         } else {
             return "";
         }
+    },
+    isMiniprogram() {
+        // 是否是在微信小程序环境
+        return window.__wxjs_environment !== "miniprogram";
     }
 };
 

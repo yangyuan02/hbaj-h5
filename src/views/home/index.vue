@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <Header title="海宝安检"></Header>
+        <Header title="海宝安检" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
             <div class="home-banner">
                 <Banner :bannerList="bannerList"></Banner>
@@ -52,6 +52,7 @@ import Header from "@/components/common/header";
 import { home } from "@/model/api";
 import store from "@/widget/store";
 import defer from "@/widget/defer";
+import utils from "@/widget/utils";
 
 export default {
     data() {
@@ -60,7 +61,8 @@ export default {
             bannerList: [],
             recommendProjectList: [],
             items: [],
-            modulesList: []
+            modulesList: [],
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {
@@ -127,7 +129,6 @@ export default {
         }
     },
     mounted() {
-        console.log("更新");
         this.getHome();
     }
 };

@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <Header title="我的课件" :isBack="true"></Header>
+        <Header title="我的课件" :isBack="true" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
             <Nav :modulesList="modulesList" path="/my/course"></Nav>
             <SubMenu :modulesList="modulesList" path="/my/course"></SubMenu>
@@ -48,7 +48,8 @@ export default {
             pageIndex: 1,
             isScrollLoad: true,
             showLoading: false,
-            pageTotal: 0
+            pageTotal: 0,
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {

@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <Header title="我的任务" :onClick="() => showCalendar(isShowCalendar)" :isShowCalendar="isShowCalendar" :isBack="true"></Header>
+        <Header title="我的任务" :onClick="() => showCalendar(isShowCalendar)" :isShowCalendar="isShowCalendar" :isBack="true" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
             <div class="task-content">
                 <Calendar v-if="isShowCalendar" class="calendar-box"></Calendar>
@@ -23,11 +23,13 @@ import Header from "@/components/common/header";
 import Calendar from "@/components/calendar";
 import Footer from "@/components/common/footer";
 import List from "./list";
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
             isShowCalendar: false,
-            menupB: true
+            menupB: true,
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {

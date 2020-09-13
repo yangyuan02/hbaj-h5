@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <Header title="海宝安检资讯"></Header>
+        <Header title="海宝安检资讯" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
             <List></List>
         </div>
@@ -19,10 +19,12 @@
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
 import List from "./list.vue";
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
-            menupB: true
+            menupB: true,
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {

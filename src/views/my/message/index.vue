@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <Header title="我的通知" :isBack="true"></Header>
+        <Header title="我的通知" :isBack="true" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
             <div class="message-content">
                 <List></List>
@@ -21,10 +21,12 @@
 import List from "./list";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
-            menupB: true
+            menupB: true,
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {
