@@ -144,14 +144,15 @@ export default {
                 width: 1.2rem;
                 height: 1.2rem;
                 background: #f0f0f0;
-                margin-left: 0.5rem;
-                margin-right: 0.3rem;
-                border-radius: 0.1rem;
+                margin-left: 0.3rem;
+                margin-right: 0.4rem;
+                border-radius: 50%;
                 img {
                     width: 100%;
                     height: 100%;
                     border-radius: 0.1rem;
                     max-width: 100%;
+                    border-radius: 50%;
                 }
             }
             .name {
@@ -181,11 +182,6 @@ export default {
         .role {
             margin-bottom: 0.16rem;
             border-radius: 0.1rem;
-            .thumb {
-                img {
-                    border-radius: 50%;
-                }
-            }
             &:last-child {
                 margin-bottom: 0;
             }
@@ -255,7 +251,7 @@ export default {
                         width: 1.28rem;
                         height: 0.4rem;
                         border-radius: 0.04rem;
-                        border: 0.01rem solid rgba(255, 255, 255, 1);
+                        border-bottom: 0.02rem solid rgba(255, 255, 255, 1);
                         display: flex;
                         justify-content: center;
                         align-items: center;

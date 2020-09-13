@@ -102,6 +102,7 @@ export default {
 
 <style lang="less">
 .task-list {
+    height: 100%;
     &.pd20 {
         padding-top: 0.2rem;
     }

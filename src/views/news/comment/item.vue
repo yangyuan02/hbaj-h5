@@ -43,6 +43,9 @@ export default {
     border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
     padding-top: 0.3rem;
     padding-bottom: 0.4rem;
+    &:last-child {
+        border: none;
+    }
     .user {
         width: 0.81rem;
         height: 0.81rem;

@@ -48,8 +48,9 @@ export default {
 
 <style lang="less">
 .task-content {
-    min-height: 100%;
-    background: linear-gradient(180deg, rgba(15, 79, 168, 1) 0%, rgba(15, 79, 168, 0.98) 100%);
+    // min-height: 100%;
+    // height: 100%;
+    // background: linear-gradient(180deg, rgba(15, 79, 168, 1) 0%, rgba(15, 79, 168, 0.98) 100%);
     padding-bottom: 0.18rem;
     .calendar-box {
         margin-bottom: 0.24rem;

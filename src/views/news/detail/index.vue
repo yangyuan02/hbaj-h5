@@ -170,7 +170,7 @@ export default {
 .news-comment {
     padding: 0.18rem 0.26rem;
     // padding-left: 0.26rem;
-    border: 0.01rem solid rgba(221, 221, 221, 1);
+    // border: 0.01rem solid rgba(221, 221, 221, 1);
     width: 100%;
     display: flex;
     align-items: center;

@@ -16,7 +16,9 @@
             </div>
         </div>
         <div class="task-item-detail">
-            <div class="task-item-thumb ui-lazyLoad-pic" v-lazy :data-src="globalConfig.imagePath + item.project.imageUrl">
+            <!-- v-lazy :data-src="globalConfig.imagePath + item.project.imageUrl" -->
+            <div class="task-item-thumb ui-lazyLoad-pic">
+                <img :src="globalConfig.imagePath + item.project.imageUrl" alt="" />
                 <div class="action" @click="operate">
                     <span>立即执行</span>
                 </div>
@@ -112,6 +114,11 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+            }
             .action {
                 width: 1.3rem;
                 height: 0.4rem;
@@ -119,6 +126,10 @@ export default {
                 border-radius: 0.2rem;
                 text-align: center;
                 line-height: 0.4rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 span {
                     font-size: 0.22rem;
                     font-family: MicrosoftYaHei;

@@ -105,19 +105,18 @@ export default {
             }).then(res => {
                 this.$hideLoading();
                 this.getComment();
-                console.log(1);
             });
         }
     },
     mounted() {
         this.getComment();
-        window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+        // window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
 
         this.setInputFocus();
     },
     beforeDestroy() {
-        cancelAnimationFrame(this.timer);
-        window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
+        // cancelAnimationFrame(this.timer);
+        // window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>
@@ -126,6 +125,9 @@ export default {
 .comment {
     height: 100%;
     background: #fff;
+    .comment-list {
+        background: #fff;
+    }
 }
 .comment-input {
     background: #fff;
