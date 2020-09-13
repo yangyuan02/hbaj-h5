@@ -9,6 +9,7 @@
     <div class="page-view">
         <Header title="我的课件" :isBack="true" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+            <Search></Search>
             <Nav :modulesList="modulesList" path="/my/course"></Nav>
             <SubMenu :modulesList="modulesList" path="/my/course"></SubMenu>
             <div class="course-content">
@@ -32,6 +33,7 @@
 <script>
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
+import Search from "@/components/search";
 import List from "./list.vue";
 import Nav from "@/components/nav";
 import SubMenu from "@/views/course/submenu";
@@ -57,12 +59,14 @@ export default {
         Header,
         Footer,
         Nav,
-        SubMenu
+        SubMenu,
+        Search
     },
     methods: {
         getCourseList() {
             this.$showPageLoading();
             const { pageIndex } = this;
+            this.recommendProjectList = []; //
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
             home(

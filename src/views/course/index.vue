@@ -72,6 +72,7 @@ export default {
         getCourseList() {
             this.$showPageLoading();
             const { pageIndex } = this;
+            this.recommendProjectList = [];
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
             home(

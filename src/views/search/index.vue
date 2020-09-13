@@ -9,7 +9,7 @@
     <div class="page-view">
         <div class="scroll-view-wrapper search">
             <div class="search-content">
-                <div class="back">
+                <div class="back" v-if="isMiniprogram">
                     <i class="iconfont icontubiao-13" @click="$router.back(-1)"></i>
                 </div>
                 <div class="search-input">
@@ -27,11 +27,13 @@
 <script>
 import List from "./list.vue";
 import { home } from "@/model/api";
+import utils from "@/widget/utils";
 export default {
     data() {
         return {
             name: "",
-            recommendProjectList: []
+            recommendProjectList: [],
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {
