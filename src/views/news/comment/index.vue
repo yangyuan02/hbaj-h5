@@ -1,6 +1,6 @@
 <template>
     <div class="page-view">
-        <Header title="全部评论" :isBack="true"></Header>
+        <Header title="全部评论" :isBack="true" v-if="isMiniprogram"></Header>
         <div class="scroll-view-wrapper">
             <div class="comment">
                 <List :list="list"></List>
@@ -31,7 +31,8 @@ export default {
             pageIndex: 1,
             isScrollLoad: true,
             showLoading: false,
-            pageTotal: 0
+            pageTotal: 0,
+            isMiniprogram: utils.isMiniprogram()
         };
     },
     components: {

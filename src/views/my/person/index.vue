@@ -44,7 +44,7 @@
                                         class="ellipsis"
                                         v-for="(moduleItem, _moduleIndex) in item.moduleList"
                                         :key="_moduleIndex"
-                                        :class="[_moduleIndex === ModuleIndex ? 'active' : '']"
+                                        :class="[_moduleIndex === ModuleIndex[Pindex] ? 'active' : '']"
                                         @click="setModuleIndex(Pindex, _moduleIndex)"
                                     >
                                         {{ moduleItem.name }}
@@ -81,7 +81,7 @@ export default {
             blocks: [],
             roleList: [],
             enterprises: [],
-            ModuleIndex: 0
+            ModuleIndex: {}
         };
     },
     components: {
@@ -114,7 +114,7 @@ export default {
             });
         },
         setModuleIndex(Pindex, index) {
-            this.ModuleIndex = index;
+            this.ModuleIndex[Pindex] = index;
             this.blocks[Pindex]["classList"] = this.blocks[Pindex]["moduleList"][index].classList || [];
         }
     },
