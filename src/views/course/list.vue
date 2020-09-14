@@ -6,9 +6,9 @@
  * @Description: 
  -->
 <template>
-  <div class="course-list">
-    <CourseItem v-for="(item, index) in recommendProjectList" :key="index" :item="item"></CourseItem>
-  </div>
+    <div class="course-list">
+        <CourseItem v-for="(item, index) in recommendProjectList" :key="index" :item="item"></CourseItem>
+    </div>
 </template>
 
 <script>
@@ -31,5 +31,6 @@ export default {
 <style lang="less">
 .course-list {
     padding: 0 0.2rem;
+    background: #fff;
 }
 </style>
