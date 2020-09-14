@@ -38,7 +38,7 @@ export default {
 <style lang="less">
 .course-list {
     background-color: #fff;
-    padding: 0 0.2rem;
+    // padding: 0 0.2rem;
     position: relative;
     // height: 100%;
 }

@@ -68,7 +68,10 @@ export default {
     display: flex;
     padding-top: 0.38rem;
     padding-bottom: 0.4rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
     border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
+    background: #fff;
     &:last-child {
         border-bottom: none;
     }
