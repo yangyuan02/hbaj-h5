@@ -69,6 +69,9 @@ export default {
     padding-top: 0.28rem;
     padding-bottom: 0.2rem;
     border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
+    &:last-child {
+        border-bottom: none;
+    }
     .course-item-thumb {
         width: 2.1rem;
         height: 2.1rem;

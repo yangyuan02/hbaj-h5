@@ -8,7 +8,7 @@
 <template>
     <div class="page-view">
         <Header title="海宝安检资讯" v-if="isMiniprogram"></Header>
-        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+        <div class="scroll-view-wrapper">
             <div class="box" style="background:#fff;height:100%">
                 <List :list="list" v-if="list.length > 0"></List>
                 <Empty v-else />

@@ -8,7 +8,7 @@
 <template>
     <div class="page-view">
         <Header title="海宝安检" v-if="isMiniprogram"></Header>
-        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+        <div class="scroll-view-wrapper">
             <div class="home-banner">
                 <Banner :bannerList="bannerList"></Banner>
             </div>

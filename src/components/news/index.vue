@@ -66,10 +66,12 @@ export default {
 <style lang="less">
 .news-content-item {
     display: flex;
-
     padding-top: 0.38rem;
     padding-bottom: 0.4rem;
     border-bottom: 0.02rem solid rgba(221, 221, 221, 1);
+    &:last-child {
+        border-bottom: none;
+    }
     .news-item-detail {
         flex: 1;
         width: 4.44rem;

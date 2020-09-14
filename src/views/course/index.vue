@@ -8,13 +8,13 @@
 <template>
     <div class="page-view course">
         <Header title="公共课件资源" v-if="isMiniprogram"></Header>
-        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+        <div class="scroll-view-wrapper">
             <Search></Search>
             <Nav :modulesList="modulesList" path="course"></Nav>
             <SubMenu :modulesList="modulesList" path="course"></SubMenu>
-            <div class="course-content" :style="{ height: contentHeight }">
+            <div class="course-content">
                 <List :recommendProjectList="recommendProjectList" v-if="recommendProjectList.length > 0"></List>
-                <Empty v-else />
+                <Empty v-else style="margin-top:1rem;" />
                 <div class="" v-show="showLoading">
                     <LoadMore :showLoading="showLoading"></LoadMore>
                 </div>
