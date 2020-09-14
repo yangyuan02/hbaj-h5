@@ -19,7 +19,7 @@
             </div>
             <div class="person-digest">
                 <div class="nickname">
-                    <span>{{ info.namecard }}</span>
+                    <span>{{ info.sgname }}</span>
                 </div>
                 <div class="info">
                     <span>{{ info.description }}</span>
@@ -64,7 +64,7 @@ export default {
             var file = e.currentTarget.files[0];
             const info = this.info;
             var imageUpload = new ImageUpload(file, {
-                url: `/api/file/upload?fileName=${info.namecard}&relatedId=${info.id}&fileType=USER_AVATAR`,
+                url: `/api/file/upload?fileName=${info.sgname}&relatedId=${info.id}&fileType=USER_AVATAR`,
                 fileKey: "file",
                 onUpload: result => {
                     this.$hideLoading();

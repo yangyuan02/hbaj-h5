@@ -13,50 +13,50 @@
  * @Description: 
  -->
 <template>
-  <div class="page-view">
-    <div class="scroll-view-wrapper">
-      <div class="my-setting-content">
-        <my-header :info="user" :onUploadSuccess="onUploadSuccess" :isOnUplaod="true" :isEdit="false"></my-header>
-        <div class="setting-edit-box">
-          <div class="info">
-            <ul>
-              <li>
-                <i class="iconfont icontubiao-18"></i>
-                <div class="border">
-                  <span>昵称</span>
-                  <input type="text" placeholder="请输入昵称" v-model="user.namecard" />
+    <div class="page-view">
+        <div class="scroll-view-wrapper">
+            <div class="my-setting-content">
+                <my-header :info="user" :onUploadSuccess="onUploadSuccess" :isOnUplaod="true" :isEdit="false"></my-header>
+                <div class="setting-edit-box">
+                    <div class="info">
+                        <ul>
+                            <li>
+                                <i class="iconfont icontubiao-18"></i>
+                                <div class="border">
+                                    <span>昵称</span>
+                                    <input type="text" placeholder="请输入昵称" v-model="user.sgname" />
+                                </div>
+                            </li>
+                            <li>
+                                <i class="iconfont icontubiao-19"></i>
+                                <div class="border"><span>邮箱</span> <input type="text" placeholder="请输入邮箱" v-model="user.email" /></div>
+                            </li>
+                            <li>
+                                <i class="iconfont icontubiao-20"></i>
+                                <div class="border">
+                                    <span>电话</span>
+                                    <input type="text" placeholder="请输入电话" v-model="user.mobile" disabled />
+                                </div>
+                            </li>
+                            <li>
+                                <i class="iconfont icontubiao-21"></i>
+                                <div class="border">
+                                    <span>区域</span>
+                                    <input type="text" placeholder="请输入区域" v-model="user.address" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="digest">
+                        <textarea name="" id="" cols="30" rows="10" v-model="user.description"></textarea>
+                    </div>
+                    <div class="save">
+                        <button @click="updateUser">保存</button>
+                    </div>
                 </div>
-              </li>
-              <li>
-                <i class="iconfont icontubiao-19"></i>
-                <div class="border"><span>邮箱</span> <input type="text" placeholder="请输入邮箱" v-model="user.email" /></div>
-              </li>
-              <li>
-                <i class="iconfont icontubiao-20"></i>
-                <div class="border">
-                  <span>电话</span>
-                  <input type="text" placeholder="请输入电话" v-model="user.mobile" disabled />
-                </div>
-              </li>
-              <li>
-                <i class="iconfont icontubiao-21"></i>
-                <div class="border">
-                  <span>区域</span>
-                  <input type="text" placeholder="请输入区域" v-model="user.address" />
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="digest">
-            <textarea name="" id="" cols="30" rows="10" v-model="user.description"></textarea>
-          </div>
-          <div class="save">
-            <button @click="updateUser">保存</button>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
