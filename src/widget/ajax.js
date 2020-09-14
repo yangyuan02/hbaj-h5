@@ -33,8 +33,15 @@ export default function ajax({ hostPath = location.origin, url, async = true, ti
                 if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     resolve(xhr.response);
                 } else if (xhr.status === 401) {
-                    window.localStorage.removeItem("authorization");
-                    // window.location.href = "/";
+                    if (window.__wxjs_environment === "miniprogram") {
+                        wx.miniProgram.navigateTo({ url: "/pages/auth/auth?isClearStore=1" });
+                    } else {
+                        window.localStorage.removeItem("authorization");
+                        setTimeout(() => {
+                            window.location.href = "/login";
+                        }, 1000);
+                        return this.$toast("请输入正确的手机号");
+                    }
                 } else {
                     resolve({
                         data: [],
