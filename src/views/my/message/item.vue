@@ -71,7 +71,7 @@ export default {
     box-shadow: 0px 0.01rem 0.03rem 0px rgba(0, 0, 0, 0.5);
     border-radius: 0.1rem;
     filter: blur(0px);
-    &:last-child {
+    &:last-of-type {
         margin-bottom: 0;
     }
     &.unread {

@@ -8,12 +8,13 @@
 <template>
     <div class="page-view">
         <Header title="我的课件" :isBack="true" v-if="isMiniprogram"></Header>
-        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+        <div class="scroll-view-wrapper">
             <Search></Search>
             <Nav :modulesList="modulesList" path="/my/course"></Nav>
             <SubMenu :modulesList="modulesList" path="/my/course"></SubMenu>
             <div class="course-content">
-                <List :recommendProjectList="recommendProjectList"></List>
+                <List :recommendProjectList="recommendProjectList" v-if="recommendProjectList.length > 0"></List>
+                <Empty v-else style="margin-top:1rem;" />
                 <div class="" v-show="showLoading">
                     <LoadMore :showLoading="showLoading"></LoadMore>
                 </div>
@@ -26,6 +27,8 @@
 <style lang="less">
 .course-content {
     width: 100%;
+    position: relative;
+    // height: calc(100% - 1.14rem - 2rem - 3.04rem);
     background: #fff;
 }
 </style>
@@ -34,6 +37,7 @@
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
 import Search from "@/components/search";
+import Empty from "@/components/empty";
 import List from "./list.vue";
 import Nav from "@/components/nav";
 import SubMenu from "@/views/course/submenu";
@@ -51,7 +55,8 @@ export default {
             isScrollLoad: true,
             showLoading: false,
             pageTotal: 0,
-            isMiniprogram: utils.isMiniprogram()
+            isMiniprogram: utils.isMiniprogram(),
+            contentHeight: 0
         };
     },
     components: {
@@ -60,9 +65,21 @@ export default {
         Footer,
         Nav,
         SubMenu,
-        Search
+        Search,
+        Empty
     },
     methods: {
+        setContentHeihgt() {
+            this.$nextTick(() => {
+                const getHeight = ele => (document.querySelector(ele) && document.querySelector(ele).getBoundingClientRect().height) || 0;
+                const scrollViewWrapper = getHeight(".scroll-view-wrapper");
+                const searchContent = getHeight(".search-content");
+                const header = getHeight("header");
+                const nav = getHeight("nav");
+                const subMenu = getHeight(".sub-menu");
+                this.contentHeight = scrollViewWrapper - searchContent - nav - subMenu - header + "px";
+            });
+        },
         getCourseList() {
             this.$showPageLoading();
             const { pageIndex } = this;
@@ -83,6 +100,7 @@ export default {
                 "project"
             ).then(res => {
                 this.$hidePageLoading();
+                this.setContentHeihgt();
                 if (res.suceeded) {
                     const { content, total } = res.data;
                     if (pageIndex > 1) {

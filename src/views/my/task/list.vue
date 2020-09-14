@@ -7,7 +7,10 @@
  -->
 <template>
     <div class="task-list" :class="[isPaddingTop ? '' : 'pd20']">
-        <taskItem v-for="(item, index) in list" :key="index" :item="item"></taskItem>
+        <template v-if="list.length > 0">
+            <taskItem v-for="(item, index) in list" :key="index" :item="item"></taskItem>
+        </template>
+        <Empty v-else />
         <div class="" v-show="showLoading">
             <LoadMore :showLoading="showLoading"></LoadMore>
         </div>
@@ -19,6 +22,7 @@ import taskItem from "./item";
 import { task } from "@/model/api";
 import utils from "@/widget/utils";
 import LoadMore from "@/components/loadMore";
+import Empty from "@/components/empty";
 
 export default {
     data() {
@@ -38,7 +42,8 @@ export default {
     },
     components: {
         taskItem,
-        LoadMore
+        LoadMore,
+        Empty
     },
     methods: {
         getTaskList() {

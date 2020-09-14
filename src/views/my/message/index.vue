@@ -8,7 +8,7 @@
 <template>
     <div class="page-view">
         <Header title="我的通知" :isBack="true" v-if="isMiniprogram"></Header>
-        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+        <div class="scroll-view-wrapper">
             <div class="message-content">
                 <List></List>
             </div>
@@ -38,7 +38,7 @@ export default {
 </script>
 <style lang="less">
 .message-content {
-    background: linear-gradient(180deg, rgba(15, 79, 168, 1) 0%, rgba(15, 79, 168, 0.98) 100%);
-    padding: 0.18rem 0;
+    height: 100%;
+    background: #fff;
 }
 </style>

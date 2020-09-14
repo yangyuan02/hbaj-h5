@@ -7,7 +7,10 @@
  -->
 <template>
     <div class="message-list">
-        <messageItem v-for="item in list" :key="item.id" :item="item"></messageItem>
+        <template v-if="list.length > 0">
+            <messageItem v-for="item in list" :key="item.id" :item="item"></messageItem>
+        </template>
+        <Empty v-else />
         <div class="" v-show="showLoading">
             <LoadMore :showLoading="showLoading"></LoadMore>
         </div>
@@ -20,6 +23,8 @@ import { messageDetail } from "@/model/api";
 import store from "@/widget/store";
 import utils from "@/widget/utils";
 import LoadMore from "@/components/loadMore";
+import Empty from "@/components/empty";
+
 export default {
     data() {
         return {
@@ -33,7 +38,8 @@ export default {
     },
     components: {
         messageItem,
-        LoadMore
+        LoadMore,
+        Empty
     },
     methods: {
         getMessageList() {
@@ -101,5 +107,7 @@ export default {
 
 <style lang="less">
 .message-list {
+    padding: 0.18rem 0;
+    background: #fff;
 }
 </style>
