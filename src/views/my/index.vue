@@ -103,12 +103,17 @@ export default {
                     type: "get"
                 },
                 userId
-            ).then(res => {
-                this.$hidePageLoading();
-                if (res.suceeded) {
-                    this.user = res.data;
+            ).then(
+                res => {
+                    this.$hidePageLoading();
+                    if (res.suceeded) {
+                        this.user = res.data;
+                    }
+                },
+                err => {
+                    this.$hidePageLoading();
                 }
-            });
+            );
         },
         getMessageDetail() {
             messageDetail(
