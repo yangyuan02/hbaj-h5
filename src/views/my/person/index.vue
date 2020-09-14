@@ -7,7 +7,7 @@
  -->
 <template>
     <div class="page-view">
-        <div class="scroll-view-wrapper" :class="{ 'menu-pBottom': menupB }">
+        <div class="scroll-view-wrapper">
             <div class="my-content">
                 <my-header :info="user"></my-header>
                 <div class="person-box">
