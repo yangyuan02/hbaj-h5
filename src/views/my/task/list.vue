@@ -68,6 +68,8 @@ export default {
 <style lang="less">
 .task-list {
     height: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
     &.pd20 {
         padding-top: 0.2rem;
     }
