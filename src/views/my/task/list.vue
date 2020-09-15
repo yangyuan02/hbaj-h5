@@ -8,12 +8,9 @@
 <template>
     <div class="task-list" :class="[isPaddingTop ? '' : 'pd20']">
         <template v-if="list.length > 0">
-            <taskItem v-for="(item, index) in list" :key="index" :item="item"></taskItem>
+            <taskItem v-for="item in list" :key="item.id" :item="item"></taskItem>
         </template>
         <Empty v-else />
-        <div class="" v-show="showLoading">
-            <LoadMore :showLoading="showLoading"></LoadMore>
-        </div>
     </div>
 </template>
 
@@ -21,7 +18,6 @@
 import taskItem from "./item";
 import { task } from "@/model/api";
 import utils from "@/widget/utils";
-import LoadMore from "@/components/loadMore";
 import Empty from "@/components/empty";
 
 export default {
@@ -42,7 +38,6 @@ export default {
     },
     components: {
         taskItem,
-        LoadMore,
         Empty
     },
     methods: {
@@ -60,48 +55,12 @@ export default {
                 if (res.suceeded) {
                     const { content, total } = res.data;
                     this.list = content;
-                    // if (pageIndex > 1) {
-                    //     setTimeout(() => {
-                    //         this.showLoading = false;
-                    //         this.isScrollLoad = true;
-                    //         this.list = this.list.concat(content || []);
-                    //     }, 500);
-                    // } else {
-                    //     this.list = content || [];
-                    // }
-                    // this.pageTotal = total;
-                    // if (pageIndex == Math.ceil(total / 10) || !content.length) {
-                    //     this.showLoading = false;
-                    // }
                 }
             });
-        },
-        scrollLoadList() {
-            const winHeight = window.innerHeight;
-            const scrollTop = document.scrollingElement.scrollTop;
-            const scrollViewHeight = document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
-            const realFunc = () => {
-                if (winHeight + scrollTop >= scrollViewHeight && this.list.length < this.pageTotal) {
-                    this.showLoading = true;
-                    this.pageIndex += 1;
-                    this.getTaskList();
-                } else {
-                    this.isScrollLoad = true;
-                }
-            };
-            if (this.isScrollLoad) {
-                this.isScrollLoad = false;
-                this.timer = window.requestAnimationFrame(realFunc);
-            }
         }
     },
     mounted() {
         this.getTaskList();
-        // window.addEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
-    },
-    beforeDestroy() {
-        // cancelAnimationFrame(this.timer);
-        // window.removeEventListener("scroll", this.scrollLoadList, utils.isPassive() ? { passive: true, capture: true } : true);
     }
 };
 </script>

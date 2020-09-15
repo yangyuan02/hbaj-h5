@@ -36,7 +36,7 @@
                 <div class="member-content">
                     <div class="text"><span>协作成员:</span></div>
                     <div class="member-item">
-                        <span v-for="(k, index) in item.project.userList" :key="index">{{ k.sgname }}</span>
+                        <span v-for="k in item.project.userList" :key="k.id">{{ k.sgname }}</span>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import "@/widget/lazyLoad";
+// import "@/widget/lazyLoad";
 export default {
     props: {
         item: {
