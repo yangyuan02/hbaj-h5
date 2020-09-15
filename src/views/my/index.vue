@@ -16,7 +16,7 @@
                             <div class="info">
                                 <i class="iconfont" :class="[item.icon ? item.icon : '']" :style="{ color: item.color }"></i>
                                 <span>{{ item.text }}</span>
-                                <span v-if="item.text === '我的通知' && count !== 0" class="unreadCount">10</span>
+                                <span v-if="item.text === '我的通知' && count !== 0" class="unreadCount">{{ count }}</span>
                             </div>
                             <div class="arrows">
                                 <i class="iconfont icontubiao-13"></i>

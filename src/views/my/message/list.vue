@@ -59,19 +59,20 @@ export default {
                 this.$hidePageLoading();
                 if (res.suceeded) {
                     const { content, total } = res.data;
-                    if (pageIndex > 1) {
-                        setTimeout(() => {
-                            this.showLoading = false;
-                            this.isScrollLoad = true;
-                            this.list = this.list.concat(content || []);
-                        }, 500);
-                    } else {
-                        this.list = content || [];
-                    }
-                    this.pageTotal = total;
-                    if (pageIndex == Math.ceil(total / 10) || !content.length) {
-                        this.showLoading = false;
-                    }
+                    this.list = content;
+                    // if (pageIndex > 1) {
+                    //     setTimeout(() => {
+                    //         this.showLoading = false;
+                    //         this.isScrollLoad = true;
+                    //         this.list = this.list.concat(content || []);
+                    //     }, 500);
+                    // } else {
+                    //     this.list = content || [];
+                    // }
+                    // this.pageTotal = total;
+                    // if (pageIndex == Math.ceil(total / 10) || !content.length) {
+                    //     this.showLoading = false;
+                    // }
                 }
             });
         },
