@@ -1,13 +1,17 @@
 <template>
     <div class="p_editor_container">
-        <div id="p_editor"></div>
+        <div id="p_editor">
+            <iframe :src="src" style="width:100%;height:100%"></iframe>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     data() {
-        return {};
+        return {
+            src: ""
+        };
     },
     methods: {
         initPano() {
@@ -25,6 +29,10 @@ export default {
                     onready: buildProject(projectId)
                 });
             });
+        },
+        iframe() {
+            const scale = 1 / window.devicePixelRatio || 1;
+            this.src = `https://msa.vr2shipping.com/pano/index.html?id=${this.$route.params.projectId}&scale=${scale}`;
         }
     },
     computed: {
@@ -33,8 +41,11 @@ export default {
             return this.$route.params.from === "1";
         }
     },
+    created() {
+        this.iframe();
+    },
     mounted() {
-        this.initPano();
+        // this.initPano();
     }
 };
 </script>

@@ -15,6 +15,9 @@ import showModal from "@/components/showModal";
 import filters from "./filters";
 import "@/widget/skeleton";
 import store from "@/widget/store";
+import vconsole from "vconsole";
+
+let vConsole = new vconsole();
 
 Vue.config.productionTip = false;
 
