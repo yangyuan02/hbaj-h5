@@ -67,7 +67,7 @@ export default {
                 font-size: 0.24rem;
                 font-family: MicrosoftYaHei;
                 color: rgba(153, 153, 153, 1);
-                line-height: 31px;
+                line-height: 0.31rem;
                 -webkit-background-clip: text;
             }
         }

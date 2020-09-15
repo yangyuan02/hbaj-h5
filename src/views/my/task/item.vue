@@ -148,12 +148,13 @@ export default {
             letter-spacing: 0.01rem;
             -webkit-background-clip: text;
             .text {
-                width: 1.6rem;
+                width: 1.1rem;
             }
             .member-content {
                 display: flex;
                 flex: 1;
                 .member-item {
+                    flex: 1;
                     span {
                         margin-right: 0.1rem;
                     }
