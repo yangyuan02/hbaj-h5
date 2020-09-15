@@ -6,11 +6,11 @@
  * @Description: 
  -->
 <template>
-    <div class="course-list">
+    <div class="news-list">
         <NewsItem v-for="item in list" :key="item.id" :item="item"></NewsItem>
-        <div class="" v-show="showLoading">
+        <!-- <div class="" v-show="showLoading">
             <LoadMore :showLoading="showLoading"></LoadMore>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
 };
 </script>
 <style lang="less">
-.course-list {
+.news-list {
     background-color: #fff;
     // padding: 0 0.2rem;
     position: relative;

@@ -35,9 +35,11 @@ export default function ajax({ hostPath = location.origin, url, async = true, ti
                 } else if (xhr.status === 401) {
                     if (window.__wxjs_environment === "miniprogram") {
                         wx.miniProgram.navigateTo({ url: "/pages/auth/auth?isClearStore=1" });
+                        xhr.abort();
                         return this.$toast("登录失效");
                     } else {
                         window.localStorage.removeItem("authorization");
+                        xhr.abort();
                         setTimeout(() => {
                             window.location.href = "/login";
                         }, 1000);
