@@ -8,7 +8,7 @@
 <template>
     <div class="my-header-content">
         <header>
-            <i class="iconfont icontubiao-13 goBack" @click="$router.back(-1)" v-if="isBack"></i>
+            <i class="iconfont icontubiao-13 goBack" @click="$router.back(-1)" v-if="isBack && isMiniprogram"></i>
             <span>我的</span>
             <i class="iconfont icontubiao-251 edit" @click="edit" v-if="isEdit"></i>
         </header>
@@ -31,9 +31,12 @@
 
 <script>
 import ImageUpload from "@/widget/imageUpload";
+import utils from "@/widget/utils";
 export default {
     data() {
-        return {};
+        return {
+            isMiniprogram: utils.isMiniprogram()
+        };
     },
     props: {
         info: {
