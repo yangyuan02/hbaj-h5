@@ -15,8 +15,9 @@
                 <span>{{ item.status | formTaskText }}</span>
             </div>
         </div>
-        <div class="task-item-detail">
-            <!-- v-lazy :data-src="globalConfig.imagePath + item.project.imageUrl" -->
+
+        <!-- <div class="task-item-detail">
+            v-lazy :data-src="globalConfig.imagePath + item.project.imageUrl"
             <div class="task-item-thumb ui-lazyLoad-pic">
                 <img :src="globalConfig.imagePath + item.project.imageUrl" alt="" />
                 <div class="action" @click="operate">
@@ -40,7 +41,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

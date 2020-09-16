@@ -1,10 +1,17 @@
 {
   "id": "1728139",
-  "name": "海宝安检VR手机平台",
+  "name": "海宝安检 APP图标",
   "font_family": "iconfont",
   "css_prefix_text": "icon",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "10487453",
+      "name": "船舶",
+      "font_class": "chuanbo",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
     {
       "icon_id": "7124805",
       "name": "点赞",

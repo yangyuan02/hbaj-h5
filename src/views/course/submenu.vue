@@ -137,8 +137,8 @@ export default {
                     title: "散货船"
                 },
                 {
-                    icon: "icontubiao-10",
-                    title: "普通干货船"
+                    icon: "iconchuanbo",
+                    title: "CIC示范船"
                 },
                 {
                     icon: "icontubiao-11",
