@@ -19,6 +19,7 @@ import taskItem from "./item";
 import { task } from "@/model/api";
 import utils from "@/widget/utils";
 import Empty from "@/components/empty";
+import store from "@/widget/store";
 
 export default {
     data() {
@@ -42,12 +43,14 @@ export default {
     },
     methods: {
         getTaskList() {
+            const userId = store.get("userId", "local");
             this.$showPageLoading();
             const { pageIndex } = this;
             task({
                 type: "GET",
                 data: {
                     page: pageIndex,
+                    userId,
                     size: 10000
                 }
             }).then(res => {
