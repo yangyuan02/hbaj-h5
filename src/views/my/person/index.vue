@@ -62,6 +62,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="logout">
+                    <button @click="logout">退出登录</button>
+                </div>
             </div>
         </div>
         <Footer></Footer>
@@ -116,6 +119,14 @@ export default {
         setModuleIndex(Pindex, index) {
             this.ModuleIndex[Pindex] = index;
             this.blocks[Pindex]["classList"] = this.blocks[Pindex]["moduleList"][index].classList || [];
+        },
+        logout() {
+            if (window.__wxjs_environment === "miniprogram") {
+                return wx.miniProgram.navigateTo({ url: "/pages/auth/auth?isClearStore=1" });
+            } else {
+                window.localStorage.removeItem("authorization");
+                window.location.href = "/login";
+            }
         }
     },
     mounted() {
@@ -126,13 +137,14 @@ export default {
 
 <style lang="less">
 .my-content {
-    // height: 100%;
+    background: #fff;
     display: flex;
     flex-direction: column;
+    height: 100%;
     .person-box {
         padding: 0.27rem 0.35rem;
-        background: #fff;
-        min-height: 100%;
+
+        // min-height: 100%;
         flex: 1;
         .common {
             display: flex;
@@ -279,6 +291,20 @@ export default {
                     color: #fff;
                 }
             }
+        }
+    }
+    .logout {
+        width: 100%;
+        padding: 0 0.35rem;
+        height: 0.9rem;
+        padding-bottom: 0.2rem;
+        flex-shrink: 0;
+        button {
+            width: 100%;
+            height: 100%;
+            background: #ff9d3b;
+            color: #fff;
+            height: 0.7rem;
         }
     }
 }

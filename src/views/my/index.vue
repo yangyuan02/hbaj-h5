@@ -144,7 +144,7 @@ export default {
         height: 100%;
         .my-list-content {
             width: 7rem;
-            height: calc(100% - 3.9rem);
+            height: calc(100% - 4.4rem);
             background: #fff;
             margin: 0 auto;
             border-radius: 0.21rem 0.21rem 0 0;

@@ -103,6 +103,7 @@ export default {
     background: url("./images/header-bg.png");
     background-size: 100%;
     position: relative;
+    flex-shrink: 0;
     header {
         height: 0.88rem;
         width: 100%;
