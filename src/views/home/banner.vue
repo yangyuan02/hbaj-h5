@@ -6,20 +6,20 @@
  * @Description: 
  -->
 <template>
-  <Swiper :style="{ height: itemHeight }" :list="list" :index="index" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex">
-    <template #banner>
-      <ul class="slideshow-item" :style="{ height: itemHeight }">
-        <li v-for="(item, index) in list" :style="{ width: itemWidth + 'px' }" @click="pageAction(item)" :key="index">
-          <img :src="globalConfig.imagePath + item.url" :style="{ width: itemWidth + 'px', height: itemHeight }" />
-        </li>
-      </ul>
-    </template>
-    <template #dot>
-      <ul class="slideshow-dots">
-        <li v-for="(item, $index) in bannerList" :class="{ active: $index == index - 1 }" :key="$index"></li>
-      </ul>
-    </template>
-  </Swiper>
+    <Swiper :style="{ height: itemHeight }" :list="list" :index="index" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex">
+        <template #banner>
+            <ul class="slideshow-item" :style="{ height: itemHeight }">
+                <li v-for="(item, index) in list" :style="{ width: itemWidth + 'px' }" @click="pageAction(item)" :key="index">
+                    <img :src="globalConfig.imagePath + item.url" :style="{ width: itemWidth + 'px', height: itemHeight }" />
+                </li>
+            </ul>
+        </template>
+        <template #dot>
+            <ul class="slideshow-dots">
+                <li v-for="(item, $index) in bannerList" :class="{ active: $index == index - 1 }" :key="$index"></li>
+            </ul>
+        </template>
+    </Swiper>
 </template>
 
 <script>
@@ -54,11 +54,6 @@ export default {
             }
             return list;
         }
-    },
-    created() {
-        // const itemWidth = document.documentElement.clientWidth * 0.92;
-        // this.wrapperWidth = itemWidth;
-        // this.itemWidth = itemWidth;
     },
     methods: {
         pageAction({ type, aim_id }) {

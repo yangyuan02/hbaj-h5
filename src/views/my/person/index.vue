@@ -99,7 +99,7 @@ export default {
                 {
                     type: "get"
                 },
-                userId
+                "personal"
             ).then(res => {
                 this.$hidePageLoading();
                 if (res.suceeded) {
