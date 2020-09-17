@@ -58,7 +58,14 @@ export default {
     methods: {
         pageAction({ type, aim_id }) {
             if (type === "PROJECT") {
-                window.location.href = "http://www.ship2vr.com/hb/";
+                this.$router.push({
+                    name: "panoEditor",
+                    params: {
+                        taskId: "0",
+                        projectId: aim_id,
+                        from: "2"
+                    }
+                });
             } else {
                 this.$router.push({
                     name: "newsDetail",
