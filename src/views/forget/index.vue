@@ -11,29 +11,24 @@
             <div class="login-content">
                 <div class="login-bg">
                     <div class="login-title">
-                        <span>欢迎使用海宝安检</span>
+                        <span>忘记密码</span>
                     </div>
                 </div>
                 <div class="login-box">
                     <div class="tel">
                         <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
                     </div>
-                    <div class="tel">
-                        <input type="password" maxlength="11" placeholder="请输入密码" v-model="password" />
-                    </div>
-                    <div class="forget">
-                        <span @click="forget">忘记密码</span>
-                    </div>
-                    <!-- <div class="code">
+                    <div class="code">
                         <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
                         <span @click="send">{{ buttonText }}</span>
-                    </div> -->
+                    </div>
+                    <div class="tel">
+                        <input type="password" maxlength="11" placeholder="请输入新密码" v-model="password" />
+                    </div>
+
                     <div class="login-button">
                         <button @click="submit">登录</button>
                     </div>
-                </div>
-                <div class="tips">
-                    <p>海宝安检尚未对外开放注册，有关海事技术合作共建事宜请联系宝山海事局海宝安检团队，微信号“HAIBAOANJIAN”，有关平台功能问题请联系上海船福信息科技有限公司,微信号“CHAUNFUKEJI”</p>
                 </div>
             </div>
         </div>
@@ -123,9 +118,6 @@ export default {
                     res.message && this.$toast(res.message);
                 }
             });
-        },
-        forget() {
-            this.$router.push("/forget");
         }
     },
     beforeDestroy() {
@@ -180,9 +172,6 @@ export default {
                 width: 100%;
                 height: 100%;
             }
-        }
-        .forget {
-            text-align: right;
         }
         .code {
             border-bottom: 0.01rem solid rgba(221, 221, 221, 1);

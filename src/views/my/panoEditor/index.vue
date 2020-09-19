@@ -1,7 +1,7 @@
 <template>
     <div class="p_editor_container">
         <div id="p_editor">
-            <iframe :src="src" style="width:100%;height:100%"></iframe>
+            <!-- <iframe :src="src" style="width:100%;height:100%"></iframe> -->
         </div>
     </div>
 </template>
@@ -42,10 +42,10 @@ export default {
         }
     },
     created() {
-        this.iframe();
+        // this.iframe();
     },
     mounted() {
-        // this.initPano();
+        this.initPano();
     }
 };
 </script>

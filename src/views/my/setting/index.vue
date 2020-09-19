@@ -36,6 +36,7 @@
                                 <div class="border">
                                     <span>电话</span>
                                     <input type="text" placeholder="请输入电话" v-model="user.mobile" disabled />
+                                    <span @click="resetPassword">重置密码</span>
                                 </div>
                             </li>
                             <li>
@@ -73,6 +74,14 @@ export default {
         MyHeader
     },
     methods: {
+        resetPassword() {
+            this.$router.push({
+                name: "resetPassword",
+                params: {
+                    mobile: this.user.mobile
+                }
+            });
+        },
         getUserDetail() {
             this.$showPageLoading();
             const userId = store.get("userId", "local");
@@ -105,7 +114,7 @@ export default {
             ).then(res => {
                 this.$hideLoading();
                 if (res.suceeded) {
-                    this.$router.push("/my");
+                    this.$router.push("/my", {});
                 }
                 console.log(res);
             });

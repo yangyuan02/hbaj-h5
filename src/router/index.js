@@ -115,6 +115,15 @@ export default new Router({
             }
         },
         {
+            path: "/my/resetPassword/:mobile",
+            name: "resetPassword",
+            component: () => import("@/views/my/resetPassword"),
+            meta: {
+                title: "重置密码",
+                requireLogin: true
+            }
+        },
+        {
             path: "/my/setting",
             name: "mySetting",
             component: () => import("@/views/my/setting"),
@@ -129,6 +138,14 @@ export default new Router({
             component: () => import("@/views/login"),
             meta: {
                 title: "登录"
+            }
+        },
+        {
+            path: "/forget",
+            name: "forget",
+            component: () => import("@/views/forget"),
+            meta: {
+                title: "忘记密码"
             }
         },
         {
