@@ -18,7 +18,7 @@
                                 <i class="iconfont iconxinxiduanxinxiaoxitixingyoujiansixinyouxiang"></i>
                             </div>
                             <div class="input code">
-                                <input type="text" placeholder="短信验证码" maxlength="6" />
+                                <input type="text" placeholder="短信验证码" maxlength="6" v-model="verifyCode" />
                                 <span @click="send">{{ buttonText }}</span>
                             </div>
                         </li>
@@ -27,7 +27,7 @@
                                 <i class="iconfont iconmima"></i>
                             </div>
                             <div class="input">
-                                <input type="text" placeholder="填写新密码" />
+                                <input type="text" placeholder="填写新密码" v-model="password" />
                             </div>
                         </li>
                         <li>
@@ -35,7 +35,7 @@
                                 <i class="iconfont icontubiao-18"></i>
                             </div>
                             <div class="input">
-                                <input type="text" placeholder="确认密码" />
+                                <input type="text" placeholder="确认密码" v-model="confirmPassword" />
                             </div>
                         </li>
                     </ul>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="save">
-                <button @click="updateUser">更改密码</button>
+                <button @click="submit">更改密码</button>
             </div>
         </div>
     </div>
@@ -52,16 +52,91 @@
 <script>
 import utils from "@/widget/utils";
 import Header from "@/components/common/header";
+import validate from "@/widget/validate";
+import { user } from "@/model/api";
 export default {
     data() {
         return {
             isMiniprogram: utils.isMiniprogram(),
             buttonText: "发送验证码",
-            mobile: this.$route.params.mobile
+            mobile: this.$route.params.mobile,
+            time: 60,
+            verifyCode: "",
+            password: "",
+            confirmPassword: "",
+            isClickCode: true
         };
     },
     components: {
         Header
+    },
+    methods: {
+        send() {
+            const sendCode = () => {
+                this.isClickCode = false;
+                let times = this.time;
+                this.buttonTextClone = this.buttonText;
+                this.buttonText = times + "s";
+                const countTimeTimer = setInterval(() => {
+                    times--;
+                    this.buttonText = times + "s";
+
+                    if (times == 0) {
+                        this.isClickCode = true;
+                        this.buttonText = this.buttonTextClone;
+                        clearInterval(countTimeTimer);
+                    }
+                }, 1000);
+                this.countTimeTimer = countTimeTimer;
+            };
+
+            const { mobile } = this;
+            if (!validate.isMobile(mobile)) {
+                return this.$toast("请输入正确的手机号");
+            }
+            this.$showLoading();
+            user({ type: "GET", data: { mobile } }, "verifyCode").then(res => {
+                if (res.suceeded) {
+                    this.$hideLoading();
+                    sendCode();
+                }
+            });
+        },
+        submit() {
+            const { verifyCode, password, confirmPassword, mobile } = this;
+            if (!mobile) {
+                return this.$toast("手机号不存在");
+            }
+            if (!verifyCode) {
+                return this.$toast("验证码不存在");
+            }
+            if (!password) {
+                return this.$toast("请输入密码");
+            }
+            if (!confirmPassword) {
+                return this.$toast("请输入确认密码");
+            }
+            if (confirmPassword !== password) {
+                return this.$toast("两次密码输入不一致");
+            }
+            const data = {
+                mobile,
+                password,
+                verifyCode
+            };
+            user(
+                {
+                    type: "post",
+                    data
+                },
+                "password/reset"
+            ).then(res => {
+                console.log("重置密码", res);
+            });
+        }
+    },
+    beforeDestroy() {
+        this.countTimeTimer && clearInterval(this.countTimeTimer);
     }
 };
 </script>
