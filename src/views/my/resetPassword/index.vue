@@ -124,6 +124,7 @@ export default {
                 password,
                 verifyCode
             };
+            this.$showLoading();
             user(
                 {
                     type: "post",
@@ -131,7 +132,13 @@ export default {
                 },
                 "password/reset"
             ).then(res => {
-                console.log("重置密码", res);
+                if (res.suceeded) {
+                    this.$hideLoading();
+                    this.$toast("重置密码成功");
+                    window.history.back();
+                } else {
+                    this.$hideLoading();
+                }
             });
         }
     },

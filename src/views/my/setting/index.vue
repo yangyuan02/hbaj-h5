@@ -13,7 +13,7 @@
  * @Description: 
  -->
 <template>
-    <div class="page-view">
+    <div class="page-view" style="background:#fff">
         <div class="scroll-view-wrapper">
             <div class="my-setting-content">
                 <my-header :info="user" :onUploadSuccess="onUploadSuccess" :isOnUplaod="true" :isEdit="false"></my-header>
@@ -131,6 +131,9 @@ export default {
     background: #fff;
     height: 100%;
     .setting-edit-box {
+        height: calc(100% - 4.4rem);
+        // padding-bottom: 0.6rem;
+        // background: red;
         .info {
             ul {
                 padding: 0 0.24rem;
@@ -191,11 +194,12 @@ export default {
         }
         .save {
             padding: 0 0.24rem;
-            height: 0.84rem;
-            margin: 0.24rem 0;
+            // height: 0.84rem;
+            margin-top: 0.24rem;
+            padding-bottom: 0.6rem;
             button {
                 width: 100%;
-                height: 0.84rem;
+                // height: 0.84rem;
                 line-height: 0.84rem;
                 text-align: center;
                 background: rgba(15, 79, 168, 1);
