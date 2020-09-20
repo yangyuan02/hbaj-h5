@@ -27,7 +27,7 @@
                                 <i class="iconfont iconmima"></i>
                             </div>
                             <div class="input">
-                                <input type="text" placeholder="填写新密码" v-model="password" />
+                                <input type="password" placeholder="填写新密码" v-model="password" />
                             </div>
                         </li>
                         <li>
@@ -35,7 +35,7 @@
                                 <i class="iconfont icontubiao-18"></i>
                             </div>
                             <div class="input">
-                                <input type="text" placeholder="确认密码" v-model="confirmPassword" />
+                                <input type="password" placeholder="确认密码" v-model="confirmPassword" />
                             </div>
                         </li>
                     </ul>
@@ -64,7 +64,7 @@ export default {
             verifyCode: "",
             password: "",
             confirmPassword: "",
-            isClickCode: true
+            isClickCode: false
         };
     },
     components: {
@@ -73,7 +73,7 @@ export default {
     methods: {
         send() {
             const sendCode = () => {
-                this.isClickCode = false;
+                this.isClickCode = true;
                 let times = this.time;
                 this.buttonTextClone = this.buttonText;
                 this.buttonText = times + "s";
@@ -82,7 +82,7 @@ export default {
                     this.buttonText = times + "s";
 
                     if (times == 0) {
-                        this.isClickCode = true;
+                        this.isClickCode = false;
                         this.buttonText = this.buttonTextClone;
                         clearInterval(countTimeTimer);
                     }
@@ -93,6 +93,9 @@ export default {
             const { mobile } = this;
             if (!validate.isMobile(mobile)) {
                 return this.$toast("请输入正确的手机号");
+            }
+            if (this.isClickCode) {
+                return false;
             }
             this.$showLoading();
             user({ type: "GET", data: { mobile } }, "verifyCode").then(res => {
@@ -138,6 +141,7 @@ export default {
                     window.history.back();
                 } else {
                     this.$hideLoading();
+                    res.message && this.$toast(res.message);
                 }
             });
         }

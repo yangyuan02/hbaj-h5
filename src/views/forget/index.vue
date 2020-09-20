@@ -23,11 +23,11 @@
                         <span @click="send">{{ buttonText }}</span>
                     </div>
                     <div class="tel">
-                        <input type="password" maxlength="11" placeholder="请输入新密码" v-model="password" />
+                        <input type="password" placeholder="请输入新密码" v-model="password" />
                     </div>
 
                     <div class="login-button">
-                        <button @click="submit">登录</button>
+                        <button @click="submit">确定</button>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,8 @@ export default {
         return {
             mobile: "",
             verifyCode: "",
-            isClickCode: true,
+            password: "",
+            isClickCode: false,
             buttonText: "发送验证码",
             time: 60
         };
@@ -57,7 +58,7 @@ export default {
     methods: {
         send() {
             const sendCode = () => {
-                this.isClickCode = false;
+                this.isClickCode = true;
                 let times = this.time;
                 this.buttonTextClone = this.buttonText;
                 this.buttonText = times + "s";
@@ -66,7 +67,7 @@ export default {
                     this.buttonText = times + "s";
 
                     if (times == 0) {
-                        this.isClickCode = true;
+                        this.isClickCode = false;
                         this.buttonText = this.buttonTextClone;
                         clearInterval(countTimeTimer);
                     }
@@ -77,6 +78,9 @@ export default {
             const { mobile } = this;
             if (!validate.isMobile(mobile)) {
                 return this.$toast("请输入正确的手机号");
+            }
+            if (this.isClickCode) {
+                return false;
             }
             this.$showLoading();
             user({ type: "GET", data: { mobile } }, "verifyCode").then(res => {
@@ -91,28 +95,18 @@ export default {
             if (!validate.isMobile(mobile)) {
                 return this.$toast("请输入正确的手机号");
             }
-            // if (!verifyCode) {
-            //     return this.$toast("请输入验证码");
-            // }
+            if (!verifyCode) {
+                return this.$toast("请输入验证码");
+            }
+            if (!password) {
+                return this.$toast("请输入密码");
+            }
             this.$showLoading();
-            user({ type: "POST", data: { mobile, password } }, "login").then(res => {
-                const { from } = this.$route.query;
+            user({ type: "POST", data: { mobile, password, verifyCode } }, "password/reset").then(res => {
                 if (res.suceeded) {
-                    const {
-                        suceeded,
-                        data: { authorization, id }
-                    } = res;
                     this.$hideLoading();
-                    store.set("authorization", authorization, "local");
-                    store.set("userId", id, "local");
-                    store.set("user", res.data, "local");
-
-                    this.$router.push({ path: "/home" });
-                    // if (from) {
-                    //     window.location.href = from;
-                    // } else {
-
-                    // }
+                    this.$toast("操作成功");
+                    this.$router.push({ path: "/login" });
                 } else {
                     this.$hideLoading();
                     res.message && this.$toast(res.message);
