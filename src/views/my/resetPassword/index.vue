@@ -32,7 +32,7 @@
                         </li>
                         <li>
                             <div class="icon">
-                                <i class="iconfont icontubiao-18"></i>
+                                <i class="iconfont iconmima"></i>
                             </div>
                             <div class="input">
                                 <input type="password" placeholder="确认密码" v-model="confirmPassword" />
