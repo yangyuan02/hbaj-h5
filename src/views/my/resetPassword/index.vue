@@ -10,7 +10,7 @@
                                 <i class="iconfont iconiconfontshouji"></i>
                             </div>
                             <div class="input">
-                                <input type="text" placeholder="手机号" readonly v-model="mobile" />
+                                <input type="number" placeholder="手机号" readonly v-model="mobile" />
                             </div>
                         </li>
                         <li>
@@ -18,7 +18,7 @@
                                 <i class="iconfont iconxinxiduanxinxiaoxitixingyoujiansixinyouxiang"></i>
                             </div>
                             <div class="input code">
-                                <input type="text" placeholder="短信验证码" maxlength="6" v-model="verifyCode" />
+                                <input type="number" placeholder="短信验证码" maxlength="6" v-model="verifyCode" />
                                 <span @click="send">{{ buttonText }}</span>
                             </div>
                         </li>

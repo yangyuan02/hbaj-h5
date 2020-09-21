@@ -16,7 +16,7 @@
                 </div>
                 <div class="login-box">
                     <div class="tel">
-                        <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
+                        <input type="number" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
                     </div>
                     <div class="tel">
                         <input type="password" maxlength="11" placeholder="请输入密码" v-model="password" />

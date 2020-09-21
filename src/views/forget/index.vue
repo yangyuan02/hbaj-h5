@@ -16,10 +16,10 @@
                 </div>
                 <div class="login-box">
                     <div class="tel">
-                        <input type="text" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
+                        <input type="number" maxlength="11" placeholder="请输入手机号" v-model="mobile" />
                     </div>
                     <div class="code">
-                        <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
+                        <input type="number" maxlength="6" placeholder="请输入短信验证码" v-model="verifyCode" />
                         <span @click="send">{{ buttonText }}</span>
                     </div>
                     <div class="tel">
