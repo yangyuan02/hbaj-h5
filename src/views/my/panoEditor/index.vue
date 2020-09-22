@@ -46,6 +46,9 @@ export default {
     },
     mounted() {
         this.initPano();
+    },
+    beforeDestroy() {
+        window.removepano && window.removepano("kr");
     }
 };
 </script>
