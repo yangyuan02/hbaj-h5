@@ -153,7 +153,13 @@ export default {
                 &[style] {
                     font-size: 0.32rem !important;
                 }
-
+                span {
+                    font-size: 0.32rem !important;
+                    &[style] {
+                        font-size: 0.32rem !important;
+                    }
+                }
+                font-size: 0.32rem !important;
                 font-family: MicrosoftYaHei;
                 color: rgba(51, 51, 51, 1);
                 line-height: 0.33rem;
