@@ -159,13 +159,18 @@ export default {
                         font-size: 0.32rem !important;
                     }
                 }
+                img {
+                    &[style] {
+                        width: 90% !important;
+                    }
+                }
                 font-size: 0.32rem !important;
                 font-family: MicrosoftYaHei;
                 color: rgba(51, 51, 51, 1);
-                line-height: 0.33rem;
-                letter-spacing: 0.05rem;
+                // line-height: 0.33rem;
+                // letter-spacing: 0.05rem;
                 -webkit-background-clip: text;
-                margin-bottom: 0.4rem;
+                // margin-bottom: 0.4rem;
                 &:last-child {
                     margin-bottom: 0rem;
                 }
