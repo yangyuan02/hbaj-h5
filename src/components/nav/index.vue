@@ -75,8 +75,8 @@ export default {
                 name: title
             };
             if (children && children.length > 0) {
-                query.moduleId = children[0].id;
-                query.blockId = children[0].blockId;
+                query.moduleId = children[1].id;
+                query.blockId = children[1].blockId;
                 if (children[0].classList && children[0].classList.length > 0) {
                     query.classListId = children[0].classList[0].id;
                 }
