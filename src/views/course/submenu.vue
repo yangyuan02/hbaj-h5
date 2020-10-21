@@ -138,7 +138,7 @@ export default {
                 },
                 {
                     icon: "iconchuanbo",
-                    title: "CIC示范船"
+                    title: "CIC2019专项船"
                 },
                 {
                     icon: "icontubiao-11",
