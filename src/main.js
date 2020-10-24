@@ -17,7 +17,7 @@ import "@/widget/skeleton";
 import store from "@/widget/store";
 import vconsole from "vconsole";
 
-let vConsole = new vconsole();
+// let vConsole = new vconsole();
 
 Vue.config.productionTip = false;
 
@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
             // token存在 且token没有过期
             next();
         } else {
-            next({ path: "/login", query: { from: location.href } });
+            next({ path: "/login", query: { from: to.fullPath } });
         }
     } else {
         // 不需要登录的直接next()
