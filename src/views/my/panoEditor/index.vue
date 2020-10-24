@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { project } from "@/model/api";
 export default {
     data() {
         return {
@@ -30,6 +31,23 @@ export default {
                 });
             });
         },
+        getProject() {
+            const projectId = this.$route.params.projectId;
+            project(
+                {
+                    type: "get"
+                },
+                projectId
+            ).then(res => {
+                if (res.suceeded) {
+                    const { name, imageUrl } = res.data;
+                    const baseUrl = "https://msa_pc.vr2shipping.com/pano/" + imageUrl;
+                    if (window.__wxjs_environment === "miniprogram") {
+                        wx.miniProgram.postMessage({ data: { name, imageUrl: baseUrl } });
+                    }
+                }
+            });
+        },
         iframe() {
             const scale = 1 / window.devicePixelRatio || 1;
             this.src = `https://msa.vr2shipping.com/pano/index.html?id=${this.$route.params.projectId}&scale=${scale}`;
@@ -45,6 +63,7 @@ export default {
         // this.iframe();
     },
     mounted() {
+        this.getProject();
         this.initPano();
     },
     beforeDestroy() {
