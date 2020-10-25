@@ -53,7 +53,11 @@ router.beforeEach((to, from, next) => {
             // token存在 且token没有过期
             next();
         } else {
-            next({ path: "/login", query: { from: to.fullPath } });
+            if (window.__wxjs_environment === "miniprogram") {
+                // wx.miniProgram.navigateTo({ url: `/pages/auth/auth?isClearStore=1&n=${n}` });
+            } else {
+                next({ path: "/login", query: { from: to.fullPath } });
+            }
         }
     } else {
         // 不需要登录的直接next()
