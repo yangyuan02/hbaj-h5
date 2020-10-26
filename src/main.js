@@ -30,15 +30,24 @@ Vue.use(loading);
 Vue.use(pageLoading);
 Vue.use(Toast);
 
+const isDef = value => {
+    if (!value) {
+        return true;
+    }
+    const fake = [null, "", "null", undefined, "undefined"];
+    return fake.some(item => item === value);
+};
 Vue.prototype.globalConfig = window.globalConfig;
 if (window.__wxjs_environment === "miniprogram") {
     // 微信小程序环境
     const searchParasm = new URLSearchParams(location.search);
     const authorization = searchParasm.get("authorization");
     const userId = searchParasm.get("userId");
-    if (authorization && userId) {
-        store.set("authorization", authorization, "local");
-        store.set("userId", userId, "local");
+    if (!isDef(authorization) && !isDef(userId)) {
+        if (authorization && userId) {
+            store.set("authorization", authorization, "local");
+            store.set("userId", userId, "local");
+        }
     }
 }
 router.beforeEach((to, from, next) => {
