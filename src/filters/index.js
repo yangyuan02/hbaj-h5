@@ -25,7 +25,7 @@ const formPublicFlg = flg => {
         0: "不公开",
         1: "公开"
     };
-    return flg ? publicFlg[flg] : flg;
+    return publicFlg[flg];
 };
 
 const formMessageText = type => {

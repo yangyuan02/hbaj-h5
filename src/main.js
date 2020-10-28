@@ -17,7 +17,7 @@ import "@/widget/skeleton";
 import store from "@/widget/store";
 import vconsole from "vconsole";
 
-// let vConsole = new vconsole();
+let vConsole = new vconsole();
 
 Vue.config.productionTip = false;
 

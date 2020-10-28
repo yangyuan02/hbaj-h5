@@ -100,7 +100,8 @@ export default {
                         size: 100000,
                         moduleId,
                         classId: classListId,
-                        blockId
+                        blockId,
+                        publishFlg: 1
                     }
                 },
                 "project"
