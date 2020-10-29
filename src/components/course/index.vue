@@ -15,7 +15,7 @@
                 <div class="text ellipsisLineTwo">
                     <p>{{ item.name }}</p>
                 </div>
-                <div class="status">
+                <div :class="`status status${item.publicFlg}`">
                     <span>{{ item.publicFlg | formPublicFlg }}</span>
                 </div>
             </div>
@@ -107,8 +107,14 @@ export default {
                 font-size: 0.2rem;
                 color: #fff;
                 text-align: center;
-                background: rgba(59, 206, 180, 1);
+
                 border-radius: 0.02rem;
+                &.status0 {
+                    background: red;
+                }
+                &.status1 {
+                    background: rgba(59, 206, 180, 1);
+                }
             }
         }
         .course-item-digest {

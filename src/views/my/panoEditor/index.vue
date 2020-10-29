@@ -1,18 +1,26 @@
 <template>
     <div class="p_editor_container">
-        <div id="p_editor">
-            <!-- <iframe :src="src" style="width:100%;height:100%"></iframe> -->
-        </div>
+        <div id="p_editor"></div>
+        <Comment :isShow="isShow" :eventConfirm="confirm" :eventCancel="cancel" ref="Comment" :title="opt.title" :cancelText="opt.cancelText" :confirmText="opt.confirmText" />
     </div>
 </template>
 
 <script>
 import { project } from "@/model/api";
+import Comment from "@/components/comment";
 export default {
     data() {
         return {
-            src: ""
+            isShow: false,
+            opt: {
+                title: "默认标题",
+                cancelText: "取消",
+                confirmText: "确认"
+            }
         };
+    },
+    components: {
+        Comment
     },
     methods: {
         initPano() {
@@ -51,6 +59,35 @@ export default {
         iframe() {
             const scale = 1 / window.devicePixelRatio || 1;
             this.src = `https://msa.vr2shipping.com/pano/index.html?id=${this.$route.params.projectId}&scale=${scale}`;
+        },
+        toggleComment() {
+            this.isShow = !this.isShow;
+        },
+        confirm(content) {
+            this.toggleComment();
+        },
+        getText() {
+            if (this.$refs.Comment) {
+                return this.$refs.Comment.content;
+            }
+        },
+        cancel() {
+            this.toggleComment();
+        },
+        exportWindow() {
+            window.hban_comment_getText = this.getText.bind(this);
+            window.hban_comment_toggleComment = this.toggleComment.bind(this);
+            window.hban_comment_setOpt = data => {
+                this.opt = Object.assign(this.opt, data);
+            };
+            window.hban_comment_confirm = callBack => {
+                callBack && callBack();
+                this.toggleComment();
+            };
+            window.hban_comment_cancel = callBack => {
+                callBack && callBack();
+                this.toggleComment();
+            };
         }
     },
     computed: {
@@ -59,12 +96,10 @@ export default {
             return this.$route.params.from === "1";
         }
     },
-    created() {
-        // this.iframe();
-    },
     mounted() {
         this.getProject();
         this.initPano();
+        this.exportWindow();
     },
     beforeDestroy() {
         window.removepano && window.removepano("kr");
