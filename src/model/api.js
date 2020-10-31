@@ -28,3 +28,5 @@ export const comment = data => request(`${baseUrl}/comment`, data);
 export const addComment = data => request(`${baseUrl}/comment`, data);
 
 export const project = (data, url) => request(`${baseUrl}/project/${url}`, data);
+
+export const projectDetail = data => request(`${baseUrl}/project`, data);

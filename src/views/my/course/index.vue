@@ -41,7 +41,7 @@ import Empty from "@/components/empty";
 import List from "./list.vue";
 import Nav from "@/components/nav";
 import SubMenu from "@/views/course/submenu";
-import { home } from "@/model/api";
+import { projectDetail } from "@/model/api";
 import store from "@/widget/store";
 import utils from "@/widget/utils";
 import LoadMore from "@/components/loadMore";
@@ -86,19 +86,16 @@ export default {
             this.recommendProjectList = []; //
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
-            home(
-                {
-                    type: "GET",
-                    data: {
-                        page: pageIndex,
-                        size: 10000,
-                        moduleId,
-                        classId: classListId,
-                        blockId
-                    }
-                },
-                "project"
-            ).then(res => {
+            projectDetail({
+                type: "GET",
+                data: {
+                    page: pageIndex,
+                    size: 10000,
+                    moduleId,
+                    classId: classListId,
+                    blockId
+                }
+            }).then(res => {
                 this.$hidePageLoading();
                 this.setContentHeihgt();
                 if (res.suceeded) {

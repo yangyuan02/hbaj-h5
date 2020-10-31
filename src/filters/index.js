@@ -22,7 +22,7 @@ const formaData = dateTime => {
 
 const formPublicFlg = flg => {
     const publicFlg = {
-        0: "不公开",
+        0: "内部",
         1: "公开"
     };
     return publicFlg[flg];
