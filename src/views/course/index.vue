@@ -101,7 +101,8 @@ export default {
                         moduleId,
                         classId: classListId,
                         blockId,
-                        publicFlg: 1
+                        publicFlg: 1,
+                        publishFlg: 1
                     }
                 },
                 "project"

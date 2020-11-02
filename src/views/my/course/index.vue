@@ -93,7 +93,8 @@ export default {
                     size: 10000,
                     moduleId,
                     classId: classListId,
-                    blockId
+                    blockId,
+                    publishFlg:1
                 }
             }).then(res => {
                 this.$hidePageLoading();
