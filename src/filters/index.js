@@ -34,7 +34,8 @@ const formMessageText = type => {
         TASK: "任务类",
         NEWS: "新闻资讯类",
         ROLE: "权限变更",
-        DEPARTMENT: "部门变更"
+        DEPARTMENT: "部门变更",
+        ENTERPRISE: "机构通知"
     };
     return type ? message[type] : type;
 };
