@@ -9,6 +9,10 @@ const path = require("path");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackPluginCrossorigin = require("html-webpack-plugin-crossorigin");
+
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const External = require("./external");
+
 function resolve(dir) {
     return path.join(__dirname, dir);
 }
@@ -32,6 +36,7 @@ module.exports = {
                 filename: path.resolve(__dirname, "sh_msa/index.html"),
                 imagePath: process.env.VUE_APP_IMAGE_PATH,
                 getTime: new Date().getTime(),
+                src: process.env.NODE_ENV == "production" ? External : "",
                 inject: true,
                 attributes: {
                     crossorigin: "anonymous"
@@ -51,20 +56,51 @@ module.exports = {
                 inject: true
             })
         );
-        if (process.env.VUE_APP_CURRENTMODE == "production") {
-            config.plugins.push(
-                new UglifyJsPlugin({
-                    uglifyOptions: {
-                        compress: {
-                            warnings: false,
-                            drop_debugger: true,
-                            drop_console: true
-                        }
-                    },
-                    sourceMap: false,
-                    parallel: true
+        if (process.env.NODE_ENV == "production") {
+            config.externals = {
+                vue: "Vue",
+                vuex: "Vuex",
+                "vue-router": "VueRouter"
+                // "element-ui": "ELEMENT"
+            };
+            // 为生产环境修改配置...
+            // 优化打包chunk-vendor.js文件体积过大
+            config.optimization = {
+                runtimeChunk: "single",
+                minimize: true,
+                splitChunks: {
+                    chunks: "all",
+                    maxInitialRequests: Infinity,
+                    minSize: 102400,
+                    cacheGroups: {
+                        // vendor: {
+                        //   test: /[\\/]node_modules[\\/]/,
+                        //   name(module) {
+                        //     // get the name. E.g. node_modules/packageName/not/this/part.js
+                        //     // or node_modules/packageName
+                        //     const packageName = module.context.match(
+                        //       /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                        //     )[1];
+                        //     // npm package names are URL-safe, but some servers don't like @ symbols
+                        //     return `npm.${packageName.replace("@", "")}`;
+                        //   },
+                        // },
+                    }
+                }
+            };
+            const plugins = [];
+            // gzip打包
+            plugins.push(
+                new CompressionWebpackPlugin({
+                    filename: "[path].gz[query]",
+                    algorithm: "gzip",
+                    test: /\.js$|\.html$|\.json$|\.css/,
+                    threshold: 10240,
+                    minRatio: 0.8
                 })
+                // new HardSourceWebpackPlugin()
             );
+            config.plugins = [...config.plugins, ...plugins];
         }
     },
     //   baseUrl: 'activity', // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制)
