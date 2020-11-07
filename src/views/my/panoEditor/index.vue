@@ -56,10 +56,6 @@ export default {
                 }
             });
         },
-        iframe() {
-            const scale = 1 / window.devicePixelRatio || 1;
-            this.src = `https://msa.vr2shipping.com/pano/index.html?id=${this.$route.params.projectId}&scale=${scale}`;
-        },
         toggleComment() {
             this.isShow = !this.isShow;
         },
