@@ -51,6 +51,7 @@ export default {
                 data: {
                     page: pageIndex,
                     userId,
+                    statusIn: [1, 3],
                     size: 10000
                 }
             }).then(res => {
