@@ -76,7 +76,7 @@ export default function request(
         optionData = utils.queryStringify(optionData);
     }
 
-    options.headers["app_source"] = window.__wxjs_environment === "miniprogram" ? "WECHAT" : "H5"; // 标识
+    options.headers["App-Source"] = window.__wxjs_environment === "miniprogram" ? "WECHAT" : "H5"; // 标识
 
     let cacheUrl = url;
     if (type.toLocaleUpperCase() === "POST" || type.toLocaleUpperCase() === "PUT") {
