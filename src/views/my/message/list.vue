@@ -51,7 +51,8 @@ export default {
                     data: {
                         page: pageIndex,
                         size: "10000",
-                        receiver: this.userId
+                        receiver: this.userId,
+                        status: 0
                     }
                 },
                 "private"
