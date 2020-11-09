@@ -29,8 +29,8 @@ export default {
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
-                    swf: "https://msa_pc.vr2shipping.com/pano/tour.swf",
-                    xml: `https://msa_pc.vr2shipping.com/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
+                    swf: "/pano/tour.swf",
+                    xml: `/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
                     target: "p_editor",
                     html5: "prefer",
                     mobilescale: 1 / scale,
@@ -49,7 +49,7 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     const { name, imageUrl } = res.data;
-                    const baseUrl = "https://msa_pc.vr2shipping.com/pano/" + imageUrl;
+                    const baseUrl = location.origin + "/pano/" + imageUrl;
                     if (window.__wxjs_environment === "miniprogram") {
                         wx.miniProgram.postMessage({ data: { name, imageUrl: baseUrl } });
                     }

@@ -68,7 +68,7 @@ export default {
                 if (res.suceeded) {
                     this.data = res.data;
                     const { title, imageUrl } = res.data;
-                    const baseUrl = "https://msa_pc.vr2shipping.com/pano/" + imageUrl;
+                    const baseUrl = location.origin + "/pano/" + imageUrl;
                     if (window.__wxjs_environment === "miniprogram") {
                         wx.miniProgram.postMessage({ data: { name: title, imageUrl: baseUrl } });
                     }
