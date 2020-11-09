@@ -36,7 +36,7 @@ module.exports = {
                 filename: path.resolve(__dirname, "sh_msa/index.html"),
                 imagePath: process.env.VUE_APP_IMAGE_PATH,
                 getTime: new Date().getTime(),
-                src: process.env.NODE_ENV == "production" ? External : "",
+                // src: process.env.NODE_ENV == "production" ? External : "",
                 inject: true,
                 attributes: {
                     crossorigin: "anonymous"
@@ -57,12 +57,12 @@ module.exports = {
             })
         );
         if (process.env.NODE_ENV == "production") {
-            config.externals = {
-                vue: "Vue",
-                vuex: "Vuex",
-                "vue-router": "VueRouter"
-                // "element-ui": "ELEMENT"
-            };
+            // config.externals = {
+            //     vue: "Vue",
+            //     vuex: "Vuex",
+            //     "vue-router": "VueRouter"
+            //     // "element-ui": "ELEMENT"
+            // };
             // 为生产环境修改配置...
             // 优化打包chunk-vendor.js文件体积过大
             config.optimization = {
