@@ -30,7 +30,7 @@ export default {
                 embedpano({
                     id: "kr",
                     swf: "/pano/tour.swf",
-                    xml: `/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
+                    xml: `/pano/${this.isShowToobar ? "main" : "main_c"}.xml?${new Date().getTime()}`,
                     target: "p_editor",
                     html5: "prefer",
                     mobilescale: 1 / scale,
