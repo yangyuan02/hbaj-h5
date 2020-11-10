@@ -30,6 +30,9 @@ Vue.use(loading);
 Vue.use(pageLoading);
 Vue.use(Toast);
 
+window.app_source = "h5";
+window.Vue = Vue;
+
 const isDef = value => {
     if (!value) {
         return true;
