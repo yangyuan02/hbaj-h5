@@ -155,8 +155,12 @@ export default {
         }
         .text {
             p {
+                font-size: 0.32rem !important;
+                line-height: 0.54rem !important;
+
                 &[style] {
                     font-size: 0.32rem !important;
+                    line-height: 0.54rem;
                 }
                 span {
                     font-size: 0.32rem !important;
