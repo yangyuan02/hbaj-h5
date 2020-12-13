@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2038781",
+      "name": "轮船-13",
+      "font_class": "qicheqianlian-",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "4931947",
+      "name": "学习_nor",
+      "font_class": "xuexi_nor",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "5075811",
+      "name": "轮船",
+      "font_class": "lunchuan",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "8605742",
+      "name": "角色类型",
+      "font_class": "jiaoseleixing",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "15816695",
+      "name": "001船-1",
+      "font_class": "001chuan-1",
+      "unicode": "e82a",
+      "unicode_decimal": 59434
+    },
+    {
+      "icon_id": "17990796",
+      "name": "项目",
+      "font_class": "xiangmu",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "18012211",
+      "name": "工具",
+      "font_class": "gongju",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
       "icon_id": "417851",
       "name": "手机",
       "font_class": "iconfontshouji",
