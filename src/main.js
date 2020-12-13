@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
                 next();
             } else {
                 if (window.__wxjs_environment === "miniprogram") {
-                    // wx.miniProgram.navigateTo({ url: `/pages/auth/auth?isClearStore=1&n=${n}` });
+                    wx.miniProgram.navigateTo({ url: `/pages/auth/auth?isClearStore=1&n=https://msa.vr2shipping.com/` });
                 } else {
                     next({ path: "/login", query: { from: to.fullPath } });
                 }
