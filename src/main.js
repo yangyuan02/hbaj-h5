@@ -70,6 +70,7 @@ router.beforeEach((to, from, next) => {
                 next();
             } else {
                 if (window.__wxjs_environment === "miniprogram") {
+                    // authorization不存在的情况可能是第一次注册，或者没有这个字段的时候
                     wx.miniProgram.navigateTo({ url: `/pages/auth/auth?isClearStore=1&n=https://msa.vr2shipping.com/` });
                 } else {
                     next({ path: "/login", query: { from: to.fullPath } });
