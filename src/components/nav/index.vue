@@ -24,26 +24,31 @@
 export default {
     data() {
         return {
-            list: [
-                {
-                    icon: "icontubiao-05",
-                    bgColor: "#0F4FA8",
-                    title: "技术解读",
-                    order: 1
-                },
-                {
-                    icon: "icontubiao-06",
-                    bgColor: "#FF6600",
-                    title: "专业英语",
-                    order: 2
-                },
-                {
-                    icon: "icontubiao-07",
-                    bgColor: "#FF9E3A",
-                    title: "模拟训练",
-                    order: 3
-                }
-            ]
+            // list: [
+            //     {
+            //         icon: "icontubiao-05",
+            //         bgColor: "#0F4FA8",
+            //         title: "技术解读",
+            //         order: 1
+            //     },
+            //     {
+            //         icon: "icontubiao-06",
+            //         bgColor: "#FF6600",
+            //         title: "专业英语",
+            //         order: 2
+            //     },
+            //     {
+            //         icon: "icontubiao-07",
+            //         bgColor: "#FF9E3A",
+            //         title: "模拟训练",
+            //         order: 3
+            //     }
+            // ]
+            list: globalConfig.defaultInfo.APP_DEFAULT_MODULE.map(item => JSON.parse(item)).map(item => ({
+                title: item.title,
+                bgColor: item.bgColor,
+                icon: item.icon
+            }))
         };
     },
     props: {

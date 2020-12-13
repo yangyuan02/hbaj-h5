@@ -127,24 +127,28 @@
 export default {
     data() {
         return {
-            list: [
-                {
-                    icon: "icontubiao-08",
-                    title: "豪华邮轮"
-                },
-                {
-                    icon: "icontubiao-09",
-                    title: "散货船"
-                },
-                {
-                    icon: "iconchuanbo",
-                    title: "CIC2019专项船"
-                },
-                {
-                    icon: "icontubiao-11",
-                    title: "集装箱船"
-                }
-            ],
+            // list: [
+            //     {
+            //         icon: "icontubiao-08",
+            //         title: "豪华邮轮"
+            //     },
+            //     {
+            //         icon: "icontubiao-09",
+            //         title: "散货船"
+            //     },
+            //     {
+            //         icon: "iconchuanbo",
+            //         title: "CIC2019专项船"
+            //     },
+            //     {
+            //         icon: "icontubiao-11",
+            //         title: "集装箱船"
+            //     }
+            // ],
+            list: globalConfig.defaultBlocks.map(item => ({
+                icon: item.icon,
+                title: item.name
+            })),
             classList: [],
             shipList: []
         };
