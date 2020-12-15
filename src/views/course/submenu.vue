@@ -147,7 +147,8 @@ export default {
             // ],
             list: globalConfig.defaultBlocks.map(item => ({
                 icon: item.icon,
-                title: item.name
+                title: item.name,
+                seq: item.seq
             })),
             classList: [],
             shipList: []
@@ -186,7 +187,7 @@ export default {
                 ...item,
                 ...this.list.find(k => k.title === item.blockName)
             }));
-            this.shipList = list;
+            this.shipList = list.sort((a, b) => a.seq - b.seq);
         },
         getClassList() {
             const { blockId } = this.$route.query;
