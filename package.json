@@ -37,7 +37,7 @@
         "ora": "^4.0.2",
         "postcss-pxtorem": "^4.0.1",
         "sass-loader": "^7.1.0",
-        "shelljs": "^0.8.3",
+        "shelljs": "^0.8.5",
         "uglifyjs-webpack-plugin": "^2.1.0",
         "vue-template-compiler": "^2.6.10"
     },
