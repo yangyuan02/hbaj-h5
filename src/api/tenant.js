@@ -1,28 +1,35 @@
 import http from '@/utils/http'
 
-export function getTenantSeries() {
+function getTenantSeries() {
   return http('/tenant/series', {
     method: 'GET',
   })
 }
 
-export function getWord(params) {
+function getWord(params) {
   return http('/sys/word', {
     method: 'GET',
     data: params,
   })
 }
 
-export function getDocument(params) {
+function getDocument(params) {
   return http('/tenant/document/info', {
     method: 'GET',
     data: params,
   })
 }
 
-export function getTenantDocNode(params) {
+function getTenantDocNode(params) {
   return http('/tenant/document/node', {
     method: 'GET',
     data: params,
   })
+}
+
+export default {
+  getTenantSeries,
+  getWord,
+  getDocument,
+  getTenantDocNode
 }
