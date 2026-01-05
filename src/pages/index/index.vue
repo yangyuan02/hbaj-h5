@@ -8,8 +8,15 @@
 </template>
 
 <script setup>
+import { useUserStore } from '@/store/user'
+import { onLoad } from '@dcloudio/uni-app'
 import {ref} from 'vue'
 const title = ref('test123')
+const userStore = useUserStore()
+onLoad(() => {
+  console.log(import.meta.env.VITE_WX_CYBERSHIPX_APPID, 'www')
+      userStore.setToken('123')
+})
 </script>
 
 <style lang="less">
