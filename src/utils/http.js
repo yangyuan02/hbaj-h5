@@ -1,10 +1,10 @@
 import { getEnvBaseUrl } from '@/config'
-import useUserStore from '@/store/user'
+import useAuthStore from '@/store/auth'
 
 const http = (url, options = {}) => {
   const baseUrl = getEnvBaseUrl()
-  const userStore = useUserStore()
-  const token = userStore.token
+  const authStore = useAuthStore()
+  const {auth: {access_token}} = authStore
 
   return new Promise((resolve, reject) => {
     uni.request({
@@ -14,11 +14,19 @@ const http = (url, options = {}) => {
       dataType: 'json',
       header: {
         ...(options.header || {}),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(access_token ? { Authorization: `Bearer ${access_token}` } : {}),
       },
       success(res) {
         // HTTP 层成功
         if (res.statusCode >= 200 && res.statusCode < 300) {
+          if (res?.data?.code !== 200) {
+            uni.showToast({
+              icon: 'none',
+              title: res?.data?.message || '请求失败',
+            })
+            reject({...res, errorType: 'httpError'})
+            return
+          }
           resolve(res.data)
         } else if (res.statusCode === 401) {
           uni.showToast({
@@ -27,8 +35,14 @@ const http = (url, options = {}) => {
           })
           // 需要清理用户信息
           // userStore.clearUserInfo()
+        } else if (res.statusCode >= 500) {
+          uni.showToast({
+            icon: 'none',
+            title: '服务器错误，请稍后重试',
+          })
+          reject({...res, errorType: 'httpError'})
         } else {
-          reject(res)
+          reject({...res, errorType: 'httpError'})
         }
       },
       fail(err) {

@@ -32,7 +32,7 @@
 import { ref } from 'vue'
 import { authApi, userApi } from '@/api'
 import FrameOutLayout from '@/layouts/FrameOutLayout/index.vue'
-import useUserStore from '@/store/user'
+import useAuthStore from '@/store/auth'
 
 const loading = ref(false)
 
@@ -41,16 +41,15 @@ const form = ref({
     password: ''
 })
 
-const userStore = useUserStore()
-const { setToken } = userStore;
+const authStore = useAuthStore()
+const { setAuth } = authStore;
 
 const refreshToken = async (account_id) => {
   try {
     const { data } = await authApi.refreshToken({
       account_id,
     })
-    const { access_token } = data;
-    setToken(access_token);
+    setAuth(data);
   } catch (error) {
     console.error(error, '刷新token失败')
   }
@@ -68,8 +67,8 @@ const handlePasswordLogin = async () => {
         }
         loading.value = true;
         const { data } = await authApi.login(form.value);
-        const { access_token, login_type } = data;
-        setToken(access_token);
+        const { login_type } = data;
+        setAuth(data);
         const userRes = await userApi.getPersonalInfo();
         const { account_list = [] } = userRes.data
         if (account_list?.length > 1) {
@@ -87,11 +86,7 @@ const handlePasswordLogin = async () => {
             // 登录成功
         }
     } catch (error) {
-        uni.showToast({
-            title: error?.message || '登录失败，请重试',
-            icon: 'none',
-            duration: 2000
-        })
+        console.error(error, '登录失败')
     } finally {
         loading.value = false;
     }
