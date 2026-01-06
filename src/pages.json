@@ -9,13 +9,13 @@
 			}
 		},
 		{
-			"path": "pages/home/index",
+			"path": "pages/Home/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/Account/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}

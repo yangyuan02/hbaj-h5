@@ -6,16 +6,16 @@
             </view>
             <view class="login__form">
                 <view class="login__form-item">
-                    <input class="login__form-input" type="text" placeholder="请输入账号" :maxlength="20" />
+                    <input class="login__form-input" type="text" placeholder="请输入账号" :maxlength="20" v-model="form.username" />
                 </view>
                 <view class="login__form-item">
-                    <input class="login__form-input" password placeholder="请输入密码" :maxlength="20" />
+                    <input class="login__form-input" password placeholder="请输入密码" :maxlength="20" v-model="form.password" />
                 </view>
                 <view class="login__form-actions">
                     <text class="login__form-forgotPassword" @click="forgotPassword">忘记密码？</text>
                 </view>
                 <view class="login__form-button">
-                    <button class="login__form-button-primary">登录并注册</button>
+                    <button class="login__form-button-primary" @click="handlePasswordLogin">登录并注册</button>
                 </view>
                 <view class="login__form-divider">
                     <text>其他登录方式</text>
@@ -30,10 +30,72 @@
 
 <script setup>
 import { ref } from 'vue'
-import { userApi } from '@/api'
+import { authApi, userApi } from '@/api'
 import FrameOutLayout from '@/layouts/FrameOutLayout/index.vue'
+import useUserStore from '@/store/user'
 
-const title = ref('登录')
+const loading = ref(false)
+
+const form = ref({
+    username: '',
+    password: ''
+})
+
+const userStore = useUserStore()
+const { setToken } = userStore;
+
+const refreshToken = async (account_id) => {
+  try {
+    const { data } = await authApi.refreshToken({
+      account_id,
+    })
+    const { access_token } = data;
+    setToken(access_token);
+  } catch (error) {
+    console.error(error, '刷新token失败')
+  }
+}
+
+const handlePasswordLogin = async () => {
+    try {
+        if (!form.value.username || !form.value.password) {
+            uni.showToast({
+                title: '请输入账号或密码',
+                icon: 'none',
+                duration: 2000
+            })
+            return
+        }
+        loading.value = true;
+        const { data } = await authApi.login(form.value);
+        const { access_token, login_type } = data;
+        setToken(access_token);
+        const userRes = await userApi.getPersonalInfo();
+        const { account_list = [] } = userRes.data
+        if (account_list?.length > 1) {
+            // 选择企业
+            uni.navigateTo({
+                url: '/pages/Account/index',
+            })
+        } else {
+            const notRefreshTypes = ['TENANT', 'WECHAT_ACCOUNT'];
+            const isRefresh = !notRefreshTypes.includes(login_type);
+            if (isRefresh) {
+                const account_id = account_list?.[0].account_id
+                await refreshToken(account_id);
+            }
+            // 登录成功
+        }
+    } catch (error) {
+        uni.showToast({
+            title: error?.message || '登录失败，请重试',
+            icon: 'none',
+            duration: 2000
+        })
+    } finally {
+        loading.value = false;
+    }
+}
 
 const forgotPassword = () => {
     uni.showToast({

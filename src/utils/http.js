@@ -20,11 +20,19 @@ const http = (url, options = {}) => {
         // HTTP 层成功
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
+        } else if (res.statusCode === 401) {
+          uni.showToast({
+            icon: 'none',
+            title: '登录过期，请重新登录',
+          })
+          // 需要清理用户信息
+          // userStore.clearUserInfo()
         } else {
           reject(res)
         }
       },
       fail(err) {
+        debugger
         uni.showToast({
           icon: 'none',
           title: '网络错误，请稍后重试',
