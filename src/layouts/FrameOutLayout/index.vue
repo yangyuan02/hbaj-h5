@@ -1,9 +1,12 @@
 <!-- layouts/FrameInLayout.vue -->
 <template>
-  <view className="layout-container">
+  <view class="layout-container">
+    <slot />
   </view>
 </template>
 
-<script setup>
-// 组件逻辑
-</script>
+<style scoped lang="less">
+.layout-container {
+  height: 100vh;
+}
+</style>
