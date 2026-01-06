@@ -18,7 +18,7 @@
                     <button class="login__form-button-primary">登录并注册</button>
                 </view>
                 <view class="login__form-divider">
-                    <text>或</text>
+                    <text>其他登录方式</text>
                 </view>
                 <view class="login__form-button login__form-button--weixin">
                     <button>微信账号登录</button>
@@ -97,21 +97,24 @@ const forgotPassword = () => {
 
         &-button {
             button {
-                height: 80rpx;
-                background: #006aff;
+                height: 88rpx;
                 border-radius: 20rpx;
-                border: none;
                 font-size: 32rpx;
-                color: #ffffff;
                 font-weight: 500;
-                box-shadow: 0px 5px 11px rgba(63, 133, 251, 0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 32rpx;
+                background: linear-gradient(135deg, #165dff, #4080ff);
+                color: #ffffff;
+                box-shadow: 0 12rpx 28rpx rgba(22, 93, 255, 0.35);
             }
 
             &--weixin {
                 button {
-                    background: #07c160;
-                    color: #ffffff;
-                    box-shadow: 0px 5px 11px rgba(7, 193, 96, 0.3);
+                    background: #f6fffa;
+                    color: #07c160;
+                    border: 2rpx solid rgba(7, 193, 96, 0.3);
                 }
             }
         }
