@@ -4,7 +4,7 @@ import useAuthStore from '@/store/auth'
 const http = (url, options = {}) => {
   const baseUrl = getEnvBaseUrl()
   const authStore = useAuthStore()
-  const {auth: {access_token}} = authStore
+  const {auth: {access_token}, logout} = authStore
 
   return new Promise((resolve, reject) => {
     uni.request({
@@ -32,9 +32,11 @@ const http = (url, options = {}) => {
           uni.showToast({
             icon: 'none',
             title: '登录过期，请重新登录',
+            complete: () => {
+              // 需要清理用户信息
+              logout()
+            }
           })
-          // 需要清理用户信息
-          // userStore.clearUserInfo()
         } else if (res.statusCode >= 500) {
           uni.showToast({
             icon: 'none',

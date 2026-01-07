@@ -13,6 +13,14 @@ import { ref, computed } from 'vue'
       auth.value = data
     }
 
+    const logout = () => {
+      auth.value = {
+        access_token: '',
+        login_type: '',
+      }
+      uni.removeStorageSync('auth')
+    }
+
     const isLogined = computed(() => {
       return !!auth.value.access_token
     })
@@ -21,6 +29,7 @@ import { ref, computed } from 'vue'
       setAuth,
       isLogined,
       auth,
+      logout,
     }
   },
   {
