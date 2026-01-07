@@ -61,6 +61,10 @@ export const useRouter = () => {
       uni.switchTab({
         url: path,
         complete: () => (navigating = false),
+        fail: (err) => {
+          console.error(err, '跳转失败')
+          navigating = false
+        }
       })
       return
     }
@@ -70,6 +74,10 @@ export const useRouter = () => {
       uni.redirectTo({
         url,
         complete: () => (navigating = false),
+        fail: (err) => {
+          console.error(err, '跳转失败')
+          navigating = false
+        }
       })
       return
     }
@@ -79,6 +87,10 @@ export const useRouter = () => {
     api({
       url,
       complete: () => (navigating = false),
+      fail: (err) => {
+        console.error(err, '跳转失败')
+        navigating = false
+      }
     })
   }
 

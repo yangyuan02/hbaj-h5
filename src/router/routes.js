@@ -35,7 +35,7 @@ export const routes = [
   },
   {
     name: 'account',
-    path: '/pages/Account/index',
+    path: '/pages/account/index',
     requiresAuth: true,
   },
 ]
