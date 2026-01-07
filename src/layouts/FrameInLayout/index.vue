@@ -14,7 +14,7 @@
   const { isLogined } = authStore;
   onLoad(() => {
     if (!isLogined) {
-      router.push({name: 'login'})
+      router.push({name: 'login', replace: true})
     }
   })
 </script>

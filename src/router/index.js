@@ -50,7 +50,7 @@ export const useRouter = () => {
 
     if (requiresAuth && !isLogined) {
       navigating = false
-      return push({ name: 'login' })
+      return push({ name: 'login', replace: true })
     }
 
 
