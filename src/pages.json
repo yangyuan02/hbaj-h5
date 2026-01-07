@@ -1,7 +1,37 @@
 {
 	"pages": [
 		{
-			"path": "pages/Login/index",
+			"path": "pages/fleet/index",
+			"style": {
+				"navigationBarTitleText": "船队"
+			}
+		},
+		{
+			"path": "pages/knowledge/index",
+			"style": {
+				"navigationBarTitleText": "知识库"
+			}
+		},
+		{
+			"path": "pages/ai/index",
+			"style": {
+				"navigationBarTitleText": "AI助手"
+			}
+		},
+		{
+			"path": "pages/task/index",
+			"style": {
+				"navigationBarTitleText": "任务"
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "登录",
 				"navigationBarBackgroundColor": "#ecf5ff",
@@ -9,13 +39,7 @@
 			}
 		},
 		{
-			"path": "pages/Home/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		},
-		{
-			"path": "pages/Account/index",
+			"path": "pages/account/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
