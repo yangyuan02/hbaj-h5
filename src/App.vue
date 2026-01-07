@@ -1,4 +1,6 @@
 <script>
+  import '@/static/iconfont/iconfont.css'
+
 export default {
   onLaunch: function () {
     console.log('App Launch')
