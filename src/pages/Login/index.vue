@@ -84,7 +84,7 @@ const handlePasswordLogin = async () => {
                 const account_id = account_list?.[0].account_id
                 await refreshToken(account_id);
             }
-            router.push({ name: 'home' })
+            router.push({ name: 'fleet' })
             // 登录成功
         }
     } catch (error) {
