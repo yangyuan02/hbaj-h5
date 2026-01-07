@@ -1,13 +1,13 @@
 <template>
-  <DefaultLayout>
+  <TabLayout>
     <view>
       知识库
     </view>
-  </DefaultLayout>
+  </TabLayout>
 </template>
 
 <script setup>
-import DefaultLayout from '@/layouts/DefaultLayout/index.vue'
+import TabLayout from '@/layouts/TabLayout/index.vue'
 
 
 </script>
