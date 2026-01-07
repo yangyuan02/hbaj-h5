@@ -10,6 +10,7 @@ export const routes = [
   {
     name: 'account',
     path: '/pages/Account/index',
+    requiresAuth: true,
   },
 ]
 

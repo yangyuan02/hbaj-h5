@@ -1,6 +1,6 @@
 import { buildUrl, getCurrentPageCount } from './helpers'
 import { routeMap } from './routes'
-// import { useUserStore } from '@/stores/user' // 可选
+import useAuthStore from '@/store/auth'
 
 let navigating = false
 
@@ -43,12 +43,16 @@ export const useRouter = () => {
       requiresAuth = false,
     } = resolveTo(to)
 
-    // // 登录校验（可选）
-    // const userStore = useUserStore()
-    // if (requiresAuth && !userStore.isLogin) {
-    //   navigating = false
-    //   return push({ name: 'login' })
-    // }
+    const authStore = useAuthStore()
+    const { isLogined } = authStore;
+    console.log(isLogined, 'isLogined')
+    // 登录校验
+
+    if (requiresAuth && !isLogined) {
+      navigating = false
+      return push({ name: 'login' })
+    }
+
 
     const url = buildUrl(path, query)
 

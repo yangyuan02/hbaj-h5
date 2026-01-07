@@ -13,13 +13,13 @@ import { ref, computed } from 'vue'
       auth.value = data
     }
 
-    // const isLogined = computed(() => {
-    //   return !!auth.value.token
-    // })
+    const isLogined = computed(() => {
+      return !!auth.value.access_token
+    })
 
     return {
       setAuth,
-      // isLogined,
+      isLogined,
       auth,
     }
   },

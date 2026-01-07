@@ -29,12 +29,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { authApi, userApi } from '@/api'
 import FrameOutLayout from '@/layouts/FrameOutLayout/index.vue'
 import useAuthStore from '@/store/auth'
+import { useRouter } from '@/router'
 
 const loading = ref(false)
+
+const router = useRouter()
 
 const form = ref({
     username: '',
@@ -43,6 +46,7 @@ const form = ref({
 
 const authStore = useAuthStore()
 const { setAuth } = authStore;
+
 
 const refreshToken = async (account_id) => {
   try {
@@ -72,10 +76,7 @@ const handlePasswordLogin = async () => {
         const userRes = await userApi.getPersonalInfo();
         const { account_list = [] } = userRes.data
         if (account_list?.length > 1) {
-            // 选择企业
-            uni.navigateTo({
-                url: '/pages/Account/index',
-            })
+            router.push({ name: 'account' })
         } else {
             const notRefreshTypes = ['TENANT', 'WECHAT_ACCOUNT'];
             const isRefresh = !notRefreshTypes.includes(login_type);
@@ -83,6 +84,7 @@ const handlePasswordLogin = async () => {
                 const account_id = account_list?.[0].account_id
                 await refreshToken(account_id);
             }
+            router.push({ name: 'home' })
             // 登录成功
         }
     } catch (error) {
