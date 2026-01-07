@@ -1,26 +1,17 @@
 <template>
   <view class="layout">
-    <!-- 顶部 -->
-    <view class="layout__header">
-      <slot name="header">
-        <text class="title">默认标题</text>
-      </slot>
-    </view>
-
-    <!-- 内容区 -->
-    <view class="layout__content">
+    <!-- 内容区域 -->
+    <view class="layout__container">
       <slot />
     </view>
-
     <!-- 底部 -->
-    <view class="layout__footer">
-      <slot name="footer" />
-    </view>
+    <Menu />
   </view>
 </template>
 
 <script setup>
   import { onLoad } from '@dcloudio/uni-app'
+  import Menu from '@/components/Menu/index.vue'
   import useAuthStore from '@/store/auth'
   import { useRouter } from '@/router'
   const router = useRouter()
@@ -39,18 +30,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  &__header {
-    height: 88rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  &__content {
+  &__container {
     flex: 1;
-    overflow: auto;
-  }
-  &__footer {
-    height: 100rpx;
   }
 }
 </style>
