@@ -35,7 +35,7 @@
 			"style": {
 				"navigationBarTitleText": "登录",
 				"navigationBarBackgroundColor": "#ecf5ff",
-    			"navigationBarTextStyle": "black"
+				"navigationBarTextStyle": "black"
 			}
 		},
 		{
@@ -50,5 +50,25 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"custom": true,
+		"list": [
+			{
+				"pagePath": "pages/fleet/index"
+			},
+			{
+				"pagePath": "pages/knowledge/index"
+			},
+			{
+				"pagePath": "pages/ai/index"
+			},
+			{
+				"pagePath": "pages/task/index"
+			},
+			{
+				"pagePath": "pages/my/index"
+			}
+		]
 	}
 }
