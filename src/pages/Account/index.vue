@@ -1,5 +1,5 @@
 <template>
-  <FrameInLayout>
+  <FrameInLayout routerName="account">
     <view class="account">
       <!-- 企业列表 -->
       <view class="account__list">

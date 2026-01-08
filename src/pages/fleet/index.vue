@@ -1,6 +1,7 @@
 <template>
-  <TabLayout>
-   
+  <TabLayout v-slot="{ initializeLoading }">
+    <text>123</text>
+    <text>{{ initializeLoading }}</text>
   </TabLayout>
 </template>
 
