@@ -83,7 +83,7 @@ const handlePasswordLogin = async () => {
         const userRes = await userApi.getPersonalInfo();
         const { account_list = [] } = userRes.data
         if (account_list?.length > 1) {
-            router.push({ name: 'account' })
+            return router.push({ name: 'account' })
         } else {
             const notRefreshTypes = ['TENANT', 'WECHAT_ACCOUNT'];
             const isRefresh = !notRefreshTypes.includes(login_type);
