@@ -30,7 +30,7 @@ const authGate = async () => {
         // 静默登录失败
         uni.reLaunch({ url: '/pages/login/index' })
     } catch (error) {
-        console.log('小程序启动失败')
+        console.log('小程序启动失败', error)
         uni.reLaunch({ url: '/pages/login/index' })
     }
 
