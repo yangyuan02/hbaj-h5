@@ -32,6 +32,7 @@
   height: 100vh;
   &__container {
     flex: 1;
+    overflow-y: scroll;
   }
 }
 </style>
