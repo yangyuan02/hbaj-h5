@@ -1,5 +1,5 @@
 <template>
-  <FrameOutLayout>
+  <FrameInLayout>
     <view class="account">
       <!-- 企业列表 -->
       <view class="account__list">
@@ -9,9 +9,7 @@
           class="account__list-item"
           @click="handleSelectEnterprise(item)"
         >
-          <!-- 企业信息卡片 -->
-          <view class="account__card">
-            <!-- 卡片头部 -->
+          <!-- 卡片头部 -->
             <view class="account__card-header">
               <text class="account__card-company">{{ item.companyName }}</text>
               <view v-if="item.isRecent" class="account__card-recent">
@@ -34,16 +32,15 @@
                 <text class="account__card-value">{{ item.role }}</text>
               </view>
             </view>
-          </view>
         </view>
       </view>
     </view>
-  </FrameOutLayout>
+  </FrameInLayout>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'
-import FrameOutLayout from '@/layouts/FrameOutLayout/index.vue'
+import FrameInLayout from '@/layouts/FrameInLayout/index.vue'
 
 // 企业列表数据
 const enterpriseList = reactive([
@@ -70,8 +67,7 @@ const enterpriseList = reactive([
     role: '普通员工',
     companyName: '演示贸易公司',
     isRecent: false
-  },
-  
+  }
 ])
 
 // 选择企业登录
@@ -117,16 +113,12 @@ const handleSelectEnterprise = (item) => {
     border-radius: 20rpx;
     box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
     overflow: hidden;
+    padding: 30rpx;
     
     &:active {
       opacity: 0.9;
       transform: scale(0.99);
     }
-  }
-
-  // 信息卡片
-  &__card {
-    padding: 30rpx;
   }
 
   // 卡片头部
