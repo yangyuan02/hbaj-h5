@@ -4,7 +4,7 @@ import useAuthStore from '@/store/auth'
 const http = (url, options = {}) => {
   const baseUrl = getEnvBaseUrl()
   const authStore = useAuthStore()
-  const {auth: {access_token}, logout} = authStore
+  const {auth: {access_token}, logout } = authStore
 
   return new Promise((resolve, reject) => {
     uni.request({
