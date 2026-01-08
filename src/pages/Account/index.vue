@@ -3,35 +3,31 @@
     <view class="account">
       <!-- 企业列表 -->
       <view class="account__list">
-        <view 
-          v-for="(item, index) in enterpriseList" 
-          :key="item.id"
-          class="account__list-item"
-          @click="handleSelectEnterprise(item)"
-        >
+        <view v-for="(item, index) in enterpriseList" :key="item.id" class="account__list-item"
+          @click="handleSelectEnterprise(item)">
           <!-- 卡片头部 -->
-            <view class="account__card-header">
-              <text class="account__card-company">{{ item.companyName }}</text>
-              <view v-if="item.isRecent" class="account__card-recent">
-                <text>最近登录</text>
-              </view>
+          <view class="account__card-header">
+            <text class="account__card-company">{{ item.tenant_name_cn }}</text>
+            <view v-if="index === 0" class="account__card-recent">
+              <text>最近登录</text>
             </view>
+          </view>
 
-            <!-- 用户信息 -->
-            <view class="account__card-info">
-              <view class="account__card-row">
-                <text class="account__card-label">账号：</text>
-                <text class="account__card-value">{{ item.account }}</text>
-              </view>
-              <view class="account__card-row">
-                <text class="account__card-label">姓名：</text>
-                <text class="account__card-value">{{ item.name }}</text>
-              </view>
-              <view class="account__card-row">
-                <text class="account__card-label">身份：</text>
-                <text class="account__card-value">{{ item.role }}</text>
-              </view>
+          <!-- 用户信息 -->
+          <view class="account__card-info">
+            <view class="account__card-row">
+              <text class="account__card-label">账号：</text>
+              <text class="account__card-value">{{ item.principal_name }}</text>
             </view>
+            <view class="account__card-row">
+              <text class="account__card-label">姓名：</text>
+              <text class="account__card-value">{{ item.full_name }}</text>
+            </view>
+            <view class="account__card-row">
+              <text class="account__card-label">身份：</text>
+              <text class="account__card-value">{{ item.identity_name }}</text>
+            </view>
+          </view>
         </view>
       </view>
     </view>
@@ -39,59 +35,49 @@
 </template>
 
 <script setup>
+import { onLoad } from '@dcloudio/uni-app'
 import { ref, reactive } from 'vue'
 import FrameInLayout from '@/layouts/FrameInLayout/index.vue'
-
+import { userApi, authApi } from '@/api'
+import useAuthStore from '@/store/auth'
+import { useRouter } from '@/router'
+const router = useRouter()
+const authStore = useAuthStore()
+const { setAuth } = authStore;
 // 企业列表数据
-const enterpriseList = reactive([
-  {
-    id: 1,
-    account: 'admin@example.com',
-    name: '张三',
-    role: '超级管理员',
-    companyName: '示例科技有限公司',
-    isRecent: true
-  },
-  {
-    id: 2,
-    account: 'manager@test.com',
-    name: '李四',
-    role: '企业管理员',
-    companyName: '测试制造企业',
-    isRecent: false
-  },
-  {
-    id: 3,
-    account: 'user@demo.com',
-    name: '王五',
-    role: '普通员工',
-    companyName: '演示贸易公司',
-    isRecent: false
-  }
-])
+const enterpriseList = ref([])
 
 // 选择企业登录
-const handleSelectEnterprise = (item) => {
-  uni.showLoading({
-    title: '登录中...'
+const handleSelectEnterprise = async (item) => {
+  const { data } = await authApi.refreshToken({
+    account_id: item.account_id,
   })
-
-  // 模拟登录请求
-  setTimeout(() => {
-    uni.hideLoading()
-    uni.showToast({
-      title: `已登录${item.companyName}`,
-      icon: 'success'
-    })
-
-    // TODO: 实际登录逻辑，跳转到首页
-    setTimeout(() => {
-      uni.switchTab({
-        url: '/pages/index/index'
-      })
-    }, 1500)
-  }, 1000)
+  const { access_token } = data;
+  if (access_token) {
+    setAuth(data);
+    router.push({ name: 'fleet', reLaunch: true })
+  }
 }
+const getEnterpriseList = async () => {
+  try {
+    uni.showLoading({
+      title: '加载中...'
+    })
+    const res = await userApi.getPersonalInfo()
+    const { account_list = [] } = res.data
+    enterpriseList.value = account_list.sort(
+      (a, b) => new Date(b.last_login_time).getTime() - new Date(a.last_login_time).getTime(),
+    )
+  } catch (error) {
+    console.log(error, '获取企业列表失败')
+  } finally {
+    uni.hideLoading()
+  }
+}
+
+onLoad(async () => {
+  await getEnterpriseList()
+})
 </script>
 
 <style scoped lang="less">
@@ -114,7 +100,7 @@ const handleSelectEnterprise = (item) => {
     box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
     overflow: hidden;
     padding: 30rpx;
-    
+
     &:active {
       opacity: 0.9;
       transform: scale(0.99);

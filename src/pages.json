@@ -49,7 +49,9 @@
 		{
 			"path": "pages/account/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "选择企业",
+				"navigationBarBackgroundColor": "#f5f7fa",
+				"navigationBarTextStyle": "black"
 			}
 		}
 	],
