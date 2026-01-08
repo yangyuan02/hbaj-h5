@@ -21,7 +21,7 @@ import useAuthStore from '@/store/auth'
 import { getAppid } from '@/config'
 import { sleep } from '@/utils'
 const authStore = useAuthStore()
-const { setAuth, clearAuth } = authStore;
+const { setAuth, clearAuth, isLogined } = authStore;
 import { useRouter } from '@/router'
 const router = useRouter()
 
@@ -41,6 +41,14 @@ const refreshToken = async (account_id) => {
 
 const authGate = async () => {
     try {
+        console.log('小程序开始启动')
+        // if (isLogined) {
+        //     // token存在，检查下token是否有效
+        //     await userApi.getUserFunctions()
+        //     await sleep(1000)
+        //     return router.push({ name: 'fleet', reLaunch: true })
+        // }
+        // 尝试静默登录
         const { code } = await uni.login({ provider: 'weixin' })
         const { data } = await authApi.wxLogin({ code, app_id: getAppid() })
         const { login_type, access_token } = data;
@@ -59,7 +67,7 @@ const authGate = async () => {
                     await refreshToken(account_id);
                 }
                 await sleep(300)
-                router.push({ name: 'fleet' })
+                router.push({ name: 'fleet', reLaunch: true })
                 // 登录成功
             }
         }
