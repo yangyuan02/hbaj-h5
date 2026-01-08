@@ -50,7 +50,7 @@ const authGate = async () => {
             const { account_list = [] } = userRes.data
             if (account_list?.length > 1) {
                 await sleep(300)
-                return router.push({ name: 'account' })
+                return router.push({ name: 'account', reLaunch: true })
             } else {
                 const notRefreshTypes = ['TENANT', 'WECHAT_ACCOUNT'];
                 const isRefresh = !notRefreshTypes.includes(login_type);
@@ -64,11 +64,13 @@ const authGate = async () => {
             }
         }
         // 静默登录失败
-        uni.reLaunch({ url: '/pages/login/index' })
+        router.push({ name: 'login', reLaunch: true })
+        // uni.reLaunch({ url: '/pages/login/index' })
     } catch (error) {
         clearAuth()
         console.log('小程序启动失败', error)
-        uni.reLaunch({ url: '/pages/login/index' })
+        router.push({ name: 'login', reLaunch: true })
+        // uni.reLaunch({ url: '/pages/login/index' })
     }
 
 

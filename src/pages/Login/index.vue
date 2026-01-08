@@ -83,7 +83,7 @@ const handlePasswordLogin = async () => {
         const userRes = await userApi.getPersonalInfo();
         const { account_list = [] } = userRes.data
         if (account_list?.length > 1) {
-            return router.push({ name: 'account' })
+            return router.push({ name: 'account', reLaunch: true })
         } else {
             const notRefreshTypes = ['TENANT', 'WECHAT_ACCOUNT'];
             const isRefresh = !notRefreshTypes.includes(login_type);
@@ -91,7 +91,7 @@ const handlePasswordLogin = async () => {
                 const account_id = account_list?.[0].account_id
                 await refreshToken(account_id);
             }
-            router.push({ name: 'fleet' })
+            router.push({ name: 'fleet', reLaunch: true })
             // 登录成功
         }
     } catch (error) {
