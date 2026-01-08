@@ -1,5 +1,9 @@
 export const routes = [
   {
+    name: 'index',
+    path: '/pages/index/index',
+  },
+  {
     name: 'login',
     path: '/pages/login/index',
   },

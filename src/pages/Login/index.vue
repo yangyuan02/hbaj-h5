@@ -6,10 +6,12 @@
             </view>
             <view class="login__form">
                 <view class="login__form-item">
-                    <input class="login__form-input" type="text" placeholder="请输入账号" :maxlength="20" v-model="form.username" />
+                    <input class="login__form-input" type="text" placeholder="请输入账号" :maxlength="20"
+                        v-model="form.username" />
                 </view>
                 <view class="login__form-item">
-                    <input class="login__form-input" password placeholder="请输入密码" :maxlength="20" v-model="form.password" />
+                    <input class="login__form-input" password placeholder="请输入密码" :maxlength="20"
+                        v-model="form.password" />
                 </view>
                 <view class="login__form-actions">
                     <text class="login__form-forgotPassword" @click="forgotPassword">忘记密码？</text>
@@ -49,14 +51,17 @@ const { setAuth } = authStore;
 
 
 const refreshToken = async (account_id) => {
-  try {
-    const { data } = await authApi.refreshToken({
-      account_id,
-    })
-    setAuth(data);
-  } catch (error) {
-    console.error(error, '刷新token失败')
-  }
+    try {
+        const { data } = await authApi.refreshToken({
+            account_id,
+        })
+        const { access_token } = data;
+        if (access_token) {
+            setAuth(data);
+        }
+    } catch (error) {
+        console.error(error, '刷新token失败')
+    }
 }
 
 const handlePasswordLogin = async () => {
@@ -71,8 +76,10 @@ const handlePasswordLogin = async () => {
         }
         loading.value = true;
         const { data } = await authApi.login(form.value);
-        const { login_type } = data;
-        setAuth(data);
+        const { login_type, access_token } = data;
+        if (access_token) {
+            setAuth(data);
+        }
         const userRes = await userApi.getPersonalInfo();
         const { account_list = [] } = userRes.data
         if (account_list?.length > 1) {

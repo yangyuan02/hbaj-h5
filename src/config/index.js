@@ -19,6 +19,28 @@ const getEnvBaseUrl = () => {
 const staticPath = 'https://shipx-static.oss-cn-shanghai.aliyuncs.com/'
 
 
+// CyberShipx
+export const WX_CYBERSHIPX_APPID = import.meta.env.VITE_WX_CYBERSHIPX_APPID
+
+// 船舶英语学习空间
+export const WX_ENGLISH_APPID = import.meta.env.VITE_WX_ENGLISH_APPID
+
+
+export const getWxAppid = () => {
+  const appBaseInfo = uni.getAccountInfoSync && uni.getAccountInfoSync()
+  console.log('appId', appBaseInfo.miniProgram.appId)
+  return appBaseInfo.miniProgram.appId
+}
+
+export const getAppid = () => {
+  const wxAppid = getWxAppid();
+  if (wxAppid === WX_CYBERSHIPX_APPID) { // CyberShipx
+    return 2
+  }
+  return 1  // 英语
+}
+
+
 export {
     getEnvBaseUrl,
     staticPath
