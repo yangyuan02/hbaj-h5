@@ -42,6 +42,11 @@ const refreshToken = async (account_id) => {
 const authGate = async () => {
     try {
         console.log('小程序开始启动')
+        /**
+         * 如果【放开注释】，意味着token优先，即记住了登录的某一个企业，而不是每次选择
+         * 如果【注释】，账号密码登录情况：每次都需要重新输入，没有达到记住密码的效果
+         * 需要看需求需要那种逻辑
+         */
         // if (isLogined) {
         //     // token存在，检查下token是否有效
         //     await userApi.getUserFunctions()
