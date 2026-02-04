@@ -9,6 +9,15 @@
 			}
 		},
 		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "CyberShipX",
+				"navigationStyle": "custom",
+				"navigationBarBackgroundColor": "#ecf5ff",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
 			"path": "pages/fleet/index",
 			"style": {
 				"navigationBarTitleText": "船队"
