@@ -1,162 +1,165 @@
 <template>
   <view class="home">
-    <!-- 顶部导航区域 -->
-    <view class="home__header">
-      <view class="home__header-left">
-        <view class="home__logo">
-          <!-- 图标用颜色占位 -->
-          <view class="home__logo-icon"></view>
+    <!-- Header Area - 蓝色渐变背景区域 -->
+    <view class="home__header-area">
+      <!-- 顶部栏 -->
+      <view class="home__topbar">
+        <view class="home__topbar-left">
+          <view class="home__logo">
+            <!-- Ship 图标占位 -->
+            <view class="home__logo-icon"></view>
+          </view>
+          <view class="home__brand">
+            <text class="home__brand-name">CyberShipX</text>
+            <text class="home__brand-desc">智能船舶管理平台</text>
+          </view>
         </view>
-        <view class="home__title">
-          <text class="home__title-main">CyberShipX</text>
-          <text class="home__title-sub">智能船舶管理平台</text>
-        </view>
-      </view>
-      <view class="home__header-right">
-        <view class="home__header-btn" @click="handleSync">
-          <!-- 同步图标用颜色占位 -->
-          <view class="home__icon-placeholder home__icon-placeholder--sync"></view>
-        </view>
-        <view class="home__header-btn home__header-btn--notify" @click="handleNotify">
-          <!-- 通知图标用颜色占位 -->
-          <view class="home__icon-placeholder home__icon-placeholder--bell"></view>
-          <view v-if="notifyCount > 0" class="home__notify-badge">
-            <text>{{ notifyCount > 99 ? '99+' : notifyCount }}</text>
+        <view class="home__topbar-right">
+          <view class="home__topbar-btn" @click="handleSync">
+            <!-- RefreshCw 图标占位 -->
+            <view class="home__icon home__icon--white"></view>
+          </view>
+          <view class="home__topbar-btn home__topbar-btn--badge" @click="handleNotify">
+            <!-- Bell 图标占位 -->
+            <view class="home__icon home__icon--white"></view>
+            <view class="home__badge">
+              <text>2</text>
+            </view>
           </view>
         </view>
       </view>
-    </view>
 
-    <!-- 搜索框 -->
-    <view class="home__search" @click="handleSearch">
-      <!-- 搜索图标用颜色占位 -->
-      <view class="home__icon-placeholder home__icon-placeholder--search"></view>
-      <text class="home__search-placeholder">搜索船舶、用户、证书...</text>
-      <!-- 扫码图标用颜色占位 -->
-      <view class="home__icon-placeholder home__icon-placeholder--scan"></view>
-    </view>
-
-    <!-- 用户信息卡片 -->
-    <view class="home__user-card" @click="handleUserCard">
-      <view class="home__user-avatar">
-        <image v-if="userInfo.avatar" :src="userInfo.avatar" mode="aspectFill" />
-        <text v-else>{{ userInfo.name?.charAt(0) || 'U' }}</text>
+      <!-- 搜索框 -->
+      <view class="home__search" @click="handleSearch">
+        <!-- Search 图标占位 -->
+        <view class="home__icon home__icon--gray"></view>
+        <text class="home__search-text">搜索船舶、用户、证书...</text>
+        <!-- ScanLine 图标占位 -->
+        <view class="home__icon home__icon--gray"></view>
       </view>
-      <view class="home__user-info">
-        <view class="home__user-name-row">
-          <text class="home__user-name">{{ userInfo.name }}</text>
-          <view class="home__user-role">
-            <text>{{ userInfo.role }}</text>
+
+      <!-- 用户欢迎卡片 -->
+      <view class="home__welcome-card" @click="handleUserCard">
+        <view class="home__welcome-avatar">
+          <image v-if="userInfo.avatar" :src="userInfo.avatar" mode="aspectFill" />
+          <text v-else>{{ userInfo.name?.charAt(0) || 'U' }}</text>
+        </view>
+        <view class="home__welcome-info">
+          <view class="home__welcome-row">
+            <text class="home__welcome-name">{{ userInfo.name }}</text>
+            <view class="home__welcome-tag">
+              <text>{{ userInfo.role }}</text>
+            </view>
           </view>
+          <text class="home__welcome-company">{{ userInfo.company }}</text>
+          <text class="home__welcome-time">上次登录: {{ userInfo.lastLoginTime }}</text>
         </view>
-        <text class="home__user-company">{{ userInfo.company }}</text>
-        <view class="home__user-login">
-          <view class="home__user-status"></view>
-          <text>上次登录: {{ userInfo.lastLoginTime }}</text>
-        </view>
-      </view>
-      <view class="home__user-arrow">
-        <view class="home__icon-placeholder home__icon-placeholder--arrow"></view>
+        <!-- ChevronRight 图标占位 -->
+        <view class="home__icon home__icon--white-light"></view>
       </view>
     </view>
 
-    <!-- 统计卡片 -->
-    <view class="home__stats">
-      <view 
-        v-for="item in statsList" 
-        :key="item.key" 
-        class="home__stats-card"
-        :style="{ background: item.bgColor }"
-        @click="handleStatClick(item)"
-      >
-        <text class="home__stats-number">{{ item.value }}</text>
-        <text class="home__stats-label">{{ item.label }}</text>
-        <view class="home__stats-change" :style="{ color: item.changeColor }">
-          <text>{{ item.change > 0 ? '+' : '' }}{{ item.change }}</text>
-        </view>
-      </view>
-    </view>
-
-    <!-- 功能模块 -->
-    <view class="home__modules">
-      <view class="home__modules-header">
-        <text class="home__modules-title">功能模块</text>
-        <view class="home__modules-more" @click="handleMoreModules">
-          <text>更多</text>
-          <view class="home__icon-placeholder home__icon-placeholder--arrow-small"></view>
-        </view>
-      </view>
-      <view class="home__modules-grid">
+    <!-- Main Content -->
+    <view class="home__content">
+      <!-- Stats Cards -->
+      <view class="home__stats">
         <view 
-          v-for="item in modulesList" 
+          v-for="item in statsList" 
           :key="item.key" 
-          class="home__module-item"
-          @click="handleModuleClick(item)"
+          class="home__stat-card"
+          @click="handleStatClick(item)"
         >
-          <view class="home__module-icon" :style="{ background: item.bgColor }">
-            <!-- 图标用颜色占位 -->
-            <view class="home__module-icon-placeholder" :style="{ background: item.iconColor }"></view>
+          <view class="home__stat-indicator" :style="{ background: item.indicatorColor }"></view>
+          <text class="home__stat-value">{{ item.value }}</text>
+          <text class="home__stat-label">{{ item.label }}</text>
+          <view v-if="item.trend" class="home__stat-trend" :style="{ background: item.trendBg, color: item.trendColor }">
+            <text>{{ item.trend }}</text>
           </view>
-          <text class="home__module-name">{{ item.name }}</text>
         </view>
       </view>
 
-      <!-- 证书管理单独一行 -->
-      <view class="home__module-single">
-        <view class="home__module-item" @click="handleModuleClick(certificateModule)">
-          <view class="home__module-icon" :style="{ background: certificateModule.bgColor }">
-            <view class="home__module-icon-placeholder" :style="{ background: certificateModule.iconColor }"></view>
+      <!-- Feature Grid -->
+      <view class="home__card">
+        <view class="home__card-header">
+          <text class="home__card-title">功能模块</text>
+          <view class="home__card-more" @click="handleMoreModules">
+            <text>更多</text>
+            <!-- ChevronRight 图标占位 -->
+            <view class="home__icon home__icon--small home__icon--gray"></view>
           </view>
-          <text class="home__module-name">{{ certificateModule.name }}</text>
+        </view>
+        
+        <!-- 8个功能模块 -->
+        <view class="home__features">
+          <view 
+            v-for="item in modulesList" 
+            :key="item.key" 
+            class="home__feature-item"
+            @click="handleModuleClick(item)"
+          >
+            <view class="home__feature-icon" :style="{ background: item.bgColor }">
+              <!-- 图标占位 -->
+              <view class="home__feature-icon-inner" :style="{ background: item.iconColor }"></view>
+            </view>
+            <text class="home__feature-label">{{ item.name }}</text>
+          </view>
+        </view>
+
+        <!-- 证书管理单独一行 -->
+        <view class="home__feature-last">
+          <view class="home__feature-item" @click="handleModuleClick(certificateModule)">
+            <view class="home__feature-icon" :style="{ background: certificateModule.bgColor }">
+              <view class="home__feature-icon-inner" :style="{ background: certificateModule.iconColor }"></view>
+            </view>
+            <text class="home__feature-label">{{ certificateModule.name }}</text>
+          </view>
         </view>
       </view>
-    </view>
 
-    <!-- 快捷入口 -->
-    <view class="home__quick">
-      <view class="home__section-header">
-        <text class="home__section-title">快捷入口</text>
-      </view>
-      <view class="home__quick-list">
-        <view 
-          v-for="item in quickActions" 
-          :key="item.key" 
-          class="home__quick-item"
-          @click="handleQuickAction(item)"
-        >
-          <view class="home__quick-icon" :style="{ background: item.bgColor }">
-            <view class="home__module-icon-placeholder" :style="{ background: item.iconColor }"></view>
-          </view>
-          <view class="home__quick-content">
+      <!-- Quick Actions -->
+      <view class="home__card">
+        <view class="home__card-header">
+          <text class="home__card-title">快捷入口</text>
+        </view>
+        <view class="home__quick-actions">
+          <view 
+            v-for="item in quickActions" 
+            :key="item.key" 
+            class="home__quick-item"
+            @click="handleQuickAction(item)"
+          >
+            <view class="home__quick-icon" :style="{ background: item.bgColor }">
+              <view class="home__feature-icon-inner" :style="{ background: item.iconColor }"></view>
+            </view>
             <text class="home__quick-label">{{ item.label }}</text>
             <text class="home__quick-desc">{{ item.desc }}</text>
           </view>
         </view>
       </view>
-    </view>
 
-    <!-- 系统通知 -->
-    <view class="home__notifications">
-      <view class="home__section-header">
-        <text class="home__section-title">系统通知</text>
-        <view class="home__section-more" @click="handleAllNotifications">
-          <text>全部</text>
-          <view class="home__icon-placeholder home__icon-placeholder--arrow-small"></view>
-        </view>
-      </view>
-      <view class="home__notification-list">
-        <view 
-          v-for="item in notifications" 
-          :key="item.id" 
-          class="home__notification-item"
-          @click="handleNotificationClick(item)"
-        >
-          <view class="home__notification-dot" :class="'home__notification-dot--' + item.type"></view>
-          <view class="home__notification-content">
-            <text class="home__notification-title">{{ item.title }}</text>
-            <text class="home__notification-desc">{{ item.desc }}</text>
+      <!-- Notifications -->
+      <view class="home__card">
+        <view class="home__card-header">
+          <text class="home__card-title">系统通知</text>
+          <view class="home__card-more" @click="handleAllNotifications">
+            <text>全部</text>
+            <view class="home__icon home__icon--small home__icon--gray"></view>
           </view>
-          <text class="home__notification-time">{{ item.time }}</text>
+        </view>
+        <view class="home__notifications">
+          <view 
+            v-for="item in notifications" 
+            :key="item.id" 
+            class="home__notification"
+            @click="handleNotificationClick(item)"
+          >
+            <view class="home__notification-dot" :class="'home__notification-dot--' + item.type"></view>
+            <view class="home__notification-body">
+              <text class="home__notification-title">{{ item.title }}</text>
+              <text class="home__notification-desc">{{ item.desc }}</text>
+            </view>
+            <text class="home__notification-time">{{ item.time }}</text>
+          </view>
         </view>
       </view>
     </view>
@@ -166,9 +169,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-
-// 通知数量
-const notifyCount = ref(2)
 
 // 用户信息
 const userInfo = reactive({
@@ -181,30 +181,9 @@ const userInfo = reactive({
 
 // 统计数据
 const statsList = ref([
-  {
-    key: 'shipType',
-    label: '船型数量',
-    value: 9,
-    change: 2,
-    bgColor: 'linear-gradient(135deg, #e8f4ff 0%, #d6ebff 100%)',
-    changeColor: '#165dff'
-  },
-  {
-    key: 'ship',
-    label: '船舶数量',
-    value: 10,
-    change: 1,
-    bgColor: 'linear-gradient(135deg, #e8fff0 0%, #d4f7e2 100%)',
-    changeColor: '#00b42a'
-  },
-  {
-    key: 'user',
-    label: '用户数量',
-    value: 16,
-    change: 3,
-    bgColor: 'linear-gradient(135deg, #fff7e8 0%, #ffeccc 100%)',
-    changeColor: '#ff7d00'
-  }
+  { key: 'shipType', value: 9, label: '船型数量', trend: '+2', indicatorColor: '#3b82f6', trendBg: '#dbeafe', trendColor: '#3b82f6' },
+  { key: 'ship', value: 10, label: '船舶数量', trend: '+1', indicatorColor: '#10b981', trendBg: '#d1fae5', trendColor: '#10b981' },
+  { key: 'user', value: 16, label: '用户数量', trend: '+3', indicatorColor: '#f59e0b', trendBg: '#fef3c7', trendColor: '#f59e0b' }
 ])
 
 // 功能模块列表（前8个）
@@ -219,7 +198,7 @@ const modulesList = ref([
   { key: 'dataManage', name: '资料管理', bgColor: '#fef9c3', iconColor: '#eab308' }
 ])
 
-// 证书管理（单独一个）
+// 证书管理
 const certificateModule = reactive({
   key: 'certificateManage',
   name: '证书管理',
@@ -240,7 +219,7 @@ const notifications = ref([
   { id: 2, title: '新用户已添加', desc: '张三已加入船员管理系统', time: '5小时前', type: 'info' }
 ])
 
-// 同步数据
+// 事件处理
 const handleSync = () => {
   uni.showLoading({ title: '同步中...' })
   setTimeout(() => {
@@ -249,129 +228,94 @@ const handleSync = () => {
   }, 1000)
 }
 
-// 通知
 const handleNotify = () => {
-  uni.navigateTo({ url: '/pages/notification/index' })
+  uni.showToast({ title: '通知功能开发中', icon: 'none' })
 }
 
-// 搜索
 const handleSearch = () => {
   uni.showToast({ title: '搜索功能开发中', icon: 'none' })
 }
 
-// 用户卡片点击
 const handleUserCard = () => {
   uni.navigateTo({ url: '/pages/my/index' })
 }
 
-// 统计卡片点击
 const handleStatClick = (item) => {
   uni.showToast({ title: `查看${item.label}`, icon: 'none' })
 }
 
-// 更多模块
 const handleMoreModules = () => {
   uni.showToast({ title: '更多功能开发中', icon: 'none' })
 }
 
-// 模块点击
 const handleModuleClick = (item) => {
   uni.showToast({ title: `进入${item.name}`, icon: 'none' })
 }
 
-// 快捷入口点击
 const handleQuickAction = (item) => {
   uni.showToast({ title: `进入${item.label}`, icon: 'none' })
 }
 
-// 全部通知
 const handleAllNotifications = () => {
-  uni.navigateTo({ url: '/pages/notification/index' })
+  uni.showToast({ title: '查看全部通知', icon: 'none' })
 }
 
-// 通知项点击
 const handleNotificationClick = (item) => {
   uni.showToast({ title: item.title, icon: 'none' })
 }
 
 onLoad(() => {
-  // 可以在这里加载用户数据和统计数据
+  // 加载数据
 })
 </script>
 
 <style scoped lang="less">
 .home {
   min-height: 100vh;
-  background: linear-gradient(180deg, #ecf5ff 0%, #f5f7fa 25%);
-  padding: 0 32rpx 40rpx;
+  background: #f1f5f9;
 
-  // 图标占位通用样式
-  &__icon-placeholder {
+  // 通用图标占位
+  &__icon {
+    width: 40rpx;
+    height: 40rpx;
     border-radius: 8rpx;
 
-    &--sync {
-      width: 36rpx;
-      height: 36rpx;
-      background: #86909c;
+    &--white {
+      background: rgba(255, 255, 255, 0.9);
     }
 
-    &--bell {
-      width: 36rpx;
-      height: 36rpx;
-      background: #86909c;
+    &--white-light {
+      background: rgba(255, 255, 255, 0.5);
     }
 
-    &--search {
-      width: 36rpx;
-      height: 36rpx;
-      background: #c9cdd4;
-      border-radius: 50%;
+    &--gray {
+      background: #9ca3af;
     }
 
-    &--scan {
-      width: 36rpx;
-      height: 36rpx;
-      background: #c9cdd4;
-      margin-left: auto;
-    }
-
-    &--arrow {
-      width: 24rpx;
-      height: 24rpx;
-      background: rgba(255, 255, 255, 0.6);
-    }
-
-    &--arrow-small {
-      width: 20rpx;
-      height: 20rpx;
-      background: #86909c;
+    &--small {
+      width: 28rpx;
+      height: 28rpx;
     }
   }
 
-  &__logo-icon {
-    width: 44rpx;
-    height: 44rpx;
-    background: #fff;
-    border-radius: 10rpx;
+  // Header 蓝色区域
+  &__header-area {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24rpx 32rpx 48rpx;
+    border-radius: 0 0 48rpx 48rpx;
   }
 
-  &__module-icon-placeholder {
-    width: 44rpx;
-    height: 44rpx;
-    border-radius: 12rpx;
-  }
-
-  // 顶部导航
-  &__header {
+  // 顶部栏
+  &__topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24rpx 0 32rpx;
+    margin-bottom: 32rpx;
 
     &-left {
       display: flex;
       align-items: center;
-      gap: 20rpx;
+      gap: 24rpx;
     }
 
     &-right {
@@ -384,62 +328,72 @@ onLoad(() => {
       width: 72rpx;
       height: 72rpx;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+
+      &--badge {
+        position: relative;
+      }
     }
   }
 
   // Logo
   &__logo {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 20rpx;
-    background: linear-gradient(135deg, #165dff, #4080ff);
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 24rpx;
+    background: rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8rpx 24rpx rgba(22, 93, 255, 0.25);
+
+    &-icon {
+      width: 48rpx;
+      height: 48rpx;
+      background: #fff;
+      border-radius: 12rpx;
+    }
   }
 
-  // 标题
-  &__title {
+  // 品牌名
+  &__brand {
     display: flex;
     flex-direction: column;
     gap: 4rpx;
 
-    &-main {
+    &-name {
       font-size: 36rpx;
       font-weight: 700;
-      color: #1d2129;
+      color: #fff;
     }
 
-    &-sub {
-      font-size: 22rpx;
-      color: #86909c;
+    &-desc {
+      font-size: 24rpx;
+      color: rgba(255, 255, 255, 0.8);
     }
   }
 
-  // 通知角标
-  &__notify-badge {
+  // 角标
+  &__badge {
     position: absolute;
-    top: 8rpx;
-    right: 8rpx;
-    min-width: 32rpx;
-    height: 32rpx;
-    border-radius: 16rpx;
-    background: #f53f3f;
+    top: 4rpx;
+    right: 4rpx;
+    min-width: 36rpx;
+    height: 36rpx;
+    border-radius: 18rpx;
+    background: #ef4444;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 8rpx;
 
     text {
-      font-size: 20rpx;
+      font-size: 22rpx;
       color: #fff;
-      font-weight: 500;
+      font-weight: 600;
     }
   }
 
@@ -447,43 +401,44 @@ onLoad(() => {
   &__search {
     display: flex;
     align-items: center;
-    gap: 16rpx;
+    gap: 20rpx;
     height: 88rpx;
     background: #fff;
     border-radius: 44rpx;
     padding: 0 32rpx;
     margin-bottom: 32rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.08);
 
-    &-placeholder {
+    &-text {
       flex: 1;
       font-size: 28rpx;
-      color: #c9cdd4;
+      color: #9ca3af;
     }
   }
 
-  // 用户卡片
-  &__user-card {
+  // 欢迎卡片
+  &__welcome-card {
     display: flex;
     align-items: center;
     gap: 24rpx;
-    background: linear-gradient(135deg, #165dff, #4080ff);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     border-radius: 24rpx;
-    padding: 32rpx;
-    margin-bottom: 32rpx;
-    box-shadow: 0 12rpx 32rpx rgba(22, 93, 255, 0.25);
+    padding: 28rpx;
+    border: 2rpx solid rgba(255, 255, 255, 0.2);
   }
 
-  &__user-avatar {
+  &__welcome-avatar {
     width: 96rpx;
     height: 96rpx;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
 
     image {
       width: 100%;
@@ -493,30 +448,30 @@ onLoad(() => {
     text {
       font-size: 40rpx;
       font-weight: 600;
-      color: #fff;
+      color: #3b82f6;
     }
   }
 
-  &__user-info {
+  &__welcome-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8rpx;
   }
 
-  &__user-name-row {
+  &__welcome-row {
     display: flex;
     align-items: center;
     gap: 16rpx;
   }
 
-  &__user-name {
-    font-size: 34rpx;
+  &__welcome-name {
+    font-size: 32rpx;
     font-weight: 600;
     color: #fff;
   }
 
-  &__user-role {
+  &__welcome-tag {
     padding: 4rpx 16rpx;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 8rpx;
@@ -527,27 +482,20 @@ onLoad(() => {
     }
   }
 
-  &__user-company {
+  &__welcome-company {
     font-size: 26rpx;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
   }
 
-  &__user-login {
-    display: flex;
-    align-items: center;
-    gap: 8rpx;
-
-    text {
-      font-size: 22rpx;
-      color: rgba(255, 255, 255, 0.7);
-    }
+  &__welcome-time {
+    font-size: 22rpx;
+    color: rgba(255, 255, 255, 0.7);
   }
 
-  &__user-status {
-    width: 12rpx;
-    height: 12rpx;
-    border-radius: 50%;
-    background: #00b42a;
+  // 主内容区
+  &__content {
+    padding: 32rpx;
+    margin-top: -24rpx;
   }
 
   // 统计卡片
@@ -557,59 +505,74 @@ onLoad(() => {
     margin-bottom: 32rpx;
   }
 
-  &__stats-card {
+  &__stat-card {
     flex: 1;
-    border-radius: 20rpx;
-    padding: 24rpx 20rpx;
-    display: flex;
-    flex-direction: column;
-    gap: 8rpx;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 28rpx 24rpx;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 
     &:active {
       transform: scale(0.98);
     }
   }
 
-  &__stats-number {
-    font-size: 48rpx;
-    font-weight: 700;
-    color: #1d2129;
-  }
-
-  &__stats-label {
-    font-size: 24rpx;
-    color: #86909c;
-  }
-
-  &__stats-change {
+  &__stat-indicator {
     position: absolute;
-    bottom: 24rpx;
-    left: 20rpx;
-    font-size: 22rpx;
-    font-weight: 500;
+    top: 0;
+    left: 0;
+    width: 8rpx;
+    height: 100%;
   }
 
-  // 功能模块
-  &__modules {
+  &__stat-value {
+    font-size: 52rpx;
+    font-weight: 700;
+    color: #1e293b;
+    display: block;
+    margin-bottom: 8rpx;
+  }
+
+  &__stat-label {
+    font-size: 24rpx;
+    color: #64748b;
+    display: block;
+    margin-bottom: 16rpx;
+  }
+
+  &__stat-trend {
+    display: inline-flex;
+    align-items: center;
+    padding: 4rpx 12rpx;
+    border-radius: 8rpx;
+
+    text {
+      font-size: 22rpx;
+      font-weight: 500;
+    }
+  }
+
+  // 通用卡片
+  &__card {
     background: #fff;
     border-radius: 24rpx;
     padding: 32rpx;
-    margin-bottom: 32rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    margin-bottom: 24rpx;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 
     &-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 32rpx;
+      margin-bottom: 28rpx;
     }
 
     &-title {
       font-size: 32rpx;
       font-weight: 600;
-      color: #1d2129;
+      color: #1e293b;
     }
 
     &-more {
@@ -619,149 +582,112 @@ onLoad(() => {
 
       text {
         font-size: 26rpx;
-        color: #86909c;
+        color: #64748b;
       }
     }
-
-    &-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32rpx 0;
-    }
   }
 
-  &__module-single {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 32rpx;
-    padding-left: 25rpx;
+  // 功能模块网格
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32rpx 16rpx;
   }
 
-  &__module-item {
+  &__feature-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16rpx;
 
     &:active {
-      opacity: 0.8;
+      opacity: 0.7;
     }
   }
 
-  &__module-icon {
-    width: 100rpx;
-    height: 100rpx;
+  &__feature-icon {
+    width: 96rpx;
+    height: 96rpx;
     border-radius: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-inner {
+      width: 44rpx;
+      height: 44rpx;
+      border-radius: 12rpx;
+    }
+  }
+
+  &__feature-label {
+    font-size: 24rpx;
+    color: #475569;
+    text-align: center;
+  }
+
+  &__feature-last {
+    margin-top: 32rpx;
+    padding-top: 32rpx;
+    border-top: 2rpx solid #f1f5f9;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  // 快捷入口
+  &__quick-actions {
+    display: flex;
+    gap: 20rpx;
+  }
+
+  &__quick-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16rpx;
+    padding: 28rpx 16rpx;
+    background: #f8fafc;
+    border-radius: 20rpx;
+
+    &:active {
+      background: #f1f5f9;
+    }
+  }
+
+  &__quick-icon {
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 22rpx;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &__module-name {
-    font-size: 24rpx;
-    color: #4e5969;
+  &__quick-label {
+    font-size: 26rpx;
+    font-weight: 500;
+    color: #1e293b;
   }
 
-  // 通用区块头部
-  &__section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24rpx;
+  &__quick-desc {
+    font-size: 22rpx;
+    color: #94a3b8;
   }
 
-  &__section-title {
-    font-size: 32rpx;
-    font-weight: 600;
-    color: #1d2129;
-  }
-
-  &__section-more {
-    display: flex;
-    align-items: center;
-    gap: 4rpx;
-
-    text {
-      font-size: 26rpx;
-      color: #86909c;
-    }
-  }
-
-  // 快捷入口
-  &__quick {
-    background: #fff;
-    border-radius: 24rpx;
-    padding: 32rpx;
-    margin-bottom: 32rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-
-    &-list {
-      display: flex;
-      gap: 24rpx;
-    }
-
-    &-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16rpx;
-      padding: 24rpx 16rpx;
-      background: #f7f8fa;
-      border-radius: 16rpx;
-
-      &:active {
-        opacity: 0.8;
-      }
-    }
-
-    &-icon {
-      width: 80rpx;
-      height: 80rpx;
-      border-radius: 20rpx;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    &-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4rpx;
-    }
-
-    &-label {
-      font-size: 26rpx;
-      font-weight: 500;
-      color: #1d2129;
-    }
-
-    &-desc {
-      font-size: 22rpx;
-      color: #86909c;
-    }
-  }
-
-  // 系统通知
+  // 通知列表
   &__notifications {
-    background: #fff;
-    border-radius: 24rpx;
-    padding: 32rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-
-    &-list {
-      display: flex;
-      flex-direction: column;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  &__notification-item {
+  &__notification {
     display: flex;
     align-items: flex-start;
     gap: 20rpx;
     padding: 24rpx 0;
-    border-bottom: 1rpx solid #f2f3f5;
+    border-bottom: 2rpx solid #f1f5f9;
 
     &:last-child {
       border-bottom: none;
@@ -773,7 +699,7 @@ onLoad(() => {
     }
 
     &:active {
-      opacity: 0.8;
+      opacity: 0.7;
     }
   }
 
@@ -781,27 +707,27 @@ onLoad(() => {
     width: 16rpx;
     height: 16rpx;
     border-radius: 50%;
-    margin-top: 10rpx;
+    margin-top: 12rpx;
     flex-shrink: 0;
 
     &--warning {
-      background: #ff7d00;
+      background: #f59e0b;
     }
 
     &--info {
-      background: #165dff;
+      background: #3b82f6;
     }
 
     &--success {
-      background: #00b42a;
+      background: #10b981;
     }
 
     &--error {
-      background: #f53f3f;
+      background: #ef4444;
     }
   }
 
-  &__notification-content {
+  &__notification-body {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -811,18 +737,18 @@ onLoad(() => {
   &__notification-title {
     font-size: 28rpx;
     font-weight: 500;
-    color: #1d2129;
+    color: #1e293b;
   }
 
   &__notification-desc {
     font-size: 24rpx;
-    color: #86909c;
-    line-height: 1.4;
+    color: #64748b;
+    line-height: 1.5;
   }
 
   &__notification-time {
     font-size: 22rpx;
-    color: #c9cdd4;
+    color: #94a3b8;
     flex-shrink: 0;
   }
 }
