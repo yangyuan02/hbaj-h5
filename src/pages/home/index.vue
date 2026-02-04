@@ -4,7 +4,8 @@
     <view class="home__header">
       <view class="home__header-left">
         <view class="home__logo">
-          <text class="iconfont icon-chuanbo"></text>
+          <!-- 图标用颜色占位 -->
+          <view class="home__logo-icon"></view>
         </view>
         <view class="home__title">
           <text class="home__title-main">CyberShipX</text>
@@ -13,10 +14,12 @@
       </view>
       <view class="home__header-right">
         <view class="home__header-btn" @click="handleSync">
-          <text class="iconfont icon-shuaxin"></text>
+          <!-- 同步图标用颜色占位 -->
+          <view class="home__icon-placeholder home__icon-placeholder--sync"></view>
         </view>
         <view class="home__header-btn home__header-btn--notify" @click="handleNotify">
-          <text class="iconfont icon-tongzhi"></text>
+          <!-- 通知图标用颜色占位 -->
+          <view class="home__icon-placeholder home__icon-placeholder--bell"></view>
           <view v-if="notifyCount > 0" class="home__notify-badge">
             <text>{{ notifyCount > 99 ? '99+' : notifyCount }}</text>
           </view>
@@ -26,8 +29,11 @@
 
     <!-- 搜索框 -->
     <view class="home__search" @click="handleSearch">
-      <text class="iconfont icon-sousuo"></text>
+      <!-- 搜索图标用颜色占位 -->
+      <view class="home__icon-placeholder home__icon-placeholder--search"></view>
       <text class="home__search-placeholder">搜索船舶、用户、证书...</text>
+      <!-- 扫码图标用颜色占位 -->
+      <view class="home__icon-placeholder home__icon-placeholder--scan"></view>
     </view>
 
     <!-- 用户信息卡片 -->
@@ -50,7 +56,7 @@
         </view>
       </view>
       <view class="home__user-arrow">
-        <text class="iconfont icon-arrow-right"></text>
+        <view class="home__icon-placeholder home__icon-placeholder--arrow"></view>
       </view>
     </view>
 
@@ -77,7 +83,7 @@
         <text class="home__modules-title">功能模块</text>
         <view class="home__modules-more" @click="handleMoreModules">
           <text>更多</text>
-          <text class="iconfont icon-arrow-right"></text>
+          <view class="home__icon-placeholder home__icon-placeholder--arrow-small"></view>
         </view>
       </view>
       <view class="home__modules-grid">
@@ -88,9 +94,69 @@
           @click="handleModuleClick(item)"
         >
           <view class="home__module-icon" :style="{ background: item.bgColor }">
-            <text class="iconfont" :class="item.icon" :style="{ color: item.iconColor }"></text>
+            <!-- 图标用颜色占位 -->
+            <view class="home__module-icon-placeholder" :style="{ background: item.iconColor }"></view>
           </view>
           <text class="home__module-name">{{ item.name }}</text>
+        </view>
+      </view>
+
+      <!-- 证书管理单独一行 -->
+      <view class="home__module-single">
+        <view class="home__module-item" @click="handleModuleClick(certificateModule)">
+          <view class="home__module-icon" :style="{ background: certificateModule.bgColor }">
+            <view class="home__module-icon-placeholder" :style="{ background: certificateModule.iconColor }"></view>
+          </view>
+          <text class="home__module-name">{{ certificateModule.name }}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 快捷入口 -->
+    <view class="home__quick">
+      <view class="home__section-header">
+        <text class="home__section-title">快捷入口</text>
+      </view>
+      <view class="home__quick-list">
+        <view 
+          v-for="item in quickActions" 
+          :key="item.key" 
+          class="home__quick-item"
+          @click="handleQuickAction(item)"
+        >
+          <view class="home__quick-icon" :style="{ background: item.bgColor }">
+            <view class="home__module-icon-placeholder" :style="{ background: item.iconColor }"></view>
+          </view>
+          <view class="home__quick-content">
+            <text class="home__quick-label">{{ item.label }}</text>
+            <text class="home__quick-desc">{{ item.desc }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 系统通知 -->
+    <view class="home__notifications">
+      <view class="home__section-header">
+        <text class="home__section-title">系统通知</text>
+        <view class="home__section-more" @click="handleAllNotifications">
+          <text>全部</text>
+          <view class="home__icon-placeholder home__icon-placeholder--arrow-small"></view>
+        </view>
+      </view>
+      <view class="home__notification-list">
+        <view 
+          v-for="item in notifications" 
+          :key="item.id" 
+          class="home__notification-item"
+          @click="handleNotificationClick(item)"
+        >
+          <view class="home__notification-dot" :class="'home__notification-dot--' + item.type"></view>
+          <view class="home__notification-content">
+            <text class="home__notification-title">{{ item.title }}</text>
+            <text class="home__notification-desc">{{ item.desc }}</text>
+          </view>
+          <text class="home__notification-time">{{ item.time }}</text>
         </view>
       </view>
     </view>
@@ -98,7 +164,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 
 // 通知数量
@@ -141,64 +207,37 @@ const statsList = ref([
   }
 ])
 
-// 功能模块列表
+// 功能模块列表（前8个）
 const modulesList = ref([
-  {
-    key: 'userResource',
-    name: '用户资源',
-    icon: 'icon-shouye',
-    bgColor: '#e8f4ff',
-    iconColor: '#165dff'
-  },
-  {
-    key: 'shipManage',
-    name: '船舶管理',
-    icon: 'icon-chuanbo',
-    bgColor: '#e8fff0',
-    iconColor: '#00b42a'
-  },
-  {
-    key: 'shipTypeManage',
-    name: '船型管理',
-    icon: 'icon-chuanxing',
-    bgColor: '#ffe8e8',
-    iconColor: '#f53f3f'
-  },
-  {
-    key: 'accountManage',
-    name: '账号管理',
-    icon: 'icon-yonghu',
-    bgColor: '#e8f8ff',
-    iconColor: '#14c9c9'
-  },
-  {
-    key: 'roleManage',
-    name: '角色管理',
-    icon: 'icon-jiaose',
-    bgColor: '#f0e8ff',
-    iconColor: '#722ed1'
-  },
-  {
-    key: 'deviceManage',
-    name: '设备管理',
-    icon: 'icon-shebei',
-    bgColor: '#e8f4ff',
-    iconColor: '#165dff'
-  },
-  {
-    key: 'pmsManage',
-    name: 'PMS管理',
-    icon: 'icon-weihu',
-    bgColor: '#f0e8ff',
-    iconColor: '#722ed1'
-  },
-  {
-    key: 'dataManage',
-    name: '资料管理',
-    icon: 'icon-wenjian',
-    bgColor: '#fff7e8',
-    iconColor: '#ff7d00'
-  }
+  { key: 'userResource', name: '用户资源', bgColor: '#dbeafe', iconColor: '#3b82f6' },
+  { key: 'shipManage', name: '船舶管理', bgColor: '#e0f2fe', iconColor: '#0ea5e9' },
+  { key: 'shipTypeManage', name: '船型管理', bgColor: '#ffedd5', iconColor: '#f97316' },
+  { key: 'accountManage', name: '账号管理', bgColor: '#d1fae5', iconColor: '#10b981' },
+  { key: 'roleManage', name: '角色管理', bgColor: '#ede9fe', iconColor: '#8b5cf6' },
+  { key: 'deviceManage', name: '设备管理', bgColor: '#ccfbf1', iconColor: '#14b8a6' },
+  { key: 'pmsManage', name: 'PMS管理', bgColor: '#cffafe', iconColor: '#06b6d4' },
+  { key: 'dataManage', name: '资料管理', bgColor: '#fef9c3', iconColor: '#eab308' }
+])
+
+// 证书管理（单独一个）
+const certificateModule = reactive({
+  key: 'certificateManage',
+  name: '证书管理',
+  bgColor: '#ffe4e6',
+  iconColor: '#f43f5e'
+})
+
+// 快捷入口
+const quickActions = ref([
+  { key: 'shipList', label: '船舶列表', desc: '查看所有船舶', bgColor: '#e0f2fe', iconColor: '#0ea5e9' },
+  { key: 'certificate', label: '证书到期', desc: '3个即将到期', bgColor: '#fef9c3', iconColor: '#eab308' },
+  { key: 'todo', label: '待办任务', desc: '5个待处理', bgColor: '#ede9fe', iconColor: '#8b5cf6' }
+])
+
+// 系统通知
+const notifications = ref([
+  { id: 1, title: '船舶证书即将到期', desc: '东海号船舶登记证书将于7天后到期', time: '2小时前', type: 'warning' },
+  { id: 2, title: '新用户已添加', desc: '张三已加入船员管理系统', time: '5小时前', type: 'info' }
 ])
 
 // 同步数据
@@ -212,7 +251,7 @@ const handleSync = () => {
 
 // 通知
 const handleNotify = () => {
-  uni.showToast({ title: '暂无新通知', icon: 'none' })
+  uni.navigateTo({ url: '/pages/notification/index' })
 }
 
 // 搜索
@@ -240,6 +279,21 @@ const handleModuleClick = (item) => {
   uni.showToast({ title: `进入${item.name}`, icon: 'none' })
 }
 
+// 快捷入口点击
+const handleQuickAction = (item) => {
+  uni.showToast({ title: `进入${item.label}`, icon: 'none' })
+}
+
+// 全部通知
+const handleAllNotifications = () => {
+  uni.navigateTo({ url: '/pages/notification/index' })
+}
+
+// 通知项点击
+const handleNotificationClick = (item) => {
+  uni.showToast({ title: item.title, icon: 'none' })
+}
+
 onLoad(() => {
   // 可以在这里加载用户数据和统计数据
 })
@@ -250,6 +304,62 @@ onLoad(() => {
   min-height: 100vh;
   background: linear-gradient(180deg, #ecf5ff 0%, #f5f7fa 25%);
   padding: 0 32rpx 40rpx;
+
+  // 图标占位通用样式
+  &__icon-placeholder {
+    border-radius: 8rpx;
+
+    &--sync {
+      width: 36rpx;
+      height: 36rpx;
+      background: #86909c;
+    }
+
+    &--bell {
+      width: 36rpx;
+      height: 36rpx;
+      background: #86909c;
+    }
+
+    &--search {
+      width: 36rpx;
+      height: 36rpx;
+      background: #c9cdd4;
+      border-radius: 50%;
+    }
+
+    &--scan {
+      width: 36rpx;
+      height: 36rpx;
+      background: #c9cdd4;
+      margin-left: auto;
+    }
+
+    &--arrow {
+      width: 24rpx;
+      height: 24rpx;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    &--arrow-small {
+      width: 20rpx;
+      height: 20rpx;
+      background: #86909c;
+    }
+  }
+
+  &__logo-icon {
+    width: 44rpx;
+    height: 44rpx;
+    background: #fff;
+    border-radius: 10rpx;
+  }
+
+  &__module-icon-placeholder {
+    width: 44rpx;
+    height: 44rpx;
+    border-radius: 12rpx;
+  }
 
   // 顶部导航
   &__header {
@@ -279,17 +389,6 @@ onLoad(() => {
       align-items: center;
       justify-content: center;
       position: relative;
-
-      .iconfont {
-        font-size: 36rpx;
-        color: #4e5969;
-      }
-
-      &--notify {
-        .iconfont {
-          color: #4e5969;
-        }
-      }
     }
   }
 
@@ -303,11 +402,6 @@ onLoad(() => {
     align-items: center;
     justify-content: center;
     box-shadow: 0 8rpx 24rpx rgba(22, 93, 255, 0.25);
-
-    .iconfont {
-      font-size: 44rpx;
-      color: #fff;
-    }
   }
 
   // 标题
@@ -361,12 +455,8 @@ onLoad(() => {
     margin-bottom: 32rpx;
     box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 
-    .iconfont {
-      font-size: 36rpx;
-      color: #c9cdd4;
-    }
-
     &-placeholder {
+      flex: 1;
       font-size: 28rpx;
       color: #c9cdd4;
     }
@@ -460,18 +550,11 @@ onLoad(() => {
     background: #00b42a;
   }
 
-  &__user-arrow {
-    .iconfont {
-      font-size: 32rpx;
-      color: rgba(255, 255, 255, 0.6);
-    }
-  }
-
   // 统计卡片
   &__stats {
     display: flex;
     gap: 20rpx;
-    margin-bottom: 40rpx;
+    margin-bottom: 32rpx;
   }
 
   &__stats-card {
@@ -513,6 +596,7 @@ onLoad(() => {
     background: #fff;
     border-radius: 24rpx;
     padding: 32rpx;
+    margin-bottom: 32rpx;
     box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 
     &-header {
@@ -537,11 +621,6 @@ onLoad(() => {
         font-size: 26rpx;
         color: #86909c;
       }
-
-      .iconfont {
-        font-size: 24rpx;
-        color: #86909c;
-      }
     }
 
     &-grid {
@@ -549,6 +628,13 @@ onLoad(() => {
       grid-template-columns: repeat(4, 1fr);
       gap: 32rpx 0;
     }
+  }
+
+  &__module-single {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 32rpx;
+    padding-left: 25rpx;
   }
 
   &__module-item {
@@ -569,15 +655,175 @@ onLoad(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .iconfont {
-      font-size: 44rpx;
-    }
   }
 
   &__module-name {
     font-size: 24rpx;
     color: #4e5969;
+  }
+
+  // 通用区块头部
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24rpx;
+  }
+
+  &__section-title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #1d2129;
+  }
+
+  &__section-more {
+    display: flex;
+    align-items: center;
+    gap: 4rpx;
+
+    text {
+      font-size: 26rpx;
+      color: #86909c;
+    }
+  }
+
+  // 快捷入口
+  &__quick {
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 32rpx;
+    margin-bottom: 32rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+
+    &-list {
+      display: flex;
+      gap: 24rpx;
+    }
+
+    &-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16rpx;
+      padding: 24rpx 16rpx;
+      background: #f7f8fa;
+      border-radius: 16rpx;
+
+      &:active {
+        opacity: 0.8;
+      }
+    }
+
+    &-icon {
+      width: 80rpx;
+      height: 80rpx;
+      border-radius: 20rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rpx;
+    }
+
+    &-label {
+      font-size: 26rpx;
+      font-weight: 500;
+      color: #1d2129;
+    }
+
+    &-desc {
+      font-size: 22rpx;
+      color: #86909c;
+    }
+  }
+
+  // 系统通知
+  &__notifications {
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 32rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20rpx;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f2f3f5;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  &__notification-dot {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    margin-top: 10rpx;
+    flex-shrink: 0;
+
+    &--warning {
+      background: #ff7d00;
+    }
+
+    &--info {
+      background: #165dff;
+    }
+
+    &--success {
+      background: #00b42a;
+    }
+
+    &--error {
+      background: #f53f3f;
+    }
+  }
+
+  &__notification-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8rpx;
+  }
+
+  &__notification-title {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #1d2129;
+  }
+
+  &__notification-desc {
+    font-size: 24rpx;
+    color: #86909c;
+    line-height: 1.4;
+  }
+
+  &__notification-time {
+    font-size: 22rpx;
+    color: #c9cdd4;
+    flex-shrink: 0;
   }
 }
 </style>
